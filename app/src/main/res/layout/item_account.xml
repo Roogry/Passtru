@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="@dimen/s">
+
+    <TextView
+        android:id="@+id/tvSosmed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="asasdasdasdas"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvSosmed"
+        android:layout_marginTop="@dimen/xs"
+        android:text="asdasdas asdas dasd as das das "
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:checkable="false"
+        android:text="SALIN"
+        app:chipBackgroundColor="@android:color/transparent"
+        app:chipEndPadding="12dp"
+        app:chipStartPadding="12dp"
+        app:chipStrokeColor="@color/text_primary"
+        app:chipStrokeWidth="1dp" />
+
+    <!--    <Button-->
+    <!--        style="?attr/materialButtonOutlinedStyle"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_alignParentEnd="true"-->
+    <!--        android:layout_centerVertical="true"-->
+    <!--        android:insetTop="0dp"-->
+    <!--        android:insetBottom="0dp"-->
+    <!--        android:paddingHorizontal="12dp"-->
+    <!--        android:paddingVertical="@dimen/xs"-->
+    <!--        android:text="SALIN"-->
+    <!--        app:cornerRadius="5dp" />-->
+
+</RelativeLayout>

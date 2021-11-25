@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/s"
-        android:text="@string/account"
+        android:text="@string/add_social_media"
         android:textColor="@color/text_primary"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -28,34 +28,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvTitle"
-        android:text="@string/more_option"
+        android:text="@string/input_new_social_media_here"
         android:textColor="@color/text_secondary"
         android:textSize="14sp" />
 
-    <Button
-        android:id="@+id/btnCopy"
-        style="@style/outlineButton"
+    <EditText
+        android:id="@+id/edtSosmed"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvSubtitle"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tvSubtitle"
         android:layout_marginTop="@dimen/l"
-        android:text="@string/copy_password" />
+        android:background="@drawable/bg_input_light"
+        android:hint="Input social media name"
+        android:inputType="textPersonName|textNoSuggestions"
+        android:paddingHorizontal="@dimen/m"
+        android:textColor="@color/text_secondary" />
 
     <Button
-        android:id="@+id/btnEdit"
-        style="@style/outlineButton"
+        android:id="@+id/btnSubmit"
+        style="@style/primaryButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnCopy"
+        android:layout_below="@id/edtSosmed"
         android:layout_marginTop="@dimen/s"
-        android:text="@string/edit" />
-
-    <Button
-        android:id="@+id/btnDelete"
-        style="@style/outlineButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnEdit"
-        android:layout_marginTop="@dimen/s"
-        android:text="@string/Delete" />
+        android:text="@string/submit" />
 </RelativeLayout>

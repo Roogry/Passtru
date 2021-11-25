@@ -2,4 +2,22 @@
     <string name="app_name">Passtru</string>
     <string name="delete_account">Delete Account</string>
     <string name="create_sosmed">Create Sosmed</string>
+
+    <string name="ex_title_dialog">Dialog Title</string>
+    <string name="ex_subtitle_dialog">lorem ipsum dolor</string>
+    <string name="edit">Edit</string>
+    <string name="Delete">Delete</string>
+    <string name="copy_password">Copy Password</string>
+    <string name="more_option">More Option</string>
+    <string name="account">Account</string>
+    <string name="sosial_media">Sosial Media</string>
+    <string name="add_social_media">Add Social Media</string>
+    <string name="input_new_social_media_here">Input new social media here</string>
+    <string name="submit">Submit</string>
+    <string name="edit_account">Edit Account</string>
+    <string name="detail_account">Detail Account</string>
+    <string name="ex_username">accountexcample@passtru.co.id</string>
+    <string name="social_media">Social Media</string>
+    <string name="recently_added">Recently Added</string>
+    <string name="see_more">see more</string>
 </resources>
