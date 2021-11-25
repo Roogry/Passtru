@@ -10,7 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Passtru">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.FormManageAccount"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ListAccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ListSosmedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.LockScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
