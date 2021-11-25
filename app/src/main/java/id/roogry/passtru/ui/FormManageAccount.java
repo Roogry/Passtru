@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import id.roogry.passtru.R;
+
 public class FormManageAccount extends AppCompatActivity {
 
     @Override

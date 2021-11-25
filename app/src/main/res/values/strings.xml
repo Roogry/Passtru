@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Passtru</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="create_sosmed">Create Sosmed</string>
 </resources>

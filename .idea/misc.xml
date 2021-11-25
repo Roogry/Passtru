@@ -3,7 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable-v24/bg_rounded_light_grey.xml" value="0.2526041666666667" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable-v24/bg_rounded_white.xml" value="0.2526041666666667" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable-v24/ic_add.xml" value="0.2526041666666667" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable-v24/ic_back.xml" value="0.2526041666666667" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/activity_list_account.xml" value="0.23645833333333333" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/dialog_add_account.xml" value="0.115625" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/dialog_detail_account.xml" value="0.115625" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/dialog_more_account.xml" value="0.115625" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/dialog_more_sosmed.xml" value="0.115625" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/menu/update_delete.xml" value="0.23645833333333333" />
       </map>
     </option>
   </component>
