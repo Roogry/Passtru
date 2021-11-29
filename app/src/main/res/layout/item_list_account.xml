@@ -29,8 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
         android:contentDescription="moreMenuButton"
         android:src="@drawable/ci_more_horizontal_black" />
 
