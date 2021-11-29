@@ -4,6 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ListAccountActivity">
+    tools:context=".ui.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_size"
+        android:background="@color/primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvAccountList"
+            style="@style/toolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_list" />
+
+        <ImageView
+            style="@style/toolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginHorizontal="25dp"
+            android:contentDescription="backButton"
+            android:src="@drawable/ion_arrow_back" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/xl"
+        android:background="@color/primary"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+    <View
+        android:id="@+id/viewhalf_rounded_white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/xl"
+        android:background="@drawable/bg_half_rounded_white"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/viewhalf_rounded_white">
+
+        <LinearLayout
+            android:id="@+id/rlSearchAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="15dp"
+            android:background="@drawable/rectangle_search"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:padding="4dp"
+                android:src="@drawable/ic_search" />
+
+            <EditText
+                android:id="@+id/edtSearchAccount"
+                android:layout_width="wrap_content"
+                android:importantForAutofill="no"
+                android:layout_height="55dp"
+                android:background="@null"
+                android:layout_weight="1"
+                android:hint="Search in Accounts"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:padding="10dp"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rlSearchAccount"
+            android:layout_marginTop="10dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvLapak"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/item_list_account" />
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
