@@ -71,6 +71,7 @@
             <EditText
                 android:id="@+id/edtSearchAccount"
                 android:layout_width="wrap_content"
+                android:importantForAutofill="no"
                 android:layout_height="55dp"
                 android:background="@null"
                 android:layout_weight="1"
