@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Passtru" >
         <activity
-            android:name=".ui.HomeScreenActivity"
+            android:name=".ui.HomeActivity"
             android:exported="true" />
         <activity
             android:name=".ui.FormManageAccount"

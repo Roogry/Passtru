@@ -21,4 +21,7 @@
     <string name="social_media">Social Media</string>
     <string name="recently_added">Recently Added</string>
     <string name="see_more">see more</string>
+    <string name="ex_sosmed">Instagram</string>
+    <string name="thumb_title">Save New Password</string>
+    <string name="thumb_subtitle">Store all your password just in your local device</string>
 </resources>
