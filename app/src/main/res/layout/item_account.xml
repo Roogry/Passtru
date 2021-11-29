@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="@dimen/s">
+    android:layout_marginVertical="5dp"
+    android:padding="15dp">
 
     <TextView
         android:id="@+id/tvSosmed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="asasdasdasdas"
+        android:text="Instagram"
         android:textColor="@color/text_primary"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvUsername"
@@ -19,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvSosmed"
         android:layout_marginTop="@dimen/xs"
-        android:text="asdasdas asdas dasd as das das "
+        android:text="mynameis_vidya"
         android:textColor="@color/text_secondary"
         android:textSize="14sp" />
 
