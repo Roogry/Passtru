@@ -21,22 +21,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Manage Account" />
+
         <ImageView
             style="@style/toolbarTitle"
-            android:contentDescription="moreMenuButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/ci_more_horizontal"
-            android:layout_marginHorizontal="25dp"/>
+            android:layout_marginHorizontal="25dp"
+            android:contentDescription="moreMenuButton"
+            android:src="@drawable/ci_more_horizontal" />
+
         <ImageView
             style="@style/toolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="backButton"
             android:layout_alignParentStart="true"
-            android:src="@drawable/ion_arrow_back"
-            android:layout_marginHorizontal="25dp"/>
+            android:layout_marginHorizontal="25dp"
+            android:contentDescription="backButton"
+            android:src="@drawable/ion_arrow_back" />
     </RelativeLayout>
 
     <RelativeLayout
