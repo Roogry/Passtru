@@ -15,7 +15,7 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/tvitemUsername"
+        android:id="@+id/tvitemAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvitemSosmed"
@@ -25,6 +25,7 @@
         android:textSize="14sp" />
 
     <ImageView
+        android:id="@+id/ivMoreAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
