@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,14 +33,14 @@ import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
-import id.roogry.passtru.R;
+import id.roogry.passtru.databinding.ActivityLockScreenBinding;
 import id.roogry.passtru.helpers.FingerprintHandler;
 
 public class LockScreenActivity extends AppCompatActivity {
     private String KEY_NAME = "AndroidKey" ;
+    private ActivityLockScreenBinding binding;
     private FingerprintManager fingerprintManager;
     private KeyguardManager keyguardManager;
-    private TextView fingerprintStatus;
     private KeyStore keyStore;
     private Cipher chiper;
 
@@ -48,31 +49,32 @@ public class LockScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lock_screen);
-        fingerprintStatus = findViewById(R.id.tvStatusFingerPrint);
+        binding = ActivityLockScreenBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
          fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
          keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
 
          if (!fingerprintManager.isHardwareDetected()){
-             fingerprintStatus.setText("Fingeprint not found");
+             binding.tvStatusFingerPrint.setText("Fingeprint not found");
 
          }else if(ContextCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED){
-             fingerprintStatus.setText("Permission Denied");
+             binding.tvStatusFingerPrint.setText("Permission Denied");
 
          }else if(!keyguardManager.isKeyguardSecure()){
-             fingerprintStatus.setText("Secure Your Lockcreen First");
+             binding.tvStatusFingerPrint.setText("Secure Your Lockcreen First");
 
          }else if(!fingerprintManager.hasEnrolledFingerprints()){
-             fingerprintStatus.setText("Add fingeprint atleast 1");
+             binding.tvStatusFingerPrint.setText("Add fingeprint atleast 1");
 
          }else{
-             fingerprintStatus.setText("Use your fingeprint");
+             binding.tvStatusFingerPrint.setText("Use your fingeprint");
              generateKey();
              if (chiperInit()){
                  FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(chiper);
-                 FingerprintHandler fingerprintHandler = new FingerprintHandler(this);
+                 FingerprintHandler fingerprintHandler = new FingerprintHandler(this, binding);
                  fingerprintHandler.startAuth(fingerprintManager, cryptoObject);
              }
          }
