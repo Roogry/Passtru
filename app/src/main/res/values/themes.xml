@@ -19,6 +19,10 @@
     <style name="customPopUp" parent="Widget.MaterialComponents.PopupMenu.ListPopupWindow">
         <item name="android:popupBackground">@drawable/bg_rounded_white</item>
     </style>
+    <style name="mySpinnerItemStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 
     <style name="DialogSecondary" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:windowBackground">@drawable/bg_rounded_white</item>
