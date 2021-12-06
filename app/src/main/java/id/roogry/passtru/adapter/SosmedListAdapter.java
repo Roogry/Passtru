@@ -1,6 +1,7 @@
 package id.roogry.passtru.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,22 +11,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import id.roogry.passtru.R;
+import id.roogry.passtru.databinding.ItemAccountHomeBinding;
+import id.roogry.passtru.databinding.ItemSocialMediaListBinding;
+import id.roogry.passtru.models.Account;
 
-public class SosmedListAdapter extends RecyclerView.Adapter<SosmedListAdapter.MyViewHolder> {
+public class SosmedListAdapter extends RecyclerView.Adapter<SosmedListAdapter.SosmedListViewHolder> {
 
     Context context;
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.item_social_media_list, parent, false);
-        return new MyViewHolder(view);
+    public SosmedListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemSocialMediaListBinding binding = ItemSocialMediaListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new SosmedListAdapter.SosmedListViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull SosmedListViewHolder holder, int position) {
+//        holder.bind(listAccounts.get(position));
     }
 
     @Override
@@ -33,12 +36,18 @@ public class SosmedListAdapter extends RecyclerView.Adapter<SosmedListAdapter.My
         return 15;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView socialMediaItem;
 
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-            socialMediaItem = itemView.findViewById(R.id.socialMediaItem);
+    class SosmedListViewHolder extends RecyclerView.ViewHolder {
+        final ItemSocialMediaListBinding binding;
+
+        SosmedListViewHolder(ItemSocialMediaListBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        public void bind(Account account) {
+            binding.socialMediaItem.setText(account.getIdSosmed());
+
         }
     }
 }
