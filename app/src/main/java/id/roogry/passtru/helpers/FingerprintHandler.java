@@ -43,8 +43,6 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
         }else {
             this.update(errString.toString(), false, errorCode);
         }
-
-
     }
 
     @Override
@@ -69,7 +67,6 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
         context.startActivity(intent);
         ((LockScreenActivity) context).finish();
     }
-
 
     private void update(String string, boolean status , Integer code) {
         binding.tvStatusFingerPrint.setText(string);
