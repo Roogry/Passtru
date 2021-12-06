@@ -16,6 +16,7 @@ import id.roogry.passtru.databinding.ActivityLockScreenBinding;
 import id.roogry.passtru.ui.HomeActivity;
 import id.roogry.passtru.ui.LockScreenActivity;
 
+@RequiresApi(api = Build.VERSION_CODES.M)
 public class FingerprintHandler extends FingerprintManager.AuthenticationCallback {
     private final Context context;
     private final ActivityLockScreenBinding binding;

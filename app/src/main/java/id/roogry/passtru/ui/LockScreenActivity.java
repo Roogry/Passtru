@@ -54,6 +54,8 @@ public class LockScreenActivity extends AppCompatActivity {
     private String pinCheck;
     private SharedPreferences sharedPref;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @SuppressLint("ServiceCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setLocale(this, "en");
@@ -99,6 +101,7 @@ public class LockScreenActivity extends AppCompatActivity {
         fingerPrintAuth();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void generateKey() {
         try {
             keyStore = KeyStore.getInstance("AndroidKeySTore");
@@ -120,6 +123,7 @@ public class LockScreenActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public boolean chiperInit() {
         try {
             chiper = Cipher.getInstance(KeyProperties.KEY_ALGORITHM_AES + "/" + KeyProperties.BLOCK_MODE_CBC + "/" + KeyProperties.ENCRYPTION_PADDING_PKCS7);
