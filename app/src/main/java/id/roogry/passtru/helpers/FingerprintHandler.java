@@ -36,21 +36,25 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
         if (errorCode == 7) {
             binding.pinInput.setVisibility(View.VISIBLE);
             binding.viewFingerprint.setVisibility(View.GONE);
+        } else if(errorCode == 5){
+            binding.pinInput.setVisibility(View.VISIBLE);
+            binding.viewFingerprint.setVisibility(View.GONE);
         }
-        this.update("Mohon maaf " + errString, false);
+
+        this.update("Sorry " + errString, false);
     }
 
     @Override
     public void onAuthenticationFailed() {
         super.onAuthenticationFailed();
 
-        this.update("Finger Print Tidak Cocok", false);
+        this.update("Finger Print Invalid", false);
     }
 
     @Override
     public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
         super.onAuthenticationHelp(helpCode, helpString);
-        this.update("Mohon maaf " + helpString, false);
+        this.update("Sorry " + helpString, false);
     }
 
     @Override

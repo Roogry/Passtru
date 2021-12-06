@@ -6,10 +6,13 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,6 +33,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
+import java.util.Locale;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.Cipher;
@@ -54,6 +58,7 @@ public class LockScreenActivity extends AppCompatActivity {
     @SuppressLint("ServiceCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setLocale(this, "en");
         super.onCreate(savedInstanceState);
         binding = ActivityLockScreenBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
@@ -83,7 +88,7 @@ public class LockScreenActivity extends AppCompatActivity {
          }else{
              binding.pinInput.setVisibility(View.GONE);
              binding.viewFingerprint.setVisibility(View.VISIBLE);
-             binding.tvStatusFingerPrint.setText("Use your fingeprint");
+             binding.tvStatusFingerPrint.setText("Scan your fingeprint");
              generateKey();
              if (chiperInit()){
                  FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(chiper);
@@ -166,5 +171,14 @@ public class LockScreenActivity extends AppCompatActivity {
         }catch (KeyStoreException | CertificateException | UnrecoverableKeyException | IOException | NoSuchAlgorithmException | InvalidKeyException e){
             throw new RuntimeException("failed to init Chiper", e);
         }
+    }
+
+    public static void setLocale(Activity activity, String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+        Resources resources = activity.getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 }
