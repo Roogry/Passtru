@@ -73,6 +73,7 @@
                 android:layout_height="45dp"
                 android:layout_weight="1"
                 android:hint="Search"
+                android:background="@null"
                 android:maxLength="30"
                 android:maxLines="1"
                 android:padding="10dp"
