@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
         android:layout_marginTop="@dimen/m"
-        android:text="@string/more_option"
+        android:text="@string/lbl_username"
         android:textColor="@color/text_secondary"
         android:textSize="14sp" />
 

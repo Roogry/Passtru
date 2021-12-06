@@ -24,6 +24,7 @@
     <string name="ex_sosmed">Instagram</string>
     <string name="thumb_title">Save New Password</string>
     <string name="thumb_subtitle">Store all your password just in your local device</string>
+    <string name="lbl_username">Username</string>
 
     <string-array name="placeHolder">
         <item>Select Your Social Media </item>
