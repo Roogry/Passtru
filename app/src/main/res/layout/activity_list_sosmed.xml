@@ -16,17 +16,18 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/socialMedia"
+            android:id="@+id/titleToolbar"
             style="@style/toolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/social_media" />
 
         <ImageView
-            style="@style/toolbarTitle"
+            android:id="@+id/ivBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:layout_marginHorizontal="25dp"
             android:contentDescription="backButton"
             android:src="@drawable/ion_arrow_back" />
@@ -72,8 +73,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_weight="1"
-                android:hint="Search"
                 android:background="@null"
+                android:hint="Search"
                 android:maxLength="30"
                 android:maxLines="1"
                 android:padding="10dp"

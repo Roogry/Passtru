@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.ListAccountActivity">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -16,16 +16,17 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvAccountList"
+            android:id="@+id/titleToolbar"
             style="@style/toolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/account_list" />
 
         <ImageView
-            style="@style/toolbarTitle"
+            android:id="@+id/ivBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
             android:layout_marginHorizontal="25dp"
             android:contentDescription="backButton"

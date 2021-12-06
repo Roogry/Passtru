@@ -8,22 +8,33 @@ import android.os.Bundle;
 
 import id.roogry.passtru.R;
 import id.roogry.passtru.adapter.SosmedListAdapter;
+import id.roogry.passtru.databinding.ActivityListAccountBinding;
+import id.roogry.passtru.databinding.ActivityListSosmedBinding;
 
 public class ListSosmedActivity extends AppCompatActivity {
 
-    private RecyclerView sosmedList;
+    private ActivityListSosmedBinding binding;
     private SosmedListAdapter sosmedListAdapter;
-    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_sosmed);
 
-        sosmedList = findViewById(R.id.rvSosmedList);
+        binding = ActivityListSosmedBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         sosmedListAdapter = new SosmedListAdapter();
-        layoutManager = new LinearLayoutManager(this);
-        sosmedList.setLayoutManager(layoutManager);
-        sosmedList.setAdapter(sosmedListAdapter);
+        binding.rvSosmedList.setLayoutManager(new LinearLayoutManager(this));
+        binding.rvSosmedList.setAdapter(sosmedListAdapter);
+
+        binding.ivBack.setOnClickListener(v -> {
+            onBackPressed();
+        });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

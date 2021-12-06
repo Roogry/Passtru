@@ -40,48 +40,52 @@ import javax.crypto.SecretKey;
 
 import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ActivityLockScreenBinding;
+import id.roogry.passtru.databinding.ActivitySetPinBinding;
 import id.roogry.passtru.helpers.FingerprintHandler;
 
 public class LockScreenActivity extends AppCompatActivity {
     private final String KEY_NAME = "AndroidKey";
     private ActivityLockScreenBinding binding;
+
     private FingerprintManager fingerprintManager;
     private KeyguardManager keyguardManager;
     private KeyStore keyStore;
     private Cipher chiper;
     private String pinCheck;
-    private SharedPreferences pin;
+    private SharedPreferences sharedPref;
 
-    public static void setLocale(Activity activity, String languageCode) {
-        Locale locale = new Locale(languageCode);
-        Locale.setDefault(locale);
-        Resources resources = activity.getResources();
-        Configuration config = resources.getConfiguration();
-        config.setLocale(locale);
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @SuppressLint("ServiceCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setLocale(this, "en");
         super.onCreate(savedInstanceState);
+
         binding = ActivityLockScreenBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+        setContentView(binding.getRoot());
+
         //check Pin On Shared Preference
-        pin = getSharedPreferences("PREF", 0);
-        pinCheck = pin.getString("PIN", "");
+        sharedPref = getSharedPreferences("PREF", 0);
+        pinCheck = sharedPref.getString("PIN", "");
         //FingerPrint Security
         fingerPrintAuth();
         //Pin Security
         pinAuth();
     }
 
+    public static void setLocale(Activity activity, String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+
+        Resources resources = activity.getResources();
+        Configuration config = resources.getConfiguration();
+
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
+
         if (pinCheck.equals("")) {
             Intent intent = new Intent(LockScreenActivity.this, SetPinActivity.class);
             startActivity(intent);
@@ -95,7 +99,6 @@ public class LockScreenActivity extends AppCompatActivity {
         fingerPrintAuth();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     private void generateKey() {
         try {
             keyStore = KeyStore.getInstance("AndroidKeySTore");
@@ -117,7 +120,6 @@ public class LockScreenActivity extends AppCompatActivity {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public boolean chiperInit() {
         try {
             chiper = Cipher.getInstance(KeyProperties.KEY_ALGORITHM_AES + "/" + KeyProperties.BLOCK_MODE_CBC + "/" + KeyProperties.ENCRYPTION_PADDING_PKCS7);
@@ -138,7 +140,7 @@ public class LockScreenActivity extends AppCompatActivity {
     }
 
     private void fingerPrintAuth() {
-        //        FingerPrint Security
+        // FingerPrint Security
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
             keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
@@ -162,6 +164,7 @@ public class LockScreenActivity extends AppCompatActivity {
                 binding.viewFingerprint.setVisibility(View.VISIBLE);
                 binding.tvStatusFingerPrint.setText("Scan your fingeprint");
                 generateKey();
+
                 if (chiperInit()) {
                     FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(chiper);
                     FingerprintHandler fingerprintHandler = new FingerprintHandler(this, binding);
@@ -172,24 +175,21 @@ public class LockScreenActivity extends AppCompatActivity {
     }
 
     private void pinAuth() {
-        binding.edtPIN.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                String pinInput = binding.edtPIN.getText().toString();
-                if (pinInput.equals(pinCheck)) {
-                    if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                            (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                        Intent intent = new Intent(LockScreenActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    return true;
-                } else {
-                    binding.tvStatusFingerPrint.setTextColor(ContextCompat.getColor(LockScreenActivity.this, R.color.red));
-                    binding.tvStatusFingerPrint.setText("Pin Is Wrong");
-                    return false;
+        binding.edtPIN.setOnKeyListener((v, keyCode, event) -> {
+            String pinInput = binding.edtPIN.getText().toString();
+
+            if (pinInput.equals(pinCheck)) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    Intent intent = new Intent(LockScreenActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
 
+                return true;
+            } else {
+                binding.tvStatusFingerPrint.setTextColor(ContextCompat.getColor(LockScreenActivity.this, R.color.red));
+                binding.tvStatusFingerPrint.setText("Pin Is Wrong");
+                return false;
             }
         });
     }

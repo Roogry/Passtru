@@ -8,46 +8,48 @@
 
     <EditText
         android:id="@+id/inputPin"
-        android:background="@drawable/rectangle_search"
         android:layout_width="200dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="256dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/bg_input_light"
         android:gravity="center"
-        android:hint="Input PIN"
+        android:hint="Type PIN"
         android:inputType="numberPassword"
+        android:maxLength="6"
         android:maxLines="1"
+        android:textColor="@color/text_secondary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/confirmPin"
-        android:background="@drawable/rectangle_search"
         android:layout_width="200dp"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/s"
+        android:background="@drawable/bg_input_light"
         android:gravity="center"
+        android:hint="Re-Type PIN"
         android:inputType="numberPassword"
-        android:hint="Confirm PIN"
+        android:maxLength="6"
         android:maxLines="1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/text_secondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.464"
+        app:layout_constraintTop_toBottomOf="@+id/inputPin"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/submitPin"
+        style="@style/primaryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/xl"
+        android:text="@string/submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/confirmPin"
-        app:layout_constraintVertical_bias="0.17"
+        app:layout_constraintTop_toBottomOf="@+id/confirmPin"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

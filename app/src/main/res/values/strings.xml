@@ -2,6 +2,7 @@
     <string name="app_name">Passtru</string>
     <string name="delete_account">Delete Account</string>
     <string name="create_sosmed">Create Sosmed</string>
+    <string name="manage_account">Manage Account</string>
 
     <string name="ex_title_dialog">Dialog Title</string>
     <string name="ex_subtitle_dialog">lorem ipsum dolor</string>

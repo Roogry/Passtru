@@ -10,31 +10,33 @@ import android.widget.ImageView;
 
 import id.roogry.passtru.R;
 import id.roogry.passtru.adapter.AccountListAdapter;
+import id.roogry.passtru.databinding.ActivityHomeBinding;
+import id.roogry.passtru.databinding.ActivityListAccountBinding;
 
 public class ListAccountActivity extends AppCompatActivity {
 
-    private RecyclerView accountList;
+    private ActivityListAccountBinding binding;
     private AccountListAdapter accountListAdapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private ImageView ivMoreAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_account);
 
-        ivMoreAccount = findViewById(R.id.ivMoreAccount);
-        accountList = findViewById(R.id.rvAccountList);
+        binding = ActivityListAccountBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         accountListAdapter = new AccountListAdapter();
-        layoutManager = new LinearLayoutManager(this);
-        accountList.setLayoutManager(layoutManager);
-        accountList.setAdapter(accountListAdapter);
+        binding.rvAccountList.setLayoutManager(new LinearLayoutManager(this));
+        binding.rvAccountList.setAdapter(accountListAdapter);
 
-        ivMoreAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
+        binding.ivBack.setOnClickListener(v -> {
+            onBackPressed();
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }
