@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.ListAccountActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addBtnAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_add"
+        app:tint="@color/white"
+        tools:ignore="MissingConstraints" />
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"

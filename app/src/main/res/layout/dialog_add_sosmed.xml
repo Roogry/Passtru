@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15dp">
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="@dimen/l">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/btnClose"
         android:layout_width="@dimen/xl"
         android:layout_height="@dimen/xl"
@@ -53,3 +58,4 @@
         android:layout_marginTop="@dimen/s"
         android:text="@string/submit" />
 </RelativeLayout>
+</androidx.cardview.widget.CardView>
