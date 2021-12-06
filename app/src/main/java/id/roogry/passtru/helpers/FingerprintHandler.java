@@ -39,9 +39,10 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
         if (errorCode == 7) {
             binding.pinInput.setVisibility(View.VISIBLE);
             binding.viewFingerprint.setVisibility(View.GONE);
+            this.update("Sorry too many attempts. Please wait 30s to use FingerPrint again.", false, errorCode);
         }
 
-        this.update("Sorry " + errString, false, errorCode);
+        this.update(errString.toString(), false, errorCode);
     }
 
     @Override
@@ -54,7 +55,7 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     @Override
     public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
         super.onAuthenticationHelp(helpCode, helpString);
-        this.update("Sorry " + helpString, false, 0);
+        this.update(helpString.toString(), false, 0);
     }
 
     @Override
