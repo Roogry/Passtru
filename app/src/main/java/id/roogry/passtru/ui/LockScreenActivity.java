@@ -7,6 +7,8 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.KeyguardManager;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
@@ -14,6 +16,7 @@ import android.os.Bundle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +36,7 @@ import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
+import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ActivityLockScreenBinding;
 import id.roogry.passtru.helpers.FingerprintHandler;
 
@@ -43,6 +47,8 @@ public class LockScreenActivity extends AppCompatActivity {
     private KeyguardManager keyguardManager;
     private KeyStore keyStore;
     private Cipher chiper;
+    private String pinCheck;
+    private SharedPreferences pin;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("ServiceCast")
@@ -52,10 +58,15 @@ public class LockScreenActivity extends AppCompatActivity {
         binding = ActivityLockScreenBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        pin = getSharedPreferences("PREF", 0);
+        pinCheck = pin.getString("PIN", "");
 
+//    FingerPrint Security
      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
          fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
          keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+
+         binding.viewFingerprint.setVisibility(View.GONE);
 
          if (!fingerprintManager.isHardwareDetected()){
              binding.tvStatusFingerPrint.setText("Fingeprint not found");
@@ -67,9 +78,11 @@ public class LockScreenActivity extends AppCompatActivity {
              binding.tvStatusFingerPrint.setText("Secure Your Lockcreen First");
 
          }else if(!fingerprintManager.hasEnrolledFingerprints()){
-             binding.tvStatusFingerPrint.setText("Add fingeprint atleast 1");
+             binding.tvStatusFingerPrint.setText("To Active FingerPrint Security, Please Turn On The FingerPrint In Setting");
 
          }else{
+             binding.pinInput.setVisibility(View.GONE);
+             binding.viewFingerprint.setVisibility(View.VISIBLE);
              binding.tvStatusFingerPrint.setText("Use your fingeprint");
              generateKey();
              if (chiperInit()){
@@ -80,6 +93,37 @@ public class LockScreenActivity extends AppCompatActivity {
          }
      }
 
+//     Pin Security
+        binding.edtPIN.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                String pinInput = binding.edtPIN.getText().toString();
+                if (pinInput.equals(pinCheck)){
+                    if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                            (keyCode == KeyEvent.KEYCODE_ENTER)){
+                        Intent intent = new Intent(LockScreenActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    return true;
+                }else{
+                    binding.tvStatusFingerPrint.setTextColor(ContextCompat.getColor(LockScreenActivity.this, R.color.red));
+                    binding.tvStatusFingerPrint.setText("Pin Is Wrong");
+                    return false;
+                }
+
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (pinCheck.equals("")){
+            Intent intent = new Intent(LockScreenActivity.this, SetPinActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)

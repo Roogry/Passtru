@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="id.roogry.passtru" >
+    package="id.roogry.passtru">
 
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Passtru" >
+        android:theme="@style/Theme.Passtru">
+        <activity
+            android:name=".ui.SetPinActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.HomeActivity"
             android:exported="true" />
@@ -27,7 +31,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.LockScreenActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
