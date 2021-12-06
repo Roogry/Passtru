@@ -7,18 +7,18 @@ import androidx.room.PrimaryKey;
 
 import java.sql.Timestamp;
 
-@Entity(tableName = "tbAccount")
+@Entity(tableName = "accounts")
 public class Account {
     @PrimaryKey(autoGenerate = true)
-    public int _id;
+    public int id;
 
-    @ForeignKey(entity = Platform.class,
-            parentColumns = "_id",
-            childColumns = "id_platform",
+    @ForeignKey(entity = Sosmed.class,
+            parentColumns = "id",
+            childColumns = "id_sosmed",
             onDelete = ForeignKey.CASCADE)
 
-    @ColumnInfo(name = "id_platform")
-    public int id_platform;
+    @ColumnInfo(name = "id_sosmed")
+    public int idSosmed;
 
     @ColumnInfo(name = "username")
     public String username;
@@ -27,22 +27,22 @@ public class Account {
     public String password;
 
     @ColumnInfo(name = "created_at")
-    public Timestamp created_at;
+    public Timestamp createdAt;
 
-    public int get_id() {
-        return _id;
+    public int getId() {
+        return id;
     }
 
-    public void set_id(int _id) {
-        this._id = _id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getId_platform() {
-        return id_platform;
+    public int getIdSosmed() {
+        return idSosmed;
     }
 
-    public void setId_platform(int id_platform) {
-        this.id_platform = id_platform;
+    public void setIdSosmed(int idSosmed) {
+        this.idSosmed = idSosmed;
     }
 
     public String getUsername() {
@@ -61,11 +61,11 @@ public class Account {
         this.password = password;
     }
 
-    public Timestamp getCreated_at() {
-        return created_at;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(Timestamp created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 }

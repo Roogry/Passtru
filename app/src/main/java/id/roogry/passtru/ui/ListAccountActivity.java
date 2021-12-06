@@ -30,8 +30,6 @@ public class ListAccountActivity extends AppCompatActivity {
         accountList.setLayoutManager(layoutManager);
         accountList.setAdapter(accountListAdapter);
 
-
-
         ivMoreAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

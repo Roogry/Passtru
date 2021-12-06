@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import id.roogry.passtru.R;
 
-public class MainActivity extends AppCompatActivity {
+public class FormManageAccountActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_form_manage_account);
     }
 }

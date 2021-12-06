@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="0dp"
     android:background="@drawable/bg_lock"
-    tools:context=".ui.FormManageAccount">
+    tools:context=".ui.FormManageAccountActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"

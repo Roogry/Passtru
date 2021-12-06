@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/primary"
     android:layout_margin="0dp"
-    tools:context=".ui.FormManageAccount">
+    tools:context=".ui.FormManageAccountActivity">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"

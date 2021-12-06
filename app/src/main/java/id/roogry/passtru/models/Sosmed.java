@@ -4,20 +4,19 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "tbPlatform")
-public class Platform {
-
+@Entity(tableName = "sosmeds")
+public class Sosmed {
     @PrimaryKey(autoGenerate = true)
-    public int _id;
+    public int id;
     @ColumnInfo(name = "title")
     public String title;
 
-    public int get_id() {
-        return _id;
+    public int getId() {
+        return id;
     }
 
-    public void set_id(int _id) {
-        this._id = _id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

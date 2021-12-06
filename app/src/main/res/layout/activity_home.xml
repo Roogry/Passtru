@@ -89,7 +89,7 @@
                 android:layout_below="@id/recentTitle"
                 android:layout_marginTop="@dimen/s"
                 android:nestedScrollingEnabled="true"
-                tools:listitem="@layout/item_account" />
+                tools:listitem="@layout/item_account_home" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
