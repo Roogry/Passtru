@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.CancellationSignal;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
@@ -28,6 +29,8 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     public void startAuth(FingerprintManager fingerprintManager, FingerprintManager.CryptoObject cryptoObject) {
         CancellationSignal cancellationSignal = new CancellationSignal();
         fingerprintManager.authenticate(cryptoObject, cancellationSignal, 0, this, null);
+        binding.viewFingerprint.setColorFilter(ContextCompat.getColor(context, R.color.white));
+        binding.tvStatusFingerPrint.setTextColor(ContextCompat.getColor(context, R.color.white));
     }
 
     @Override
@@ -36,42 +39,42 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
         if (errorCode == 7) {
             binding.pinInput.setVisibility(View.VISIBLE);
             binding.viewFingerprint.setVisibility(View.GONE);
-        } else if(errorCode == 5){
-            binding.pinInput.setVisibility(View.VISIBLE);
-            binding.viewFingerprint.setVisibility(View.GONE);
         }
 
-        this.update("Sorry " + errString, false);
+        this.update("Sorry " + errString, false, errorCode);
     }
 
     @Override
     public void onAuthenticationFailed() {
         super.onAuthenticationFailed();
 
-        this.update("Finger Print Invalid", false);
+        this.update("Finger Print Invalid", false, 0);
     }
 
     @Override
     public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
         super.onAuthenticationHelp(helpCode, helpString);
-        this.update("Sorry " + helpString, false);
+        this.update("Sorry " + helpString, false, 0);
     }
 
     @Override
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
         super.onAuthenticationSucceeded(result);
-        this.update("Success", true);
+        this.update("Success", true, 0);
 
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
         ((LockScreenActivity) context).finish();
     }
 
-    private void update(String string, boolean status) {
+
+    private void update(String string, boolean status , Integer code) {
         binding.tvStatusFingerPrint.setText(string);
         if (!status) {
-            binding.tvStatusFingerPrint.setTextColor(ContextCompat.getColor(context, R.color.red));
-            binding.viewFingerprint.setColorFilter(ContextCompat.getColor(context, R.color.red));
+            if (code != 5){
+                binding.tvStatusFingerPrint.setTextColor(ContextCompat.getColor(context, R.color.red));
+                binding.viewFingerprint.setColorFilter(ContextCompat.getColor(context, R.color.red));
+            }
 
         } else {
             binding.viewFingerprint.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_check_circle_outline_24));

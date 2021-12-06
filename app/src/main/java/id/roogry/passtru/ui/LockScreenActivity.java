@@ -16,6 +16,7 @@ import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CancellationSignal;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
@@ -67,36 +68,7 @@ public class LockScreenActivity extends AppCompatActivity {
         pinCheck = pin.getString("PIN", "");
 
 //    FingerPrint Security
-     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-         fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
-         keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-
-         binding.viewFingerprint.setVisibility(View.GONE);
-
-         if (!fingerprintManager.isHardwareDetected()){
-             binding.tvStatusFingerPrint.setText("Fingeprint not found");
-
-         }else if(ContextCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED){
-             binding.tvStatusFingerPrint.setText("Permission Denied");
-
-         }else if(!keyguardManager.isKeyguardSecure()){
-             binding.tvStatusFingerPrint.setText("Secure Your Lockcreen First");
-
-         }else if(!fingerprintManager.hasEnrolledFingerprints()){
-             binding.tvStatusFingerPrint.setText("To Active FingerPrint Security, Please Turn On The FingerPrint In Setting");
-
-         }else{
-             binding.pinInput.setVisibility(View.GONE);
-             binding.viewFingerprint.setVisibility(View.VISIBLE);
-             binding.tvStatusFingerPrint.setText("Scan your fingeprint");
-             generateKey();
-             if (chiperInit()){
-                 FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(chiper);
-                 FingerprintHandler fingerprintHandler = new FingerprintHandler(this, binding);
-                 fingerprintHandler.startAuth(fingerprintManager, cryptoObject);
-             }
-         }
-     }
+        fingerPrintAuth();
 
 //     Pin Security
         binding.edtPIN.setOnKeyListener(new View.OnKeyListener() {
@@ -129,6 +101,12 @@ public class LockScreenActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fingerPrintAuth();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -173,6 +151,39 @@ public class LockScreenActivity extends AppCompatActivity {
         }
     }
 
+    private  void fingerPrintAuth(){
+        //        FingerPrint Security
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
+            keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+
+            binding.viewFingerprint.setVisibility(View.GONE);
+
+            if (!fingerprintManager.isHardwareDetected()){
+                binding.tvStatusFingerPrint.setText("Fingeprint not found. Cannot Active fingerPrint security");
+
+            }else if(ContextCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED){
+                binding.tvStatusFingerPrint.setText("FingerPrint Permission Denied");
+
+            }else if(!keyguardManager.isKeyguardSecure()){
+                binding.tvStatusFingerPrint.setText("Secure Your Lockcreen First And Active The FingerPrint From Setting To Active FingerPrint Security");
+
+            }else if(!fingerprintManager.hasEnrolledFingerprints()){
+                binding.tvStatusFingerPrint.setText("To Active FingerPrint Security, Please Turn On The FingerPrint In Setting");
+
+            }else{
+                binding.pinInput.setVisibility(View.GONE);
+                binding.viewFingerprint.setVisibility(View.VISIBLE);
+                binding.tvStatusFingerPrint.setText("Scan your fingeprint");
+                generateKey();
+                if (chiperInit()){
+                    FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(chiper);
+                    FingerprintHandler fingerprintHandler = new FingerprintHandler(this, binding);
+                    fingerprintHandler.startAuth(fingerprintManager, cryptoObject);
+                }
+            }
+        }
+    }
     public static void setLocale(Activity activity, String languageCode) {
         Locale locale = new Locale(languageCode);
         Locale.setDefault(locale);
