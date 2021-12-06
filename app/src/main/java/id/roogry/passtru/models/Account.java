@@ -27,7 +27,7 @@ public class Account {
     public String password;
 
     @ColumnInfo(name = "created_at")
-    public Timestamp createdAt;
+    public String createdAt;
 
     public int getId() {
         return id;
@@ -61,11 +61,11 @@ public class Account {
         this.password = password;
     }
 
-    public Timestamp getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 }

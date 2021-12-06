@@ -53,7 +53,11 @@ public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.
 
     @Override
     public int getItemCount() {
-        return 6;
+        if (listAccounts.size() > 6){
+            return 6;
+        }else{
+            return listAccounts.size();
+        }
     }
 
     class AccountViewHolder extends RecyclerView.ViewHolder {

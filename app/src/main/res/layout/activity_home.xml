@@ -54,6 +54,17 @@
                 android:layout_marginTop="@dimen/xl"
                 android:text="@string/social_media" />
 
+            <TextView
+                android:id="@+id/sosmedAll"
+                style="@style/sectionSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/sosmedTitle"
+                android:layout_alignParentEnd="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/see_all" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSosmed"
                 android:layout_width="match_parent"
@@ -74,38 +85,44 @@
                 android:text="@string/recently_added" />
 
             <TextView
-                android:id="@+id/recentMore"
+                android:id="@+id/recentAll"
                 style="@style/sectionSubtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/recentTitle"
                 android:layout_alignParentEnd="true"
-                android:text="@string/see_more" />
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/see_all" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvRecent"
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
+                android:layout_height="200dp"
                 android:layout_below="@id/recentTitle"
                 android:layout_marginTop="@dimen/s"
                 android:nestedScrollingEnabled="true"
                 tools:listitem="@layout/item_account_home" />
 
             <RelativeLayout
+                android:id="@+id/rlNewAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rvRecent"
                 android:layout_marginTop="@dimen/m"
-                android:background="@drawable/bg_thumb"
+                android:background="@drawable/ripple_thumb"
                 android:clickable="true"
                 android:focusable="true"
-                android:paddingHorizontal="@dimen/m"
+                android:paddingHorizontal="@dimen/l"
                 android:paddingVertical="@dimen/l">
 
                 <TextView
                     android:id="@+id/thumbTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="@dimen/m"
+                    android:layout_toStartOf="@+id/ivShield"
                     android:text="@string/thumb_title"
                     android:textColor="@color/text_primary"
                     android:textStyle="bold" />
@@ -115,8 +132,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/thumbTitle"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="@dimen/xs"
+                    android:layout_marginEnd="@dimen/m"
+                    android:layout_toStartOf="@+id/ivShield"
                     android:text="@string/thumb_subtitle"
                     android:textColor="@color/text_primary" />
+
+                <ImageView
+                    android:id="@+id/ivShield"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_shield" />
             </RelativeLayout>
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>

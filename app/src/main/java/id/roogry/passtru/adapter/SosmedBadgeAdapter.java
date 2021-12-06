@@ -52,7 +52,11 @@ public class SosmedBadgeAdapter extends RecyclerView.Adapter<SosmedBadgeAdapter.
 
     @Override
     public int getItemCount() {
-        return 6;
+        if (listSosmeds.size() > 6){
+            return 6;
+        }else{
+            return listSosmeds.size();
+        }
     }
 
     class SosmedViewHolder extends RecyclerView.ViewHolder {

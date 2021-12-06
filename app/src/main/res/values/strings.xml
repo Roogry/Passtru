@@ -21,13 +21,15 @@
     <string name="ex_username">accountexcample@passtru.co.id</string>
     <string name="social_media">Social Media</string>
     <string name="recently_added">Recently Added</string>
-    <string name="see_more">see more</string>
+    <string name="see_all">see all</string>
     <string name="ex_sosmed">Instagram</string>
     <string name="thumb_title">Save New Password</string>
     <string name="thumb_subtitle">Store all your password just in your local device</string>
     <string name="lbl_username">Username</string>
 
     <string-array name="placeHolder">
-        <item>Select Your Social Media </item>
+        <item>Select Your Social Media</item>
+        <item>Instagram</item>
+        <item>Facebook</item>
     </string-array>
 </resources>

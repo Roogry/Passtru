@@ -13,10 +13,9 @@ import androidx.core.content.ContextCompat;
 
 import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ActivityLockScreenBinding;
+import id.roogry.passtru.ui.HomeActivity;
 import id.roogry.passtru.ui.LockScreenActivity;
-import id.roogry.passtru.ui.MainActivity;
 
-@RequiresApi(api = Build.VERSION_CODES.M)
 public class FingerprintHandler extends FingerprintManager.AuthenticationCallback {
     private final Context context;
     private final ActivityLockScreenBinding binding;
@@ -63,7 +62,7 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
         super.onAuthenticationSucceeded(result);
         this.update("Success", true, 0);
 
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, HomeActivity.class);
         context.startActivity(intent);
         ((LockScreenActivity) context).finish();
     }

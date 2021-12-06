@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import java.util.List;
 
@@ -48,6 +50,21 @@ public class HomeActivity extends AppCompatActivity {
         binding.rvRecent.setLayoutManager(new LinearLayoutManager(this));
         binding.rvRecent.setHasFixedSize(true);
         binding.rvRecent.setAdapter(recentlyAddAdapter);
+
+        binding.sosmedAll.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, ListSosmedActivity.class);
+            startActivity(intent);
+        });
+
+        binding.recentAll.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, ListAccountActivity.class);
+            startActivity(intent);
+        });
+
+        binding.rlNewAccount.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, FormManageAccountActivity.class);
+            startActivity(intent);
+        });
     }
 
     private final Observer<List<Sosmed>> sosmedObserver = sosmedList -> {
