@@ -166,7 +166,7 @@ public class LockScreenActivity extends AppCompatActivity {
             } else {
                 binding.pinInput.setVisibility(View.GONE);
                 binding.viewFingerprint.setVisibility(View.VISIBLE);
-                binding.tvStatusFingerPrint.setText("Scan your fingeprint");
+                binding.tvStatusFingerPrint.setText("Scan your fingerprint");
                 generateKey();
 
                 if (chiperInit()) {

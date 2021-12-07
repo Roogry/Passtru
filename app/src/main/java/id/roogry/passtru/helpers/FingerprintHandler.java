@@ -40,7 +40,10 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
             binding.pinInput.setVisibility(View.VISIBLE);
             binding.viewFingerprint.setVisibility(View.GONE);
             this.update("Sorry too many attempts. Please wait 30s to use FingerPrint again.", false, errorCode);
-        }else {
+        }else if (errorCode == 5){
+            this.update("Scan your fingerprint", false, errorCode);
+        }
+        else {
             this.update(errString.toString(), false, errorCode);
         }
     }
