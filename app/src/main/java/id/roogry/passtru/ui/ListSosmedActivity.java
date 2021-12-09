@@ -47,7 +47,7 @@ public class ListSosmedActivity extends AppCompatActivity {
         });
 
         binding.addBtnSosmed.setOnClickListener(v ->{
-            customDialog.startAlertDialog("form",null,R.layout.dialog_add_sosmed);
+            customDialog.startAlertDialog("form",null, null, R.layout.dialog_add_sosmed);
         });
     }
 

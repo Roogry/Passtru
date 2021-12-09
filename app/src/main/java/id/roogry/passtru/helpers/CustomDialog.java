@@ -11,29 +11,47 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import id.roogry.passtru.R;
+import id.roogry.passtru.adapter.SosmedListAdapter;
 import id.roogry.passtru.database.PasstruRoomDatabase;
 import id.roogry.passtru.models.Sosmed;
+import id.roogry.passtru.repository.SosmedRepository;
 
 public class CustomDialog {
     private final Activity activity;
     private Dialog dialog;
+    private   SosmedRepository sosmedRepository;
 
     public CustomDialog(Activity myActivity) {
         activity = myActivity;
+        sosmedRepository = new SosmedRepository(activity.getApplication());
+
     }
 
-    public void startAlertDialog(String type, String message, Integer view) {
+    public void startAlertDialog(String type, Integer id , String message, Integer view) {
         dialog = new Dialog(activity);
         dialog.setContentView(view);
 
         if (type.equals("form")) {
             Button btnSave = dialog.findViewById(R.id.btnSubmit);
             EditText inputSosmed = dialog.findViewById(R.id.edtSosmed);
-            Sosmed sosmed = new Sosmed();
 
             btnSave.setOnClickListener(v -> {
+                Sosmed sosmed = new Sosmed();
                 sosmed.setTitle(inputSosmed.getText().toString());
-                insertData(sosmed);
+                sosmedRepository.insert(sosmed);
+                Toast.makeText(activity, "Social Media Added! ", Toast.LENGTH_LONG).show();
+                dismissDialog();
+            });
+
+        }else if(type.equals("more option")){
+            Button edit = dialog.findViewById(R.id.btnEdit);
+            Button delete = dialog.findViewById(R.id.btnDelete);
+            Button copy = dialog.findViewById(R.id.btnCopy);
+            SosmedListAdapter sosmedListAdapter = new SosmedListAdapter(activity);
+
+            delete.setOnClickListener(v -> {
+               sosmedListAdapter.removeItem(id);
+
             });
         }
 
@@ -51,21 +69,4 @@ public class CustomDialog {
         dialog.dismiss();
     }
 
-    private void insertData(final Sosmed sosmed) {
-        PasstruRoomDatabase passtruRoomDatabase = PasstruRoomDatabase.getDatabase(activity);
-        new AsyncTask<Void, Void, Long>() {
-            @Override
-            protected Long doInBackground(Void... voids) {
-                // melakukan proses insert data
-                long status = passtruRoomDatabase.sosmedDao().insert(sosmed);
-                return status;
-            }
-
-            @Override
-            protected void onPostExecute(Long status) {
-                Toast.makeText(activity, "Social Media Added! ", Toast.LENGTH_LONG).show();
-                dismissDialog();
-            }
-        }.execute();
-    }
 }
