@@ -15,7 +15,7 @@ import id.roogry.passtru.models.Sosmed;
 @Dao
 public interface SosmedDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Sosmed sosmed);
+    long insert(Sosmed sosmed);
 
     @Update
     void update(Sosmed sosmed);
