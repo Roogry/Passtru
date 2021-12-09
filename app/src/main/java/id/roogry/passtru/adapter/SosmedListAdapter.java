@@ -1,23 +1,37 @@
 package id.roogry.passtru.adapter;
 
-import android.content.Context;
-import android.content.Intent;
+import android.app.Activity;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import id.roogry.passtru.R;
-import id.roogry.passtru.databinding.ItemAccountHomeBinding;
+import java.util.ArrayList;
+import java.util.List;
+
 import id.roogry.passtru.databinding.ItemSocialMediaListBinding;
+import id.roogry.passtru.helpers.SosmedDiffCallback;
 import id.roogry.passtru.models.Account;
+import id.roogry.passtru.models.Sosmed;
 
 public class SosmedListAdapter extends RecyclerView.Adapter<SosmedListAdapter.SosmedListViewHolder> {
+    private final ArrayList<Sosmed> listSosmeds = new ArrayList<>();
+    private Activity activity;
 
-    Context context;
+    public SosmedListAdapter(Activity activity){
+        this.activity = activity;
+    }
+
+    public void setListSosmeds(List<Sosmed> listSosmeds) {
+        final SosmedDiffCallback diffCallback = new SosmedDiffCallback(this.listSosmeds, listSosmeds);
+        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+
+        this.listSosmeds.clear();
+        this.listSosmeds.addAll(listSosmeds);
+        diffResult.dispatchUpdatesTo(this);
+    }
 
     @NonNull
     @Override
@@ -28,12 +42,12 @@ public class SosmedListAdapter extends RecyclerView.Adapter<SosmedListAdapter.So
 
     @Override
     public void onBindViewHolder(@NonNull SosmedListViewHolder holder, int position) {
-//        holder.bind(listAccounts.get(position));
+        holder.bind(listSosmeds.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 15;
+        return listSosmeds.size();
     }
 
 
@@ -45,8 +59,8 @@ public class SosmedListAdapter extends RecyclerView.Adapter<SosmedListAdapter.So
             this.binding = binding;
         }
 
-        public void bind(Account account) {
-            binding.socialMediaItem.setText(account.getIdSosmed());
+        public void bind(Sosmed sosmed) {
+            binding.socialMediaItem.setText(sosmed.getTitle());
 
         }
     }
