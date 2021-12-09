@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15dp">
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -36,9 +40,9 @@
     <Button
         android:id="@+id/btnEdit"
         style="@style/outlineButton"
-        android:layout_below="@id/tvSubtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tvSubtitle"
         android:layout_marginTop="@dimen/l"
         android:text="@string/edit" />
 
@@ -51,3 +55,4 @@
         android:layout_marginTop="@dimen/s"
         android:text="@string/Delete" />
 </RelativeLayout>
+</androidx.cardview.widget.CardView>
