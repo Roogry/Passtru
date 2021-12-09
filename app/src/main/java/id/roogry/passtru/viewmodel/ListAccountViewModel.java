@@ -13,7 +13,7 @@ import id.roogry.passtru.repository.AccountRepository;
 public class ListAccountViewModel extends ViewModel {
     private AccountRepository accountRepository;
 
-    ListAccountViewModel(Application application){
+    public ListAccountViewModel(Application application){
         accountRepository = new AccountRepository(application);
     }
 

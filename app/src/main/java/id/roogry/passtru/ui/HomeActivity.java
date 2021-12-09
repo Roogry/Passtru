@@ -1,19 +1,15 @@
 package id.roogry.passtru.ui;
 
-import androidx.annotation.Nullable;
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
 
 import java.util.List;
 
-import id.roogry.passtru.R;
 import id.roogry.passtru.adapter.RecentlyAddAdapter;
 import id.roogry.passtru.adapter.SosmedBadgeAdapter;
 import id.roogry.passtru.databinding.ActivityHomeBinding;

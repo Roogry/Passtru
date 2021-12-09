@@ -2,23 +2,17 @@ package id.roogry.passtru.helpers;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
-import android.view.KeyEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import id.roogry.passtru.R;
 import id.roogry.passtru.database.PasstruRoomDatabase;
 import id.roogry.passtru.models.Sosmed;
-import id.roogry.passtru.ui.ListAccountActivity;
 
 public class CustomDialog {
     private Activity activity;
@@ -36,12 +30,12 @@ public class CustomDialog {
             Button btnSave = dialog.findViewById(R.id.btnSubmit);
             EditText inputSosmed = dialog.findViewById(R.id.edtSosmed);
             Sosmed sosmed = new Sosmed();
+
             btnSave.setOnClickListener(v -> {
                 sosmed.setTitle(inputSosmed.getText().toString());
                 insertData(sosmed);
             });
         }
-
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -56,7 +50,6 @@ public class CustomDialog {
     public void dismissDialog(){
         dialog.dismiss();
     }
-
 
     private void insertData(final Sosmed sosmed){
         PasstruRoomDatabase passtruRoomDatabase = PasstruRoomDatabase.getDatabase(activity);

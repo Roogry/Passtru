@@ -1,12 +1,10 @@
 package id.roogry.passtru.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
@@ -15,10 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ItemAccountHomeBinding;
 import id.roogry.passtru.helpers.AccountDiffCallback;
-import id.roogry.passtru.models.Account;
 import id.roogry.passtru.models.Account;
 
 public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.AccountViewHolder> {
@@ -69,10 +65,9 @@ public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.
         }
 
         public void bind(Account account) {
-            binding.tvSosmed.setText(account.getIdSosmed());
+            binding.tvSosmed.setText(account.getUsername());
             binding.tvUsername.setText(account.getUsername());
             binding.cardAccount.setOnClickListener(view -> {
-                // implementasi intent
                 Intent intent = new Intent();
             });
         }
