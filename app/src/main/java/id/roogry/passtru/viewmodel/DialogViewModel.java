@@ -8,7 +8,7 @@ import id.roogry.passtru.models.Sosmed;
 import id.roogry.passtru.repository.SosmedRepository;
 
 public class DialogViewModel extends ViewModel {
-    private SosmedRepository sosmedRepository;
+    private final SosmedRepository sosmedRepository;
 
     public DialogViewModel(Application application) {
         sosmedRepository = new SosmedRepository(application);

@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.ListAccountActivity">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addBtnAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="20dp"
-        android:src="@drawable/ic_add"
-        app:tint="@color/white"
-        tools:ignore="MissingConstraints" />
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
@@ -36,8 +26,8 @@
             android:id="@+id/ivBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:layout_marginHorizontal="25dp"
             android:contentDescription="backButton"
             android:src="@drawable/ion_arrow_back" />
@@ -58,54 +48,40 @@
         android:background="@drawable/bg_half_rounded_white"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
-    <RelativeLayout
+    <EditText
+        android:id="@+id/edtSearch"
         android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="@dimen/l"
+        android:background="@drawable/bg_input_light"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="@dimen/s"
+        android:hint="Search in Accounts"
+        android:maxLines="1"
+        android:paddingHorizontal="@dimen/m"
+        android:paddingVertical="@dimen/ms"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAccount"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="@dimen/l"
+        android:paddingTop="@dimen/m"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtSearch"
+        tools:listitem="@layout/item_list_account" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddAccount"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/viewhalf_rounded_white">
-
-        <LinearLayout
-            android:id="@+id/rlSearchAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="15dp"
-            android:background="@drawable/rectangle_search"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:padding="4dp"
-                android:src="@drawable/ic_search" />
-
-            <EditText
-                android:id="@+id/edtSearchAccount"
-                android:layout_width="wrap_content"
-                android:importantForAutofill="no"
-                android:layout_height="55dp"
-                android:background="@null"
-                android:layout_weight="1"
-                android:hint="Search in Accounts"
-                android:maxLength="30"
-                android:maxLines="1"
-                android:padding="10dp"
-                android:textColor="@color/white" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/rlSearchAccount"
-            android:layout_marginTop="10dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvAccountList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/item_list_account" />
-        </RelativeLayout>
-
-    </RelativeLayout>
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:tint="@color/white"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

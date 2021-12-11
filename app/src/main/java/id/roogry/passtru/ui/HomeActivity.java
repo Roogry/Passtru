@@ -40,11 +40,11 @@ public class HomeActivity extends AppCompatActivity {
         recentlyAddAdapter = new RecentlyAddAdapter(HomeActivity.this);
 
         binding.rvSosmed.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        binding.rvSosmed.setHasFixedSize(true);
+        binding.rvRecent.setNestedScrollingEnabled(false);
         binding.rvSosmed.setAdapter(sosmedBadgeAdapter);
 
         binding.rvRecent.setLayoutManager(new LinearLayoutManager(this));
-        binding.rvRecent.setHasFixedSize(true);
+        binding.rvRecent.setNestedScrollingEnabled(false);
         binding.rvRecent.setAdapter(recentlyAddAdapter);
 
         binding.sosmedAll.setOnClickListener(view -> {

@@ -4,8 +4,7 @@
     android:id="@+id/cardAccount"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="5dp"
-    android:padding="15dp">
+    android:layout_marginBottom="@dimen/m">
 
     <TextView
         android:id="@+id/tvSosmed"
@@ -26,13 +25,13 @@
         android:textSize="14sp" />
 
     <com.google.android.material.chip.Chip
-        android:id="@+id/chip_1"
+        android:id="@+id/btnCopy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:checkable="false"
-        android:text="SALIN"
+        android:text="@string/copy"
         app:chipBackgroundColor="@android:color/transparent"
         app:chipEndPadding="12dp"
         app:chipStartPadding="12dp"

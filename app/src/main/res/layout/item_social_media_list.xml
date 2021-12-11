@@ -3,36 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="5dp"
-    android:background="@drawable/rectangle_search"
-    android:padding="15dp">
+    android:background="@drawable/bg_card_item"
+    android:paddingHorizontal="@dimen/m"
+    android:paddingVertical="@dimen/ms">
 
-    <LinearLayout
-        android:id="@+id/linearLayoutItem"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tvSosmed"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_gravity="center"
+        android:text="@string/ex_sosmed"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/socialMediaItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:text="Google"
-            android:textColor="@color/text_primary"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:id="@+id/moreOption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="220dp"
-            android:contentDescription="infoVector"
-            android:src="@drawable/ci_more_horizontal_black" />
-
-    </LinearLayout>
-
-
+    <ImageView
+        android:id="@+id/ivMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/threee_dots_more_option"
+        android:src="@drawable/ic_more_dark" />
 </RelativeLayout>

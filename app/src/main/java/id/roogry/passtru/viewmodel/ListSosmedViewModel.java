@@ -11,7 +11,7 @@ import id.roogry.passtru.models.Sosmed;
 import id.roogry.passtru.repository.SosmedRepository;
 
 public class ListSosmedViewModel extends ViewModel {
-    private SosmedRepository sosmedRepository;
+    private final SosmedRepository sosmedRepository;
 
     public ListSosmedViewModel(Application application){
         sosmedRepository = new SosmedRepository(application);

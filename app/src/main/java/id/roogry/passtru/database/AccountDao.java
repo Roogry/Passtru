@@ -11,7 +11,6 @@ import androidx.room.Update;
 import java.util.List;
 
 import id.roogry.passtru.models.Account;
-import id.roogry.passtru.models.Sosmed;
 
 @Dao
 public interface AccountDao {
@@ -24,7 +23,7 @@ public interface AccountDao {
     @Delete
     void delete(Account account);
 
-    @Query("SELECT * FROM accounts")
+    @Query("SELECT * FROM accounts ORDER BY id DESC")
     LiveData<List<Account>> getAllAccounts();
 
     @Query("SELECT * FROM accounts WHERE id = :id LIMIT 1")

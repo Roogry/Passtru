@@ -13,8 +13,8 @@ import id.roogry.passtru.repository.AccountRepository;
 import id.roogry.passtru.repository.SosmedRepository;
 
 public class HomeViewModel extends ViewModel {
-    private AccountRepository accountRepository;
-    private SosmedRepository sosmedRepository;
+    private final AccountRepository accountRepository;
+    private final SosmedRepository sosmedRepository;
 
     public HomeViewModel(Application application) {
         accountRepository = new AccountRepository(application);

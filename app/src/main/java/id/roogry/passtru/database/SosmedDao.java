@@ -23,7 +23,7 @@ public interface SosmedDao {
     @Delete
     void delete(Sosmed sosmed);
 
-    @Query("SELECT * FROM sosmeds")
+    @Query("SELECT * FROM sosmeds ORDER BY id DESC")
     LiveData<List<Sosmed>> getAllSosmeds();
 
     @Query("SELECT * FROM sosmeds WHERE id = :id LIMIT 1")

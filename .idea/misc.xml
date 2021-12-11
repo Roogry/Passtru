@@ -26,22 +26,34 @@
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable-v24/bg_rounded_white.xml" value="0.2526041666666667" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable-v24/ic_add.xml" value="0.2526041666666667" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable-v24/ic_back.xml" value="0.2526041666666667" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable/bg_card_item.xml" value="0.2526041666666667" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable/bg_sosmed_home.xml" value="0.2526041666666667" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable/bg_sosmed_more.xml" value="0.20260416666666667" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable/bg_thumb.xml" value="0.2526041666666667" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable/ic_baseline_fingerprint_24.xml" value="0.2526041666666667" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable/ic_more.xml" value="0.2526041666666667" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable/ic_more_dark.xml" value="0.2526041666666667" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable/ic_search.xml" value="0.2526041666666667" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable/ic_shield.xml" value="0.2526041666666667" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable/rectangle_search.xml" value="0.2526041666666667" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable/ripple_thumb.xml" value="0.2526041666666667" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable/rounded_edittext.xml" value="0.2526041666666667" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/drawable/spinner_background.xml" value="0.2526041666666667" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/activity_form_manage_account.xml" value="0.17346014492753623" />
-        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/activity_home.xml" value="0.264" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/activity_home.xml" value="0.22" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/activity_home_screen.xml" value="0.2" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/activity_list_account.xml" value="0.23645833333333333" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/activity_list_sosmed.xml" value="0.17346014492753623" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/activity_lock_screen.xml" value="0.23645833333333333" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/dialog_add_account.xml" value="0.264" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/dialog_add_sosmed.xml" value="0.264" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/dialog_detail_account.xml" value="0.264" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/dialog_more_account.xml" value="0.4" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/dialog_more_sosmed.xml" value="0.2" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/item_account.xml" value="0.264" />
-        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/item_list_account.xml" value="0.23645833333333333" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/item_account_home.xml" value="0.264" />
+        <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/item_list_account.xml" value="0.264" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/item_social_media_list.xml" value="0.23645833333333333" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/layout/item_sosmed_home.xml" value="0.4" />
         <entry key="..\:/Project/Android/ProgmobLanjut/Passtru/app/src/main/res/menu/update_delete.xml" value="0.23645833333333333" />
@@ -52,9 +64,6 @@
         <entry key="app/src/main/res/layout/activity_lock_screen.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_set_pin.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dialog_add_sosmed.xml" value="0.23412162162162162" />
-        <entry key="app/src/main/res/layout/dialog_detail_account.xml" value="0.23412162162162162" />
-        <entry key="app/src/main/res/layout/dialog_more_account.xml" value="0.23412162162162162" />
-        <entry key="app/src/main/res/layout/dialog_more_sosmed.xml" value="0.23412162162162162" />
         <entry key="app/src/main/res/layout/item_list_account.xml" value="0.23412162162162162" />
         <entry key="app/src/main/res/layout/item_social_media_list.xml" value="0.23412162162162162" />
       </map>

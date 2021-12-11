@@ -1,61 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="15dp">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="@dimen/l">
 
-    <ImageView
-        android:id="@+id/btnClose"
-        android:layout_width="@dimen/xl"
-        android:layout_height="@dimen/xl"
-        android:layout_alignParentEnd="true"
-        android:backgroundTint="@android:color/transparent"
-        android:src="@drawable/ic_close" />
-
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/s"
-        android:text="@string/add_social_media"
-        android:textColor="@color/text_primary"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tvSubtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvTitle"
-        android:text="@string/input_new_social_media_here"
-        android:textColor="@color/text_secondary"
-        android:textSize="14sp" />
-
-    <EditText
-        android:id="@+id/edtSosmed"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/tvSubtitle"
-        android:layout_marginTop="@dimen/l"
-        android:background="@drawable/bg_input_light"
-        android:hint="Input social media name"
-        android:inputType="textPersonName|textNoSuggestions"
-        android:paddingHorizontal="@dimen/m"
-        android:textColor="@color/text_secondary" />
-
-    <Button
-        android:id="@+id/btnSubmit"
-        style="@style/primaryButton"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edtSosmed"
-        android:layout_marginTop="@dimen/s"
-        android:text="@string/submit" />
-</RelativeLayout>
+        android:padding="@dimen/l">
+
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="@dimen/xl"
+            android:layout_height="@dimen/xl"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/ic_close" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_social_media"
+            android:textColor="@color/text_primary"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTitle"
+            android:layout_marginTop="@dimen/xs"
+            android:text="@string/input_new_social_media_here"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/edtSosmed"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/tvSubtitle"
+            android:layout_marginTop="@dimen/l"
+            android:background="@drawable/bg_input_light"
+            android:hint="@string/hint_add_sosmed"
+            android:inputType="textCapWords|textNoSuggestions"
+            android:paddingHorizontal="@dimen/m"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary" />
+
+        <Button
+            android:id="@+id/btnSubmit"
+            style="@style/primaryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edtSosmed"
+            android:layout_marginTop="@dimen/ms"
+            android:text="@string/submit" />
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

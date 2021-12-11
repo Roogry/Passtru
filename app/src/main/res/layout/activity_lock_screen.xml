@@ -38,7 +38,7 @@
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/rectangle_search"
+                android:background="@drawable/bg_search"
                 android:hint="******"
                 android:importantForAutofill="no"
                 android:inputType="numberPassword"

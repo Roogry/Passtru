@@ -6,12 +6,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import java.util.List;
 
 import id.roogry.passtru.R;
-import id.roogry.passtru.adapter.SosmedListAdapter;
+import id.roogry.passtru.adapter.SosmedAdapter;
 import id.roogry.passtru.databinding.ActivityListSosmedBinding;
 import id.roogry.passtru.helpers.CustomDialog;
 import id.roogry.passtru.helpers.ViewModelFactory;
@@ -21,33 +20,31 @@ import id.roogry.passtru.viewmodel.ListSosmedViewModel;
 public class ListSosmedActivity extends AppCompatActivity {
 
     private ActivityListSosmedBinding binding;
-    private SosmedListAdapter sosmedListAdapter;
-    private CustomDialog customDialog;
+    private SosmedAdapter sosmedAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityListSosmedBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        customDialog = new CustomDialog(ListSosmedActivity.this);
 
+        CustomDialog customDialog = new CustomDialog(ListSosmedActivity.this);
         ViewModelFactory factory = ViewModelFactory.getInstance(this.getApplication());
         ListSosmedViewModel sosmedViewModel = new ViewModelProvider(this, factory).get(ListSosmedViewModel.class);
+
         sosmedViewModel.getSosmeds().observe(this, sosmedObersver);
 
-
-        sosmedListAdapter = new SosmedListAdapter(this);
-        binding.rvSosmedList.setLayoutManager(new LinearLayoutManager(this));
-        binding.rvSosmedList.setHasFixedSize(true);
-        binding.rvSosmedList.setAdapter(sosmedListAdapter);
+        sosmedAdapter = new SosmedAdapter(this);
+        binding.rvSosmed.setLayoutManager(new LinearLayoutManager(this));
+        binding.rvSosmed.setHasFixedSize(true);
+        binding.rvSosmed.setAdapter(sosmedAdapter);
 
         binding.ivBack.setOnClickListener(v -> {
             onBackPressed();
         });
 
-        binding.addBtnSosmed.setOnClickListener(v ->{
-            customDialog.startAlertDialog("form",null, null, R.layout.dialog_add_sosmed);
+        binding.fabAddSosmed.setOnClickListener(v ->{
+            customDialog.startAlertDialog("form",-1, R.layout.dialog_add_sosmed);
         });
     }
 
@@ -59,8 +56,7 @@ public class ListSosmedActivity extends AppCompatActivity {
 
     private final Observer<List<Sosmed>> sosmedObersver = sosmedList -> {
         if (sosmedList != null) {
-            Log.d("testData", "ada datanya kok");
-            sosmedListAdapter.setListSosmeds(sosmedList);
+            sosmedAdapter.setListSosmeds(sosmedList);
         }
     };
 }

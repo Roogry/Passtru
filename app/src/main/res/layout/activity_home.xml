@@ -38,13 +38,13 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fillViewport="true"
         android:paddingHorizontal="@dimen/l"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/sosmedTitle"
@@ -54,33 +54,49 @@
                 android:layout_marginTop="@dimen/xl"
                 android:text="@string/social_media" />
 
-            <TextView
-                android:id="@+id/sosmedAll"
-                style="@style/sectionSubtitle"
+            <HorizontalScrollView
+                android:id="@+id/nsvSosmed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/sosmedTitle"
-                android:layout_alignParentEnd="true"
-                android:clickable="true"
-                android:focusable="true"
-                android:text="@string/see_all" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvSosmed"
-                android:layout_width="match_parent"
-                android:layout_height="34dp"
-                android:layout_below="@id/sosmedTitle"
+                android:layout_below="@+id/sosmedTitle"
                 android:layout_marginTop="@dimen/s"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_sosmed_home" />
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvSosmed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_sosmed_home" />
+
+                    <TextView
+                        android:id="@+id/sosmedAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_sosmed_more"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="@dimen/s"
+                        android:text="@string/see_all_sosmed"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <TextView
                 android:id="@+id/recentTitle"
                 style="@style/sectionTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rvSosmed"
+                android:layout_below="@+id/nsvSosmed"
                 android:layout_marginTop="@dimen/l"
                 android:text="@string/recently_added" />
 
@@ -100,8 +116,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/recentTitle"
-                android:layout_marginTop="@dimen/s"
-                android:nestedScrollingEnabled="true"
+                android:layout_marginTop="@dimen/m"
+                android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_account_home" />
 
             <RelativeLayout

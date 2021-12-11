@@ -26,4 +26,8 @@ public class Sosmed {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public Sosmed(String title) {
+        this.title = title;
+    }
 }

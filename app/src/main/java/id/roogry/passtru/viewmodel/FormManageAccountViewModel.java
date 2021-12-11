@@ -9,8 +9,8 @@ import id.roogry.passtru.repository.AccountRepository;
 import id.roogry.passtru.repository.SosmedRepository;
 
 public class FormManageAccountViewModel extends ViewModel {
-    private AccountRepository accountRepository;
-    private SosmedRepository sosmedRepository;
+    private final AccountRepository accountRepository;
+    private final SosmedRepository sosmedRepository;
 
     public FormManageAccountViewModel(Application application) {
         accountRepository = new AccountRepository(application);

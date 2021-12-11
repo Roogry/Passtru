@@ -2,37 +2,35 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="5dp"
-    android:background="@drawable/rectangle_search"
-    android:padding="15dp">
+    android:layout_marginBottom="@dimen/s"
+    android:background="@drawable/bg_card_item"
+    android:paddingHorizontal="@dimen/m"
+    android:paddingVertical="@dimen/ms">
 
     <TextView
-        android:id="@+id/tvitemSosmed"
+        android:id="@+id/tvSosmed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Instagram"
+        android:text="@string/ex_sosmed"
         android:textColor="@color/text_primary"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/tvitemAccount"
+        android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvitemSosmed"
+        android:layout_below="@id/tvSosmed"
         android:layout_marginTop="@dimen/xs"
-        android:text="mynameis_vidya"
+        android:text="@string/ex_username"
         android:textColor="@color/text_secondary"
         android:textSize="14sp" />
 
     <ImageView
-        android:id="@+id/ivMoreAccount"
+        android:id="@+id/ivMore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
-        android:contentDescription="moreMenuButton"
-        android:src="@drawable/ci_more_horizontal_black" />
-
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/threee_dots_more_option"
+        android:src="@drawable/ic_more_dark" />
 </RelativeLayout>

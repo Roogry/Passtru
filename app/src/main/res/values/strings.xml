@@ -26,6 +26,10 @@
     <string name="thumb_title">Save New Password</string>
     <string name="thumb_subtitle">Store all your password just in your local device</string>
     <string name="lbl_username">Username</string>
+    <string name="threee_dots_more_option">Threee Dots More Option</string>
+    <string name="hint_add_sosmed">Input social media name</string>
+    <string name="see_all_sosmed">All Social Media</string>
+    <string name="copy">COPY</string>
 
     <string-array name="placeHolder">
         <item>Select Your Social Media</item>
