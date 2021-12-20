@@ -13,11 +13,12 @@ import id.roogry.passtru.R;
 import id.roogry.passtru.adapter.SosmedAdapter;
 import id.roogry.passtru.databinding.ActivityListSosmedBinding;
 import id.roogry.passtru.helpers.CustomDialog;
+import id.roogry.passtru.helpers.MoreOptionInterface;
 import id.roogry.passtru.helpers.ViewModelFactory;
 import id.roogry.passtru.models.Sosmed;
 import id.roogry.passtru.viewmodel.ListSosmedViewModel;
 
-public class ListSosmedActivity extends AppCompatActivity {
+public class ListSosmedActivity extends AppCompatActivity implements MoreOptionInterface {
 
     private ActivityListSosmedBinding binding;
     private SosmedAdapter sosmedAdapter;
@@ -28,7 +29,7 @@ public class ListSosmedActivity extends AppCompatActivity {
         binding = ActivityListSosmedBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        CustomDialog customDialog = new CustomDialog(ListSosmedActivity.this);
+        CustomDialog customDialog = new CustomDialog(ListSosmedActivity.this, R.layout.dialog_add_sosmed);
         ViewModelFactory factory = ViewModelFactory.getInstance(this.getApplication());
         ListSosmedViewModel sosmedViewModel = new ViewModelProvider(this, factory).get(ListSosmedViewModel.class);
 
@@ -44,7 +45,7 @@ public class ListSosmedActivity extends AppCompatActivity {
         });
 
         binding.fabAddSosmed.setOnClickListener(v ->{
-            customDialog.startAlertDialog("form",-1, R.layout.dialog_add_sosmed);
+            customDialog.startFormSosmed(-1, null, this);
         });
     }
 
@@ -59,4 +60,19 @@ public class ListSosmedActivity extends AppCompatActivity {
             sosmedAdapter.setListSosmeds(sosmedList);
         }
     };
+
+    @Override
+    public void getDataByPos(int position) {
+
+    }
+
+    @Override
+    public void delete(int position) {
+
+    }
+
+    @Override
+    public void updateSosmed(int position, String sosmedTitle) {
+
+    }
 }

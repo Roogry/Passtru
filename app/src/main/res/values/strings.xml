@@ -30,6 +30,8 @@
     <string name="hint_add_sosmed">Input social media name</string>
     <string name="see_all_sosmed">All Social Media</string>
     <string name="copy">COPY</string>
+    <string name="deleted_sosmed">Social Media has been deleted!</string>
+    <string name="updated_sosmed">Social Media has been updated!</string>
 
     <string-array name="placeHolder">
         <item>Select Your Social Media</item>

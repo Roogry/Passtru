@@ -18,6 +18,7 @@ import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ItemAccountHomeBinding;
 import id.roogry.passtru.helpers.AccountDiffCallback;
 import id.roogry.passtru.helpers.CustomDialog;
+import id.roogry.passtru.helpers.MoreOptionInterface;
 import id.roogry.passtru.models.Account;
 
 public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.AccountViewHolder> {
@@ -59,7 +60,7 @@ public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.
         }
     }
 
-    class AccountViewHolder extends RecyclerView.ViewHolder {
+    class AccountViewHolder extends RecyclerView.ViewHolder implements MoreOptionInterface {
         final ItemAccountHomeBinding binding;
 
         AccountViewHolder(ItemAccountHomeBinding binding) {
@@ -71,13 +72,28 @@ public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.
             binding.tvSosmed.setText(account.getUsername());
             binding.tvUsername.setText(account.getUsername());
             binding.cardAccount.setOnClickListener(view -> {
-                CustomDialog customDialog = new CustomDialog(activity);
-                customDialog.startAlertDialog("more option", account.getId(), R.layout.dialog_more_account);
+                CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_account);
+                customDialog.startAlertDialog("more option", account.getId(), this);
             });
 
             binding.btnCopy.setOnClickListener(view -> {
                 Toast.makeText(activity, "Passowrd copied", Toast.LENGTH_SHORT).show();
             });
+        }
+
+        @Override
+        public void getDataByPos(int position) {
+
+        }
+
+        @Override
+        public void delete(int position) {
+
+        }
+
+        @Override
+        public void updateSosmed(int position, String sosmedTitle) {
+
         }
     }
 }

@@ -18,6 +18,7 @@ import java.util.List;
 import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ItemSosmedHomeBinding;
 import id.roogry.passtru.helpers.CustomDialog;
+import id.roogry.passtru.helpers.MoreOptionInterface;
 import id.roogry.passtru.helpers.SosmedDiffCallback;
 import id.roogry.passtru.models.Sosmed;
 
@@ -60,7 +61,7 @@ public class SosmedBadgeAdapter extends RecyclerView.Adapter<SosmedBadgeAdapter.
         }
     }
 
-    class SosmedViewHolder extends RecyclerView.ViewHolder {
+    class SosmedViewHolder extends RecyclerView.ViewHolder implements MoreOptionInterface {
         final ItemSosmedHomeBinding binding;
 
         SosmedViewHolder(ItemSosmedHomeBinding binding) {
@@ -71,9 +72,24 @@ public class SosmedBadgeAdapter extends RecyclerView.Adapter<SosmedBadgeAdapter.
         public void bind(Sosmed sosmed) {
             binding.sosmedName.setText(sosmed.getTitle());
             binding.cardSosmed.setOnClickListener(view -> {
-                CustomDialog customDialog = new CustomDialog(activity);
-                customDialog.startAlertDialog("more option", sosmed.getId(), R.layout.dialog_more_sosmed);
+                CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_sosmed);
+                customDialog.startAlertDialog("more option", sosmed.getId(), this);
             });
+        }
+
+        @Override
+        public void getDataByPos(int position) {
+
+        }
+
+        @Override
+        public void delete(int position) {
+
+        }
+
+        @Override
+        public void updateSosmed(int position, String sosmedTitle) {
+
         }
     }
 }

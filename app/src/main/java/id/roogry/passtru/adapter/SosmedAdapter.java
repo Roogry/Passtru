@@ -1,6 +1,7 @@
 package id.roogry.passtru.adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import java.util.List;
 import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ItemSocialMediaListBinding;
 import id.roogry.passtru.helpers.CustomDialog;
+import id.roogry.passtru.helpers.MoreOptionInterface;
 import id.roogry.passtru.helpers.SosmedDiffCallback;
 import id.roogry.passtru.models.Sosmed;
 import id.roogry.passtru.repository.SosmedRepository;
@@ -38,6 +40,10 @@ public class SosmedAdapter extends RecyclerView.Adapter<SosmedAdapter.SosmedView
         diffResult.dispatchUpdatesTo(this);
     }
 
+    public void updateData(){
+        this.notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public SosmedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,7 +53,7 @@ public class SosmedAdapter extends RecyclerView.Adapter<SosmedAdapter.SosmedView
 
     @Override
     public void onBindViewHolder(@NonNull SosmedViewHolder holder, int position) {
-        holder.bind(listSosmeds.get(position));
+        holder.bind(position);
     }
 
     @Override
@@ -55,7 +61,7 @@ public class SosmedAdapter extends RecyclerView.Adapter<SosmedAdapter.SosmedView
         return listSosmeds.size();
     }
 
-    class SosmedViewHolder extends RecyclerView.ViewHolder {
+    class SosmedViewHolder extends RecyclerView.ViewHolder implements MoreOptionInterface {
         final ItemSocialMediaListBinding binding;
 
         SosmedViewHolder(ItemSocialMediaListBinding binding) {
@@ -63,17 +69,36 @@ public class SosmedAdapter extends RecyclerView.Adapter<SosmedAdapter.SosmedView
             this.binding = binding;
         }
 
-        public void bind(Sosmed sosmed) {
+        public void bind(int position) {
+            Sosmed sosmed = listSosmeds.get(position);
             binding.tvSosmed.setText(sosmed.getTitle());
             binding.ivMore.setOnClickListener(v ->{
-                CustomDialog customDialog = new CustomDialog(activity);
-                customDialog.startAlertDialog("more option", sosmed.getId(), R.layout.dialog_more_sosmed);
+                CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_sosmed);
+                customDialog.startAlertDialog("more option", position, this);
             });
         }
-    }
 
-    public void removeItem(int id) {
-        sosmedRepositor.delete(listSosmeds.get(id));
-        Toast.makeText(activity, String.valueOf(id), Toast.LENGTH_SHORT).show();
+        @Override
+        public void delete(int position) {
+            sosmedRepositor.delete(listSosmeds.get(position));
+            Toast.makeText(activity, R.string.deleted_sosmed, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void updateSosmed(int position, String sosmedTitle) {
+            listSosmeds.get(position).setTitle(sosmedTitle);
+            sosmedRepositor.update(listSosmeds.get(position));
+
+            updateData();
+            Toast.makeText(activity, R.string.updated_sosmed, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void getDataByPos(int position) {
+            CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_add_sosmed);
+            customDialog.startFormSosmed(position, listSosmeds.get(position).getTitle(), this);
+        }
+
+
     }
 }
