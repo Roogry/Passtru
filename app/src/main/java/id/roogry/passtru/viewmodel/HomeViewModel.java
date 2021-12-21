@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import id.roogry.passtru.models.Account;
+import id.roogry.passtru.models.AccountAndSosmed;
 import id.roogry.passtru.models.Sosmed;
 import id.roogry.passtru.repository.AccountRepository;
 import id.roogry.passtru.repository.SosmedRepository;
@@ -21,7 +21,7 @@ public class HomeViewModel extends ViewModel {
         sosmedRepository = new SosmedRepository(application);
     }
 
-    public LiveData<List<Account>> getAccounts() {
+    public LiveData<List<AccountAndSosmed>> getAccounts() {
         return accountRepository.getAllAccounts();
     }
 

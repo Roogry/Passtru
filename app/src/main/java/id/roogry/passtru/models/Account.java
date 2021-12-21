@@ -16,11 +16,6 @@ public class Account implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    @ForeignKey(entity = Sosmed.class,
-            parentColumns = "id",
-            childColumns = "id_sosmed",
-            onDelete = ForeignKey.CASCADE)
-
     @ColumnInfo(name = "id_sosmed")
     public int idSosmed;
 

@@ -6,14 +6,11 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -21,31 +18,26 @@ import java.util.List;
 
 import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ItemListAccountBinding;
-import id.roogry.passtru.helpers.AccountDiffCallback;
 import id.roogry.passtru.helpers.CustomDialog;
 import id.roogry.passtru.helpers.MoreOptionInterface;
-import id.roogry.passtru.models.Account;
+import id.roogry.passtru.models.AccountAndSosmed;
 import id.roogry.passtru.repository.AccountRepository;
-import id.roogry.passtru.repository.SosmedRepository;
 import id.roogry.passtru.ui.FormManageAccountActivity;
 
 public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountViewHolder> {
-    private final ArrayList<Account> listAccounts = new ArrayList<>();
-    private Activity activity;
-    private AccountRepository accountRepositor;
+    private final ArrayList<AccountAndSosmed> listAccounts = new ArrayList<>();
+    private final Activity activity;
+    private final AccountRepository accountRepositor;
 
-    public AccountAdapter(Activity activity){
+    public AccountAdapter(Activity activity) {
         this.activity = activity;
         accountRepositor = new AccountRepository(activity.getApplication());
     }
 
-    public void setListAccounts(List<Account> listAccounts) {
-        final AccountDiffCallback diffCallback = new AccountDiffCallback(this.listAccounts, listAccounts);
-        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
-
+    public void setListAccounts(List<AccountAndSosmed> listAccounts) {
         this.listAccounts.clear();
         this.listAccounts.addAll(listAccounts);
-        diffResult.dispatchUpdatesTo(this);
+        this.notifyDataSetChanged();
     }
 
     @NonNull
@@ -74,10 +66,10 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         }
 
         public void bind(int position) {
-            Account accounts = listAccounts.get(position);
-            binding.tvSosmed.setText(accounts.getUsername());
-            binding.tvUsername.setText(accounts.getUsername());
-            binding.ivMore.setOnClickListener(v ->{
+            AccountAndSosmed accounts = listAccounts.get(position);
+            binding.tvSosmed.setText(accounts.getSosmed().getTitle());
+            binding.tvUsername.setText(accounts.getAccount().getUsername());
+            binding.ivMore.setOnClickListener(v -> {
                 CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_account);
                 customDialog.startAlertDialogOptionAccount(position, this);
             });
@@ -86,7 +78,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         @Override
         public void getDataByPos(int position) {
             Intent intent = new Intent(activity, FormManageAccountActivity.class);
-            intent.putExtra(FormManageAccountActivity.EXTRA_ACCOUNT,listAccounts.get(position));
+            intent.putExtra(FormManageAccountActivity.EXTRA_ACCOUNT, listAccounts.get(position).getAccount());
             activity.startActivity(intent);
         }
 
@@ -94,17 +86,17 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         public void copyPassword(int position) {
             ClipboardManager myClipboard = (ClipboardManager) activity.getSystemService(CLIPBOARD_SERVICE);
             String text;
-            text = listAccounts.get(position).getPassword();
+            text = listAccounts.get(position).getAccount().getPassword();
 
             ClipData myClip = ClipData.newPlainText("password", text);
             myClipboard.setPrimaryClip(myClip);
 
-            Toast.makeText(activity.getApplicationContext(), "Password Copied",Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity.getApplicationContext(), "Password Copied", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void delete(int position) {
-            accountRepositor.delete(listAccounts.get(position));
+            accountRepositor.delete(listAccounts.get(position).getAccount());
             Toast.makeText(activity, R.string.deleted_account, Toast.LENGTH_SHORT).show();
         }
 

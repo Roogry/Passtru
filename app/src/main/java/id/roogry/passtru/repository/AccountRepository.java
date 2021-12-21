@@ -11,6 +11,7 @@ import java.util.concurrent.Executors;
 import id.roogry.passtru.database.PasstruRoomDatabase;
 import id.roogry.passtru.database.AccountDao;
 import id.roogry.passtru.models.Account;
+import id.roogry.passtru.models.AccountAndSosmed;
 
 public class AccountRepository {
     private final AccountDao accountsDao;
@@ -22,7 +23,7 @@ public class AccountRepository {
         accountsDao = db.accountDao();
     }
 
-    public LiveData<List<Account>> getAllAccounts() {
+    public LiveData<List<AccountAndSosmed>> getAllAccounts() {
         return accountsDao.getAllAccounts();
     }
 

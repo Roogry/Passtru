@@ -14,7 +14,7 @@ import id.roogry.passtru.adapter.RecentlyAddAdapter;
 import id.roogry.passtru.adapter.SosmedBadgeAdapter;
 import id.roogry.passtru.databinding.ActivityHomeBinding;
 import id.roogry.passtru.helpers.ViewModelFactory;
-import id.roogry.passtru.models.Account;
+import id.roogry.passtru.models.AccountAndSosmed;
 import id.roogry.passtru.models.Sosmed;
 import id.roogry.passtru.viewmodel.HomeViewModel;
 
@@ -69,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     };
 
-    private final Observer<List<Account>> accountObserver = accountList -> {
+    private final Observer<List<AccountAndSosmed>> accountObserver = accountList -> {
         if (accountList != null) {
             recentlyAddAdapter.setListAccounts(accountList);
         }

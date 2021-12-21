@@ -6,11 +6,13 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import java.util.List;
 
 import id.roogry.passtru.models.Account;
+import id.roogry.passtru.models.AccountAndSosmed;
 
 @Dao
 public interface AccountDao {
@@ -23,8 +25,9 @@ public interface AccountDao {
     @Delete
     void delete(Account account);
 
-    @Query("SELECT accounts.*, sosmeds.title FROM accounts INNER JOIN sosmeds ON accounts.id_sosmed=sosmeds.id ORDER BY id DESC")
-    LiveData<List<Account>> getAllAccounts();
+    @Transaction
+    @Query("SELECT * FROM accounts ORDER BY id DESC")
+    LiveData<List<AccountAndSosmed>> getAllAccounts();
 
     @Query("SELECT * FROM accounts WHERE id = :id LIMIT 1")
     Account getAccountById(int id);

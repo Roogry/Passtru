@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 import java.util.List;
 
 import id.roogry.passtru.models.Account;
+import id.roogry.passtru.models.AccountAndSosmed;
 import id.roogry.passtru.repository.AccountRepository;
 
 public class ListAccountViewModel extends ViewModel {
@@ -17,7 +18,7 @@ public class ListAccountViewModel extends ViewModel {
         accountRepository = new AccountRepository(application);
     }
 
-    public LiveData<List<Account>> getAccounts() {
+    public LiveData<List<AccountAndSosmed>> getAccounts() {
         return accountRepository.getAllAccounts();
     }
 

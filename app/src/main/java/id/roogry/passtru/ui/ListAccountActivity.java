@@ -11,15 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import java.util.List;
 
 import id.roogry.passtru.adapter.AccountAdapter;
-import id.roogry.passtru.adapter.RecentlyAddAdapter;
-import id.roogry.passtru.adapter.SosmedAdapter;
 import id.roogry.passtru.databinding.ActivityListAccountBinding;
 import id.roogry.passtru.helpers.ViewModelFactory;
-import id.roogry.passtru.models.Account;
-import id.roogry.passtru.models.Sosmed;
-import id.roogry.passtru.viewmodel.HomeViewModel;
+import id.roogry.passtru.models.AccountAndSosmed;
 import id.roogry.passtru.viewmodel.ListAccountViewModel;
-import id.roogry.passtru.viewmodel.ListSosmedViewModel;
 
 public class ListAccountActivity extends AppCompatActivity {
 
@@ -54,7 +49,7 @@ public class ListAccountActivity extends AppCompatActivity {
     }
 
 
-    private final Observer<List<Account>> accountObersver = accountList -> {
+    private final Observer<List<AccountAndSosmed>> accountObersver = accountList -> {
         if (accountList != null) {
             accountAdapter.setListAccounts(accountList);
         }

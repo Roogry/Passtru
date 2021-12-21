@@ -5,14 +5,11 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -20,27 +17,23 @@ import java.util.List;
 
 import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ItemAccountHomeBinding;
-import id.roogry.passtru.helpers.AccountDiffCallback;
 import id.roogry.passtru.helpers.CustomDialog;
 import id.roogry.passtru.helpers.MoreOptionInterface;
-import id.roogry.passtru.models.Account;
+import id.roogry.passtru.models.AccountAndSosmed;
 
 public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.AccountViewHolder> {
 
-    private final ArrayList<Account> listAccounts = new ArrayList<>();
+    private final ArrayList<AccountAndSosmed> listAccounts = new ArrayList<>();
     private final Activity activity;
 
     public RecentlyAddAdapter(Activity activity) {
         this.activity = activity;
     }
 
-    public void setListAccounts(List<Account> listAccounts) {
-        final AccountDiffCallback diffCallback = new AccountDiffCallback(this.listAccounts, listAccounts);
-        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
-
+    public void setListAccounts(List<AccountAndSosmed> listAccounts) {
         this.listAccounts.clear();
         this.listAccounts.addAll(listAccounts);
-        diffResult.dispatchUpdatesTo(this);
+        this.notifyDataSetChanged();
     }
 
     @NonNull
@@ -52,7 +45,7 @@ public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull AccountViewHolder holder, int position) {
-        holder.bind(listAccounts.get(position));
+        holder.bind(position);
     }
 
     @Override
@@ -68,18 +61,19 @@ public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.
             this.binding = binding;
         }
 
-        public void bind(Account account) {
-            binding.tvSosmed.setText(account.getUsername());
-            binding.tvUsername.setText(account.getUsername());
+        public void bind(int position) {
+            AccountAndSosmed accountWithSosmed = listAccounts.get(position);
+            binding.tvSosmed.setText(accountWithSosmed.getSosmed().getTitle());
+            binding.tvUsername.setText(accountWithSosmed.getAccount().getUsername());
             binding.cardAccount.setOnClickListener(view -> {
                 CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_account);
-                customDialog.startAlertDialog(account.getId(), this);
+                customDialog.startAlertDialog(position, this);
             });
 
             binding.btnCopy.setOnClickListener(view -> {
                 ClipboardManager myClipboard = (ClipboardManager) activity.getSystemService(CLIPBOARD_SERVICE);
                 String text;
-                text = account.getPassword();
+                text = accountWithSosmed.getAccount().getPassword();
 
                 ClipData myClip = ClipData.newPlainText("password", text);
                 myClipboard.setPrimaryClip(myClip);
