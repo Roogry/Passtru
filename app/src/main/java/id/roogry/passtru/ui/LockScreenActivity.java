@@ -40,19 +40,18 @@ import javax.crypto.SecretKey;
 
 import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ActivityLockScreenBinding;
-import id.roogry.passtru.databinding.ActivitySetPinBinding;
 import id.roogry.passtru.helpers.FingerprintHandler;
 
 public class LockScreenActivity extends AppCompatActivity {
     private final String KEY_NAME = "AndroidKey";
     private ActivityLockScreenBinding binding;
 
-    private FingerprintManager fingerprintManager;
-    private KeyguardManager keyguardManager;
+    private FingerprintHandler fingerprintHandler;
     private KeyStore keyStore;
-    private Cipher chiper;
+    private Cipher chipper;
     private String pinCheck;
-    private SharedPreferences sharedPref;
+
+    private boolean isFingerprint = true;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("ServiceCast")
@@ -65,18 +64,38 @@ public class LockScreenActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         //check Pin On Shared Preference
-        sharedPref = getSharedPreferences("PREF", 0);
+        SharedPreferences sharedPref = getSharedPreferences("PREF", 0);
         pinCheck = sharedPref.getString("PIN", "");
         //FingerPrint Security
-        fingerPrintAuth();
-        //Pin Security
+        setFingerprintMethod();
         pinAuth();
 
-        binding.tvPinInput.setOnClickListener(v ->{
-            binding.pinInput.setVisibility(View.VISIBLE);
-            binding.viewFingerprint.setVisibility(View.GONE);
-            binding.tvStatusFingerPrint.setText("Input Your Pin");
+        binding.tvMethod.setOnClickListener(v -> {
+            if (isFingerprint) setPinMethod();
+            else setFingerprintMethod();
         });
+    }
+
+    private void setPinMethod() {
+        isFingerprint = false;
+
+        binding.pinContainer.setVisibility(View.VISIBLE);
+        binding.fingerprintContainer.setVisibility(View.GONE);
+        binding.tvStatusFingerprint.setVisibility(View.GONE);
+        binding.tvMethod.setText("Use Fingerprint");
+
+        fingerprintHandler.cancelFingerprint();
+    }
+
+    private void setFingerprintMethod() {
+        isFingerprint = true;
+
+        binding.pinContainer.setVisibility(View.GONE);
+        binding.fingerprintContainer.setVisibility(View.VISIBLE);
+        binding.tvStatusFingerprint.setVisibility(View.VISIBLE);
+        binding.tvMethod.setText("Use PIN");
+
+        fingerPrintAuth();
     }
 
     public static void setLocale(Activity activity, String languageCode) {
@@ -104,7 +123,12 @@ public class LockScreenActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        fingerPrintAuth();
+
+        if (isFingerprint) {
+            setFingerprintMethod();
+        } else {
+            setPinMethod();
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -132,7 +156,7 @@ public class LockScreenActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.M)
     public boolean chiperInit() {
         try {
-            chiper = Cipher.getInstance(KeyProperties.KEY_ALGORITHM_AES + "/" + KeyProperties.BLOCK_MODE_CBC + "/" + KeyProperties.ENCRYPTION_PADDING_PKCS7);
+            chipper = Cipher.getInstance(KeyProperties.KEY_ALGORITHM_AES + "/" + KeyProperties.BLOCK_MODE_CBC + "/" + KeyProperties.ENCRYPTION_PADDING_PKCS7);
         } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
             throw new RuntimeException("failed to get Chiper");
         }
@@ -140,7 +164,7 @@ public class LockScreenActivity extends AppCompatActivity {
         try {
             keyStore.load(null);
             SecretKey key = (SecretKey) keyStore.getKey(KEY_NAME, null);
-            chiper.init(Cipher.ENCRYPT_MODE, key);
+            chipper.init(Cipher.ENCRYPT_MODE, key);
             return true;
         } catch (KeyPermanentlyInvalidatedException e) {
             return false;
@@ -152,32 +176,27 @@ public class LockScreenActivity extends AppCompatActivity {
     private void fingerPrintAuth() {
         // FingerPrint Security
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
-            keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-
-            binding.viewFingerprint.setVisibility(View.GONE);
+            FingerprintManager fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
+            KeyguardManager keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
 
             if (!fingerprintManager.isHardwareDetected()) {
-                binding.tvStatusFingerPrint.setText("Fingeprint not found. Cannot Active fingerPrint security");
+                binding.tvStatusFingerprint.setText("Fingeprint not found. Cannot Active fingerPrint security");
 
             } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
-                binding.tvStatusFingerPrint.setText("FingerPrint Permission Denied");
+                binding.tvStatusFingerprint.setText("FingerPrint Permission Denied");
 
             } else if (!keyguardManager.isKeyguardSecure()) {
-                binding.tvStatusFingerPrint.setText("Secure Your Lockcreen First And Active The FingerPrint From Setting To Active FingerPrint Security");
+                binding.tvStatusFingerprint.setText("Secure Your Lockcreen First And Active The FingerPrint From Setting To Active FingerPrint Security");
 
             } else if (!fingerprintManager.hasEnrolledFingerprints()) {
-                binding.tvStatusFingerPrint.setText("To Active FingerPrint Security, Please Turn On The FingerPrint In Setting");
+                binding.tvStatusFingerprint.setText("To Active FingerPrint Security, Please Turn On The FingerPrint In Setting");
 
             } else {
-                binding.pinInput.setVisibility(View.GONE);
-                binding.viewFingerprint.setVisibility(View.VISIBLE);
-                binding.tvStatusFingerPrint.setText("Scan your fingerprint");
                 generateKey();
 
                 if (chiperInit()) {
-                    FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(chiper);
-                    FingerprintHandler fingerprintHandler = new FingerprintHandler(this, binding);
+                    FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(chipper);
+                    fingerprintHandler = new FingerprintHandler(this, binding);
                     fingerprintHandler.startAuth(fingerprintManager, cryptoObject);
                 }
             }
@@ -194,11 +213,10 @@ public class LockScreenActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
-
                 return true;
             } else {
-                binding.tvStatusFingerPrint.setTextColor(ContextCompat.getColor(LockScreenActivity.this, R.color.red));
-                binding.tvStatusFingerPrint.setText("Pin Is Wrong");
+                binding.tvStatusFingerprint.setTextColor(ContextCompat.getColor(LockScreenActivity.this, R.color.red));
+                binding.tvStatusFingerprint.setText("Pin Is Wrong");
                 return false;
             }
         });
