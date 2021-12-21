@@ -27,9 +27,10 @@
             android:textStyle="bold" />
 
         <LinearLayout
-            android:id="@+id/pinInput"
+            android:id="@+id/pinContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_gravity="center"
             android:orientation="vertical">
 
@@ -64,39 +65,36 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/fingerPrintInput"
+            android:id="@+id/fingerprintContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/tvStatusFingerprint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/m"
+                android:text="Scan Your FingerPrint"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
             <ImageView
-                android:id="@+id/viewFingerprint"
+                android:id="@+id/ivFingerprint"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_baseline_fingerprint_24"
-                android:textStyle="bold"
-                android:visibility="gone" />
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvStatusFingerPrint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="15dp"
-            android:paddingHorizontal="10dp"
-            android:text="Scan Your FingerPrint"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvPinInput"
+            android:id="@+id/tvMethod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

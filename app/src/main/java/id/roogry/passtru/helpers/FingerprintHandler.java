@@ -20,25 +20,30 @@ import id.roogry.passtru.ui.LockScreenActivity;
 public class FingerprintHandler extends FingerprintManager.AuthenticationCallback {
     private final Context context;
     private final ActivityLockScreenBinding binding;
+    private final CancellationSignal cancellationSignal;
 
     public FingerprintHandler(Context context, ActivityLockScreenBinding binding) {
         this.context = context;
         this.binding = binding;
+        this.cancellationSignal = new CancellationSignal();
     }
 
     public void startAuth(FingerprintManager fingerprintManager, FingerprintManager.CryptoObject cryptoObject) {
-        CancellationSignal cancellationSignal = new CancellationSignal();
         fingerprintManager.authenticate(cryptoObject, cancellationSignal, 0, this, null);
-        binding.viewFingerprint.setColorFilter(ContextCompat.getColor(context, R.color.white));
-        binding.tvStatusFingerPrint.setTextColor(ContextCompat.getColor(context, R.color.white));
+        binding.ivFingerprint.setColorFilter(ContextCompat.getColor(context, R.color.white));
+        binding.tvStatusFingerprint.setTextColor(ContextCompat.getColor(context, R.color.white));
+    }
+
+    public void cancelFingerprint(){
+        cancellationSignal.cancel();
     }
 
     @Override
     public void onAuthenticationError(int errorCode, CharSequence errString) {
         super.onAuthenticationError(errorCode, errString);
         if (errorCode == 7) {
-            binding.pinInput.setVisibility(View.VISIBLE);
-            binding.viewFingerprint.setVisibility(View.GONE);
+            binding.pinContainer.setVisibility(View.VISIBLE);
+            binding.fingerprintContainer.setVisibility(View.GONE);
             this.update("Sorry too many attempts. Please wait 30s to use FingerPrint again.", false, errorCode);
         }else if (errorCode == 5){
             this.update("Scan your fingerprint", false, errorCode);
@@ -51,7 +56,6 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     @Override
     public void onAuthenticationFailed() {
         super.onAuthenticationFailed();
-
         this.update("Finger Print Invalid", false, 0);
     }
 
@@ -72,17 +76,17 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     }
 
     private void update(String string, boolean status , Integer code) {
-        binding.tvStatusFingerPrint.setText(string);
+        binding.tvStatusFingerprint.setText(string);
         if (!status) {
             if (code != 5){
-                binding.tvStatusFingerPrint.setTextColor(ContextCompat.getColor(context, R.color.red));
-                binding.viewFingerprint.setColorFilter(ContextCompat.getColor(context, R.color.red));
+                binding.tvStatusFingerprint.setTextColor(ContextCompat.getColor(context, R.color.red));
+                binding.ivFingerprint.setColorFilter(ContextCompat.getColor(context, R.color.red));
             }
 
         } else {
-            binding.viewFingerprint.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_check_circle_outline_24));
-            binding.viewFingerprint.setColorFilter(ContextCompat.getColor(context, R.color.white));
-            binding.tvStatusFingerPrint.setTextColor(ContextCompat.getColor(context, R.color.white));
+            binding.ivFingerprint.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_baseline_check_circle_outline_24));
+            binding.ivFingerprint.setColorFilter(ContextCompat.getColor(context, R.color.white));
+            binding.tvStatusFingerprint.setTextColor(ContextCompat.getColor(context, R.color.white));
 
         }
     }
