@@ -23,6 +23,9 @@ public interface SosmedDao {
     @Delete
     void delete(Sosmed sosmed);
 
+    @Query("SELECT * FROM sosmeds ORDER BY id DESC LIMIT 5")
+    LiveData<List<Sosmed>> getSosmedBadges();
+
     @Query("SELECT * FROM sosmeds ORDER BY id DESC")
     LiveData<List<Sosmed>> getAllSosmeds();
 

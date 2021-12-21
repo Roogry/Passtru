@@ -26,6 +26,6 @@ public class HomeViewModel extends ViewModel {
     }
 
     public LiveData<List<Sosmed>> getSosmeds() {
-        return sosmedRepository.getAllSosmeds();
+        return sosmedRepository.getSosmedBadges();
     }
 }

@@ -26,6 +26,10 @@ public class SosmedRepository {
         return sosmedsDao.getAllSosmeds();
     }
 
+    public LiveData<List<Sosmed>> getSosmedBadges() {
+        return sosmedsDao.getSosmedBadges();
+    }
+
     public void insert(final Sosmed sosmed) {
         executorService.execute(() -> sosmedsDao.insert(sosmed));
     }
