@@ -74,7 +74,7 @@ public class SosmedAdapter extends RecyclerView.Adapter<SosmedAdapter.SosmedView
             binding.tvSosmed.setText(sosmed.getTitle());
             binding.ivMore.setOnClickListener(v ->{
                 CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_sosmed);
-                customDialog.startAlertDialog("more option", position, this);
+                customDialog.startAlertDialog(position, this);
             });
         }
 

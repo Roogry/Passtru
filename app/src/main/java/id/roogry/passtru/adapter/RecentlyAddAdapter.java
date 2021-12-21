@@ -57,11 +57,7 @@ public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.
 
     @Override
     public int getItemCount() {
-        if (listAccounts.size() > 6){
-            return 6;
-        }else{
-            return listAccounts.size();
-        }
+        return Math.min(listAccounts.size(), 4);
     }
 
     class AccountViewHolder extends RecyclerView.ViewHolder implements MoreOptionInterface {
@@ -77,7 +73,7 @@ public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.
             binding.tvUsername.setText(account.getUsername());
             binding.cardAccount.setOnClickListener(view -> {
                 CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_account);
-                customDialog.startAlertDialog("more option", account.getId(), this);
+                customDialog.startAlertDialog(account.getId(), this);
             });
 
             binding.btnCopy.setOnClickListener(view -> {

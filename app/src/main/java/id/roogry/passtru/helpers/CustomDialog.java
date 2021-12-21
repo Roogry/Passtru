@@ -4,14 +4,12 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import id.roogry.passtru.R;
-import id.roogry.passtru.adapter.SosmedAdapter;
 import id.roogry.passtru.models.Sosmed;
 import id.roogry.passtru.repository.SosmedRepository;
 
@@ -39,7 +37,7 @@ public class CustomDialog {
         });
     }
 
-    public void startFormSosmed(int position, String sosmedTitle, MoreOptionInterface callback){
+    public void startFormSosmed(int position, String sosmedTitle, MoreOptionInterface callback) {
         dialog.show();
 
         Button btnSave = dialog.findViewById(R.id.btnSubmit);
@@ -50,11 +48,11 @@ public class CustomDialog {
         btnSave.setOnClickListener(v -> {
             String title = inputSosmed.getText().toString();
 
-            if (sosmedTitle == null){
+            if (sosmedTitle == null) {
                 Sosmed newSosmed = new Sosmed(title);
                 sosmedRepository.insert(newSosmed);
                 Toast.makeText(activity, "Social Media Added! ", Toast.LENGTH_LONG).show();
-            }else{
+            } else {
                 callback.updateSosmed(position, title);
             }
 
@@ -62,44 +60,40 @@ public class CustomDialog {
         });
     }
 
-    public void startAlertDialog(String type, int position, MoreOptionInterface callback) {
+    public void startAlertDialog(int position, MoreOptionInterface callback) {
         dialog.show();
-        if(type.equals("more option")){
-            Button edit = dialog.findViewById(R.id.btnEdit);
-            Button delete = dialog.findViewById(R.id.btnDelete);
-            edit.setOnClickListener(v ->{
-                callback.getDataByPos(position);
-                dismissDialog();
-            });
+        Button edit = dialog.findViewById(R.id.btnEdit);
+        Button delete = dialog.findViewById(R.id.btnDelete);
+        edit.setOnClickListener(v -> {
+            callback.getDataByPos(position);
+            dismissDialog();
+        });
 
-            delete.setOnClickListener(v -> {
-                callback.delete(position);
-                dismissDialog();
-            });
-        }
+        delete.setOnClickListener(v -> {
+            callback.delete(position);
+            dismissDialog();
+        });
     }
 
-    public void startAlertDialogOptionAccount(String type, int position, MoreOptionInterface callback) {
+    public void startAlertDialogOptionAccount(int position, MoreOptionInterface callback) {
         dialog.show();
-        if(type.equals("more option")){
-            Button edit = dialog.findViewById(R.id.btnEdit);
-            Button delete = dialog.findViewById(R.id.btnDelete);
-            Button copy = dialog.findViewById(R.id.btnCopy);
-            copy.setOnClickListener(v->{
-                callback.copyPassword(position);
-                dismissDialog();
-            });
+        Button edit = dialog.findViewById(R.id.btnEdit);
+        Button delete = dialog.findViewById(R.id.btnDelete);
+        Button copy = dialog.findViewById(R.id.btnCopy);
+        copy.setOnClickListener(v -> {
+            callback.copyPassword(position);
+            dismissDialog();
+        });
 
-            edit.setOnClickListener(v ->{
-                callback.getDataByPos(position);
-                dismissDialog();
-            });
+        edit.setOnClickListener(v -> {
+            callback.getDataByPos(position);
+            dismissDialog();
+        });
 
-            delete.setOnClickListener(v -> {
-                callback.delete(position);
-                dismissDialog();
-            });
-        }
+        delete.setOnClickListener(v -> {
+            callback.delete(position);
+            dismissDialog();
+        });
     }
 
     public void dismissDialog() {
