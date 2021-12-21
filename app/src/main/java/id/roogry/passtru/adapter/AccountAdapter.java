@@ -79,18 +79,14 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
             binding.tvUsername.setText(accounts.getUsername());
             binding.ivMore.setOnClickListener(v ->{
                 CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_account);
-                customDialog.startAlertDialogOptionAccount("more option", position, this);
+                customDialog.startAlertDialogOptionAccount(position, this);
             });
         }
 
         @Override
         public void getDataByPos(int position) {
             Intent intent = new Intent(activity, FormManageAccountActivity.class);
-            Bundle dataBundleAccount = new Bundle();
-            dataBundleAccount.putInt("idSosmed",listAccounts.get(position).getIdSosmed());
-            dataBundleAccount.putString("username",listAccounts.get(position).getUsername());
-            dataBundleAccount.putString("password",listAccounts.get(position).getPassword());
-            intent.putExtra("isEdit",dataBundleAccount);
+            intent.putExtra(FormManageAccountActivity.EXTRA_ACCOUNT,listAccounts.get(position));
             activity.startActivity(intent);
         }
 
