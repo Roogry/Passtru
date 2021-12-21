@@ -47,8 +47,8 @@
             android:hint="@string/hint_add_sosmed"
             android:inputType="textCapWords|textNoSuggestions"
             android:paddingHorizontal="@dimen/m"
-            android:textSize="14sp"
-            android:textColor="@color/text_secondary" />
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/btnSubmit"
