@@ -32,6 +32,9 @@
     <string name="copy">COPY</string>
     <string name="deleted_sosmed">Social Media has been deleted!</string>
     <string name="updated_sosmed">Social Media has been updated!</string>
+    <string name="deleted_account">Account has been deleted!</string>
+    <string name="updated_account">Account has been updated!</string>
+
 
     <string-array name="placeHolder">
         <item>Select Your Social Media</item>

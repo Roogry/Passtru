@@ -101,6 +101,7 @@
 
                                 <TextView
                                     android:layout_width="wrap_content"
+                                    android:id="@+id/titleForm"
                                     android:layout_height="wrap_content"
                                     android:text="Add Account"
                                     android:textColor="@color/white"
@@ -111,6 +112,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="2dp"
+                                    android:id="@+id/subtitleForm"
                                     android:text="Add your account information here"
                                     android:textColor="#767486"
                                     android:textSize="12sp" />

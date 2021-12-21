@@ -64,23 +64,31 @@ public class CustomDialog {
 
     public void startAlertDialog(String type, int position, MoreOptionInterface callback) {
         dialog.show();
-
-        if (type.equals("form")) {
-            Button btnSave = dialog.findViewById(R.id.btnSubmit);
-            EditText inputSosmed = dialog.findViewById(R.id.edtSosmed);
-
-            btnSave.setOnClickListener(v -> {
-                if (position == -1){
-                    Sosmed sosmed = new Sosmed(inputSosmed.getText().toString());
-                    sosmedRepository.insert(sosmed);
-                    Toast.makeText(activity, "Social Media Added! ", Toast.LENGTH_LONG).show();
-                    dismissDialog();
-                }
+        if(type.equals("more option")){
+            Button edit = dialog.findViewById(R.id.btnEdit);
+            Button delete = dialog.findViewById(R.id.btnDelete);
+            edit.setOnClickListener(v ->{
+                callback.getDataByPos(position);
+                dismissDialog();
             });
-        }else if(type.equals("more option")){
+
+            delete.setOnClickListener(v -> {
+                callback.delete(position);
+                dismissDialog();
+            });
+        }
+    }
+
+    public void startAlertDialogOptionAccount(String type, int position, MoreOptionInterface callback) {
+        dialog.show();
+        if(type.equals("more option")){
             Button edit = dialog.findViewById(R.id.btnEdit);
             Button delete = dialog.findViewById(R.id.btnDelete);
             Button copy = dialog.findViewById(R.id.btnCopy);
+            copy.setOnClickListener(v->{
+                callback.copyPassword(position);
+                dismissDialog();
+            });
 
             edit.setOnClickListener(v ->{
                 callback.getDataByPos(position);

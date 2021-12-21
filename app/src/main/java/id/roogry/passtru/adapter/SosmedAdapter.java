@@ -99,6 +99,11 @@ public class SosmedAdapter extends RecyclerView.Adapter<SosmedAdapter.SosmedView
             customDialog.startFormSosmed(position, listSosmeds.get(position).getTitle(), this);
         }
 
+        @Override
+        public void copyPassword(int position) {
+
+        }
+
 
     }
 }

@@ -67,6 +67,11 @@ public class ListSosmedActivity extends AppCompatActivity implements MoreOptionI
     }
 
     @Override
+    public void copyPassword(int position) {
+
+    }
+
+    @Override
     public void delete(int position) {
 
     }

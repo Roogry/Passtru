@@ -71,6 +71,12 @@ public class LockScreenActivity extends AppCompatActivity {
         fingerPrintAuth();
         //Pin Security
         pinAuth();
+
+        binding.tvPinInput.setOnClickListener(v ->{
+            binding.pinInput.setVisibility(View.VISIBLE);
+            binding.viewFingerprint.setVisibility(View.GONE);
+            binding.tvStatusFingerPrint.setText("Input Your Pin");
+        });
     }
 
     public static void setLocale(Activity activity, String languageCode) {

@@ -68,4 +68,11 @@ public class Account {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
+
+    public Account(Integer idSosmed, String username, String password, String createdAt) {
+        this.idSosmed = idSosmed;
+        this.username = username;
+        this.password = password;
+        this.createdAt = createdAt;
+    }
 }

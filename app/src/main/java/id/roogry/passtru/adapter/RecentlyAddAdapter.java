@@ -1,6 +1,10 @@
 package id.roogry.passtru.adapter;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,12 +81,23 @@ public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.
             });
 
             binding.btnCopy.setOnClickListener(view -> {
-                Toast.makeText(activity, "Passowrd copied", Toast.LENGTH_SHORT).show();
+                ClipboardManager myClipboard = (ClipboardManager) activity.getSystemService(CLIPBOARD_SERVICE);
+                String text;
+                text = account.getPassword();
+
+                ClipData myClip = ClipData.newPlainText("password", text);
+                myClipboard.setPrimaryClip(myClip);
+                Toast.makeText(activity, "Password copied", Toast.LENGTH_SHORT).show();
             });
         }
 
         @Override
         public void getDataByPos(int position) {
+
+        }
+
+        @Override
+        public void copyPassword(int position) {
 
         }
 

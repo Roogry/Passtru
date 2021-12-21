@@ -23,7 +23,7 @@ public interface AccountDao {
     @Delete
     void delete(Account account);
 
-    @Query("SELECT * FROM accounts ORDER BY id DESC")
+    @Query("SELECT accounts.*, sosmeds.title FROM accounts INNER JOIN sosmeds ON accounts.id_sosmed=sosmeds.id ORDER BY id DESC")
     LiveData<List<Account>> getAllAccounts();
 
     @Query("SELECT * FROM accounts WHERE id = :id LIMIT 1")

@@ -83,6 +83,11 @@ public class SosmedBadgeAdapter extends RecyclerView.Adapter<SosmedBadgeAdapter.
         }
 
         @Override
+        public void copyPassword(int position) {
+
+        }
+
+        @Override
         public void delete(int position) {
 
         }
