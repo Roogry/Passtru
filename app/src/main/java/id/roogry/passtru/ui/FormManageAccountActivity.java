@@ -10,21 +10,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ActivityFormManageAccountBinding;
+import id.roogry.passtru.helpers.AESUtils;
 import id.roogry.passtru.helpers.CustomDialog;
 import id.roogry.passtru.helpers.MoreOptionInterface;
 import id.roogry.passtru.helpers.ViewModelFactory;
@@ -44,6 +42,17 @@ public class FormManageAccountActivity extends AppCompatActivity implements More
     private AccountRepository accountRepository;
     private int selectedSosmedId;
 
+    public static String decrypt(String password) {
+        String decrypted = "";
+        try {
+            decrypted = AESUtils.decrypt(password);
+            Log.d("TEST", "decrypted:" + decrypted);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return decrypted;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,31 +66,36 @@ public class FormManageAccountActivity extends AppCompatActivity implements More
         account = getIntent().getParcelableExtra(EXTRA_ACCOUNT);
         if (account != null) {
             setupEditForm();
-        }else {
+        } else {
             account = new Account();
         }
 
         binding.btnSubmit.setOnClickListener(v -> {
             String username = binding.edtUsername.getText().toString();
             String password = binding.edtPassword.getText().toString();
+            String encryptedPwd = encrypt(password);
 
             account.setIdSosmed(selectedSosmedId);
             account.setUsername(username);
-            account.setPassword(password);
+            account.setPassword(encryptedPwd);
 
             Log.d("BLabla", "id is : " + account.getId());
 
-            if (account.getId() != 0) {
-                updateAccount();
-            } else {
-                saveAccount();
-            }
+            Boolean isAllFieldsChecked = CheckAllFields();
+            if (isAllFieldsChecked) {
+                if (account.getId() != 0) {
+                    updateAccount();
+                } else {
+                    saveAccount();
+                }
 
-            Intent intent = new Intent(FormManageAccountActivity.this, ListAccountActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                    Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+                Intent intent = new Intent(FormManageAccountActivity.this, ListAccountActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+            
         });
 
         binding.ivBack.setOnClickListener(v -> onBackPressed());
@@ -107,7 +121,7 @@ public class FormManageAccountActivity extends AppCompatActivity implements More
         PopupMenu popupMenu = new PopupMenu(this, view);
         popupMenu.getMenuInflater().inflate(R.menu.delete_create, popupMenu.getMenu());
 
-        if (account.getId() == 0){
+        if (account.getId() == 0) {
             popupMenu.getMenu().findItem(R.id.deleteAccount).setEnabled(false);
         }
 
@@ -131,7 +145,7 @@ public class FormManageAccountActivity extends AppCompatActivity implements More
         binding.titleForm.setText("Edit Account");
         binding.subtitleForm.setText("Edit your account information here");
         binding.edtUsername.setText(account.getUsername());
-        binding.edtPassword.setText(account.getPassword());
+        binding.edtPassword.setText(decrypt(account.getPassword()));
     }
 
     @Override
@@ -220,5 +234,30 @@ public class FormManageAccountActivity extends AppCompatActivity implements More
     @Override
     public void updateSosmed(int position, String sosmedTitle) {
 
+    }
+
+    private String encrypt(String password) {
+        String encrypted = "";
+        try {
+            encrypted = AESUtils.encrypt(password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return encrypted;
+    }
+
+    private boolean CheckAllFields() {
+        if (binding.edtUsername.getText().toString().trim().length() == 0) {
+            binding.edtUsername.setError("This field is required");
+            return false;
+        }
+
+        if (binding.edtPassword.getText().toString().trim().length() == 0) {
+            binding.edtPassword.setError("This field is required");
+            return false;
+        }
+
+        // after all validation return true.
+        return true;
     }
 }

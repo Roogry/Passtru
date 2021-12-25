@@ -47,16 +47,20 @@ public class CustomDialog {
 
         btnSave.setOnClickListener(v -> {
             String title = inputSosmed.getText().toString();
+            if (inputSosmed.getText().toString().trim().length() == 0) {
+                inputSosmed.setError("This field is required");
+            }else{
+                if (sosmedTitle == null) {
+                    Sosmed newSosmed = new Sosmed(title);
+                    sosmedRepository.insert(newSosmed);
+                    Toast.makeText(activity, "Social Media Added! ", Toast.LENGTH_LONG).show();
+                } else {
+                    callback.updateSosmed(position, title);
+                }
 
-            if (sosmedTitle == null) {
-                Sosmed newSosmed = new Sosmed(title);
-                sosmedRepository.insert(newSosmed);
-                Toast.makeText(activity, "Social Media Added! ", Toast.LENGTH_LONG).show();
-            } else {
-                callback.updateSosmed(position, title);
+                dismissDialog();
             }
 
-            dismissDialog();
         });
     }
 
@@ -99,5 +103,7 @@ public class CustomDialog {
     public void dismissDialog() {
         dialog.dismiss();
     }
+
+
 
 }

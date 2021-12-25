@@ -22,6 +22,7 @@ import id.roogry.passtru.helpers.AccountDiffCallback;
 import id.roogry.passtru.helpers.CustomDialog;
 import id.roogry.passtru.helpers.MoreOptionInterface;
 import id.roogry.passtru.models.Account;
+import id.roogry.passtru.ui.FormManageAccountActivity;
 
 public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.AccountViewHolder> {
 
@@ -77,7 +78,7 @@ public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.
             binding.btnCopy.setOnClickListener(view -> {
                 ClipboardManager myClipboard = (ClipboardManager) activity.getSystemService(CLIPBOARD_SERVICE);
                 String text;
-                text = account.getPassword();
+                text =  FormManageAccountActivity.decrypt(account.getPassword());
 
                 ClipData myClip = ClipData.newPlainText("password", text);
                 myClipboard.setPrimaryClip(myClip);
