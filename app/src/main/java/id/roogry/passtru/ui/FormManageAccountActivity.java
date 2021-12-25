@@ -78,6 +78,8 @@ public class FormManageAccountActivity extends AppCompatActivity implements More
             }
 
             Intent intent = new Intent(FormManageAccountActivity.this, ListAccountActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                    Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
         });

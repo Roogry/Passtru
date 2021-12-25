@@ -6,50 +6,92 @@
     android:layout_height="match_parent"
     tools:context=".ui.SetPinActivity">
 
-    <EditText
-        android:id="@+id/inputPin"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="200dp"
-        android:background="@drawable/bg_input_light"
-        android:gravity="center"
-        android:hint="Type PIN"
-        android:inputType="numberPassword"
-        android:maxLength="6"
-        android:maxLines="1"
-        android:textColor="@color/text_secondary"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints">
 
-    <EditText
-        android:id="@+id/confirmPin"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="@dimen/s"
-        android:background="@drawable/bg_input_light"
-        android:gravity="center"
-        android:hint="Re-Type PIN"
-        android:inputType="numberPassword"
-        android:maxLength="6"
-        android:maxLines="1"
-        android:textColor="@color/text_secondary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputPin"
-        tools:ignore="MissingConstraints" />
+        <ImageView
+            android:id="@+id/iconLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_shield_lock_fill" />
 
-    <Button
-        android:id="@+id/submitPin"
-        style="@style/primaryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/xl"
-        android:text="@string/submit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmPin"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/welcomeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iconLogo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="@dimen/ms"
+            android:text="Welcome To Passtru"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/welcomeSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/welcomeTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="@dimen/xl"
+            android:layout_marginBottom="@dimen/m"
+            android:lineSpacingExtra="3dp"
+            android:paddingHorizontal="@dimen/xl"
+            android:text="Store All Your Account With Save Security Just In Your Local Device"
+            android:textAlignment="center"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/inputPin"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/welcomeSubTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/xs"
+            android:background="@drawable/bg_input_light"
+            android:gravity="center"
+            android:hint="Set New PIN"
+            android:inputType="numberPassword"
+            android:maxLength="6"
+            android:maxLines="1"
+            android:textColor="@color/text_secondary"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/confirmPin"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/inputPin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/m"
+            android:background="@drawable/bg_input_light"
+            android:gravity="center"
+            android:hint="Re-Type PIN"
+            android:inputType="numberPassword"
+            android:maxLength="6"
+            android:maxLines="1"
+            android:textColor="@color/text_secondary"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/submitPin"
+            style="@style/primaryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/confirmPin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/l"
+            android:text="@string/submit"
+            tools:ignore="MissingConstraints" />
+    </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Passtru">
         <activity
+            android:name=".ui.CreateNewPinActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ResetPinActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.SetPinActivity"
             android:exported="false" />
         <activity
@@ -31,6 +37,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
