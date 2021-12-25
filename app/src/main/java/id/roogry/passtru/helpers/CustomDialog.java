@@ -60,7 +60,7 @@ public class CustomDialog {
         });
     }
 
-    public void startAlertDialog(int position, MoreOptionInterface callback) {
+    public void startAlertDialogOptionSosmed(int position, MoreOptionInterface callback) {
         dialog.show();
         Button edit = dialog.findViewById(R.id.btnEdit);
         Button delete = dialog.findViewById(R.id.btnDelete);

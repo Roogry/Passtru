@@ -1,12 +1,8 @@
 package id.roogry.passtru.adapter;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -78,7 +74,7 @@ public class SosmedBadgeAdapter extends RecyclerView.Adapter<SosmedBadgeAdapter.
             binding.sosmedName.setText(sosmed.getTitle());
             binding.cardSosmed.setOnClickListener(view -> {
                 CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_sosmed);
-                customDialog.startAlertDialog(position, this);
+                customDialog.startAlertDialogOptionSosmed(position, this);
             });
         }
 

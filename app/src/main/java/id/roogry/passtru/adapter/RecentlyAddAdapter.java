@@ -5,9 +5,7 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -73,7 +71,7 @@ public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.
             binding.tvUsername.setText(account.getUsername());
             binding.cardAccount.setOnClickListener(view -> {
                 CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_account);
-                customDialog.startAlertDialog(account.getId(), this);
+                customDialog.startAlertDialogOptionSosmed(account.getId(), this);
             });
 
             binding.btnCopy.setOnClickListener(view -> {

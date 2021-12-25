@@ -26,6 +26,10 @@ public class AccountRepository {
         return accountsDao.getAllAccounts();
     }
 
+    public  LiveData<List<Account>> getAllAccountByUserPassword(String username, String password) {
+        return accountsDao.getAccountByUserPassword(username, password);
+    }
+
     public void insert(final Account account) {
         executorService.execute(() -> accountsDao.insert(account));
     }

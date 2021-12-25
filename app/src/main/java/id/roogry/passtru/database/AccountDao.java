@@ -28,4 +28,7 @@ public interface AccountDao {
 
     @Query("SELECT * FROM accounts WHERE id = :id LIMIT 1")
     Account getAccountById(int id);
+
+    @Query("SELECT * FROM accounts WHERE username = :username AND password = :password LIMIT 1")
+    LiveData<List<Account>> getAccountByUserPassword(String username, String password);
 }

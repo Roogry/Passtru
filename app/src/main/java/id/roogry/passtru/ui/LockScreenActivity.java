@@ -17,10 +17,13 @@ import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -31,6 +34,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.crypto.Cipher;
@@ -41,6 +46,10 @@ import javax.crypto.SecretKey;
 import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ActivityLockScreenBinding;
 import id.roogry.passtru.helpers.FingerprintHandler;
+import id.roogry.passtru.helpers.ViewModelFactory;
+import id.roogry.passtru.models.Account;
+import id.roogry.passtru.viewmodel.ListAccountViewModel;
+import id.roogry.passtru.viewmodel.ResetPinViewModel;
 
 public class LockScreenActivity extends AppCompatActivity {
     private final String KEY_NAME = "AndroidKey";
@@ -74,7 +83,12 @@ public class LockScreenActivity extends AppCompatActivity {
             if (isFingerprint) setPinMethod();
             else setFingerprintMethod();
         });
+
+        binding.tvForgotPIN.setOnClickListener(v -> {
+            checkAccountSize();
+        });
     }
+    
 
     private void setPinMethod() {
         isFingerprint = false;
@@ -127,6 +141,9 @@ public class LockScreenActivity extends AppCompatActivity {
         if (isFingerprint) {
             setFingerprintMethod();
         } else {
+            //check Pin On Shared Preference
+            SharedPreferences sharedPref = getSharedPreferences("PREF", 0);
+            pinCheck = sharedPref.getString("PIN", "");
             setPinMethod();
         }
     }
@@ -218,6 +235,29 @@ public class LockScreenActivity extends AppCompatActivity {
                 binding.tvStatusFingerprint.setTextColor(ContextCompat.getColor(LockScreenActivity.this, R.color.red));
                 binding.tvStatusFingerprint.setText("Pin Is Wrong");
                 return false;
+            }
+        });
+    }
+
+    private void checkAccountSize(){
+        ArrayList<Account> accountRetrive = new ArrayList<Account>();
+        ViewModelFactory factory = ViewModelFactory.getInstance(this.getApplication());
+        ListAccountViewModel listPinViewModel = new ViewModelProvider(this, factory).get(ListAccountViewModel.class);
+
+        listPinViewModel.getAccounts().observe(LockScreenActivity.this, new Observer<List<Account>>() {
+            @Override
+            public void onChanged(List<Account> accounts) {
+                accountRetrive.clear();
+                accountRetrive.addAll(accounts);
+
+                Intent intent = null;
+
+                if (accountRetrive.size() == 0){
+                     intent = new Intent(LockScreenActivity.this, CreateNewPinActivity.class);
+                }else if(accountRetrive.size() > 0){
+                     intent = new Intent(LockScreenActivity.this, ResetPinActivity.class);
+                }
+                startActivity(intent);
             }
         });
     }

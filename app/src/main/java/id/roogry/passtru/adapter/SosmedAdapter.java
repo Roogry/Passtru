@@ -1,7 +1,6 @@
 package id.roogry.passtru.adapter;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -74,7 +73,7 @@ public class SosmedAdapter extends RecyclerView.Adapter<SosmedAdapter.SosmedView
             binding.tvSosmed.setText(sosmed.getTitle());
             binding.ivMore.setOnClickListener(v ->{
                 CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_sosmed);
-                customDialog.startAlertDialog(position, this);
+                customDialog.startAlertDialogOptionSosmed(position, this);
             });
         }
 
