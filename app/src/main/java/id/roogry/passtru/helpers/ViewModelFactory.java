@@ -11,6 +11,7 @@ import id.roogry.passtru.viewmodel.FormManageAccountViewModel;
 import id.roogry.passtru.viewmodel.HomeViewModel;
 import id.roogry.passtru.viewmodel.ListAccountViewModel;
 import id.roogry.passtru.viewmodel.ListSosmedViewModel;
+import id.roogry.passtru.viewmodel.ResetPinViewModel;
 
 public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     private static volatile ViewModelFactory INSTANCE;
@@ -44,6 +45,8 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
             return (T) new ListSosmedViewModel(mApplication);
         } else if (modelClass.isAssignableFrom(DialogViewModel.class)) {
             return (T) new DialogViewModel(mApplication);
+        } else if (modelClass.isAssignableFrom(ResetPinViewModel.class)) {
+            return (T) new ResetPinViewModel(mApplication);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());

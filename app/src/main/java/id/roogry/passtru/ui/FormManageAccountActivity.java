@@ -24,6 +24,7 @@ import id.roogry.passtru.databinding.ActivityFormManageAccountBinding;
 import id.roogry.passtru.helpers.dialog.CustomDialog;
 import id.roogry.passtru.helpers.dialog.SosmedFormInterface;
 import id.roogry.passtru.helpers.ToastMessage;
+import id.roogry.passtru.helpers.AESUtils;
 import id.roogry.passtru.helpers.ViewModelFactory;
 import id.roogry.passtru.models.Account;
 import id.roogry.passtru.models.Sosmed;
@@ -40,6 +41,17 @@ public class FormManageAccountActivity extends AppCompatActivity implements Sosm
     private FormManageAccountViewModel viewModel;
     private int selectedSosmedId;
 
+    public static String decrypt(String password) {
+        String decrypted = "";
+        try {
+            decrypted = AESUtils.decrypt(password);
+            Log.d("TEST", "decrypted:" + decrypted);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return decrypted;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,25 +66,28 @@ public class FormManageAccountActivity extends AppCompatActivity implements Sosm
         account = getIntent().getParcelableExtra(EXTRA_ACCOUNT);
         if (account != null) {
             setupEditForm();
-        }else {
+        } else {
             account = new Account();
         }
 
         binding.btnSubmit.setOnClickListener(v -> {
             String username = binding.edtUsername.getText().toString();
             String password = binding.edtPassword.getText().toString();
+            String encryptedPwd = encrypt(password);
 
             account.setIdSosmed(selectedSosmedId);
             account.setUsername(username);
-            account.setPassword(password);
+            account.setPassword(encryptedPwd);
 
             Log.d("BLabla", "id is : " + account.getId());
 
-            if (account.getId() != 0) {
-                updateAccount();
-            } else {
-                saveAccount();
-            }
+            Boolean isAllFieldsChecked = CheckAllFields();
+            if (isAllFieldsChecked) {
+                if (account.getId() != 0) {
+                    updateAccount();
+                } else {
+                    saveAccount();
+                }
 
             finish();
         });
@@ -100,7 +115,7 @@ public class FormManageAccountActivity extends AppCompatActivity implements Sosm
         PopupMenu popupMenu = new PopupMenu(this, view);
         popupMenu.getMenuInflater().inflate(R.menu.delete_create, popupMenu.getMenu());
 
-        if (account.getId() == 0){
+        if (account.getId() == 0) {
             popupMenu.getMenu().findItem(R.id.deleteAccount).setEnabled(false);
         }
 
@@ -124,7 +139,7 @@ public class FormManageAccountActivity extends AppCompatActivity implements Sosm
         binding.titleForm.setText("Edit Account");
         binding.subtitleForm.setText("Edit your account information here");
         binding.edtUsername.setText(account.getUsername());
-        binding.edtPassword.setText(account.getPassword());
+        binding.edtPassword.setText(decrypt(account.getPassword()));
     }
 
     @Override
@@ -204,5 +219,30 @@ public class FormManageAccountActivity extends AppCompatActivity implements Sosm
     @Override
     public void update(int position, String sosmedTitle) {
 
+    }
+
+    private String encrypt(String password) {
+        String encrypted = "";
+        try {
+            encrypted = AESUtils.encrypt(password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return encrypted;
+    }
+
+    private boolean CheckAllFields() {
+        if (binding.edtUsername.getText().toString().trim().length() == 0) {
+            binding.edtUsername.setError("This field is required");
+            return false;
+        }
+
+        if (binding.edtPassword.getText().toString().trim().length() == 0) {
+            binding.edtPassword.setError("This field is required");
+            return false;
+        }
+
+        // after all validation return true.
+        return true;
     }
 }
