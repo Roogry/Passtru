@@ -88,6 +88,7 @@ public class FormManageAccountActivity extends AppCompatActivity implements Sosm
                 } else {
                     saveAccount();
                 }
+            }
 
             finish();
         });

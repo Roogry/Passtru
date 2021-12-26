@@ -19,9 +19,7 @@ public class ResetPinViewModel extends ViewModel {
         accountRepository = new AccountRepository(application);
     }
 
-
-
     public  LiveData<List<Account>> getAccounts(String username, String password) {
-        return accountRepository.getAllAccountByUserPassword(username, password);
+        return accountRepository.getAccountsByUserPassword(username, password);
     }
 }

@@ -36,31 +36,22 @@ public class ResetPinActivity extends AppCompatActivity {
         binding.ivBack.setOnClickListener(v -> {
             onBackPressed();
         });
-
-
     }
 
     private void checkAccount(){
-        ArrayList<Account>  accountRetrive = new ArrayList<Account>();
         ViewModelFactory factory = ViewModelFactory.getInstance(this.getApplication());
         ResetPinViewModel resetPinViewModel = new ViewModelProvider(this, factory).get(ResetPinViewModel.class);
 
         String username = binding.edtUsername.getText().toString().trim();
         String password = binding.edtPassword.getText().toString().trim();
 
-        resetPinViewModel.getAccounts(username, password).observe(ResetPinActivity.this, new Observer<List<Account>>() {
-            @Override
-            public void onChanged(List<Account> accounts) {
-                accountRetrive.clear();
-                accountRetrive.addAll(accounts);
-
-                if (accountRetrive.size() > 0){
-                    Intent intent = new Intent(ResetPinActivity.this, CreateNewPinActivity.class);
-                    startActivity(intent);
-                    finish();
-                }else{
-                    Toast.makeText(ResetPinActivity.this, "Account Not Found", Toast.LENGTH_SHORT).show();
-                }
+        resetPinViewModel.getAccounts(username, password).observe(ResetPinActivity.this, accounts -> {
+            if (accounts.size() > 0){
+                Intent intent = new Intent(ResetPinActivity.this, CreateNewPinActivity.class);
+                startActivity(intent);
+                finish();
+            }else{
+                Toast.makeText(ResetPinActivity.this, "Account Not Found", Toast.LENGTH_SHORT).show();
             }
         });
     }

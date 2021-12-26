@@ -62,7 +62,7 @@
             android:layout_below="@id/title"
             android:layout_marginTop="10dp"
             android:lineSpacingExtra="5dp"
-            android:text="Please enter one of the usernames/emails and passwords stored in the application to reset your PIN access"
+            android:text="Please enter one of the usernames/emails and passwords stored in this application to reset your PIN access"
             android:textSize="16sp" />
 
         <TextView

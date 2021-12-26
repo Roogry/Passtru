@@ -32,4 +32,7 @@ public interface AccountDao {
 
     @Query("SELECT * FROM accounts ORDER BY id DESC LIMIT 3")
     LiveData<List<AccountAndSosmed>> getAccountRecents();
+
+    @Query("SELECT * FROM accounts WHERE username = :username AND password = :password")
+    LiveData<List<Account>> getAccountsByUsernamePassword(String username, String password);
 }

@@ -48,6 +48,7 @@ import id.roogry.passtru.databinding.ActivityLockScreenBinding;
 import id.roogry.passtru.helpers.FingerprintHandler;
 import id.roogry.passtru.helpers.ViewModelFactory;
 import id.roogry.passtru.models.Account;
+import id.roogry.passtru.models.AccountAndSosmed;
 import id.roogry.passtru.viewmodel.ListAccountViewModel;
 import id.roogry.passtru.viewmodel.ResetPinViewModel;
 
@@ -240,25 +241,19 @@ public class LockScreenActivity extends AppCompatActivity {
     }
 
     private void checkAccountSize(){
-        ArrayList<Account> accountRetrive = new ArrayList<Account>();
         ViewModelFactory factory = ViewModelFactory.getInstance(this.getApplication());
         ListAccountViewModel listPinViewModel = new ViewModelProvider(this, factory).get(ListAccountViewModel.class);
 
-        listPinViewModel.getAccounts().observe(LockScreenActivity.this, new Observer<List<Account>>() {
-            @Override
-            public void onChanged(List<Account> accounts) {
-                accountRetrive.clear();
-                accountRetrive.addAll(accounts);
+        listPinViewModel.getAccounts().observe(LockScreenActivity.this, accountAndSosmeds -> {
+            Intent intent;
 
-                Intent intent = null;
-
-                if (accountRetrive.size() == 0){
-                     intent = new Intent(LockScreenActivity.this, CreateNewPinActivity.class);
-                }else if(accountRetrive.size() > 0){
-                     intent = new Intent(LockScreenActivity.this, ResetPinActivity.class);
-                }
-                startActivity(intent);
+            if (accountAndSosmeds.size() == 0){
+                intent = new Intent(LockScreenActivity.this, CreateNewPinActivity.class);
+            }else {
+                accountAndSosmeds.size();
+                intent = new Intent(LockScreenActivity.this, ResetPinActivity.class);
             }
+            startActivity(intent);
         });
     }
 }
