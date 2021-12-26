@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -19,8 +18,8 @@ import java.util.List;
 
 import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ItemListAccountBinding;
-import id.roogry.passtru.helpers.CustomDialog;
-import id.roogry.passtru.helpers.MoreOptionInterface;
+import id.roogry.passtru.helpers.dialog.CustomDialog;
+import id.roogry.passtru.helpers.dialog.AccountOptionInterface;
 import id.roogry.passtru.helpers.ToastMessage;
 import id.roogry.passtru.models.AccountAndSosmed;
 import id.roogry.passtru.repository.AccountRepository;
@@ -59,7 +58,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         return listAccounts.size();
     }
 
-    public class AccountViewHolder extends RecyclerView.ViewHolder implements MoreOptionInterface {
+    public class AccountViewHolder extends RecyclerView.ViewHolder implements AccountOptionInterface {
         final ItemListAccountBinding binding;
 
         public AccountViewHolder(ItemListAccountBinding binding) {
@@ -73,7 +72,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
             binding.tvUsername.setText(accounts.getAccount().getUsername());
             binding.cardAccount.setOnClickListener(v -> {
                 CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_account);
-                customDialog.startAlertDialogOptionAccount(position, accounts.getAccount().getUsername(), this);
+                customDialog.startAccountOption(position, accounts.getAccount().getUsername(), this);
             });
         }
 
@@ -99,16 +98,6 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         public void delete(int position) {
             accountRepositor.delete(listAccounts.get(position).getAccount());
             ToastMessage.showDeletedMessage(activity, listAccounts.get(position).getAccount().getUsername());
-        }
-
-        @Override
-        public void insertSosmed(String title) {
-
-        }
-
-        @Override
-        public void updateSosmed(int position, String sosmedTitle) {
-
         }
     }
 }

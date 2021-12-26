@@ -1,6 +1,5 @@
 package id.roogry.passtru.ui;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,31 +9,27 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ActivityFormManageAccountBinding;
-import id.roogry.passtru.helpers.CustomDialog;
-import id.roogry.passtru.helpers.MoreOptionInterface;
+import id.roogry.passtru.helpers.dialog.CustomDialog;
+import id.roogry.passtru.helpers.dialog.SosmedFormInterface;
 import id.roogry.passtru.helpers.ToastMessage;
 import id.roogry.passtru.helpers.ViewModelFactory;
 import id.roogry.passtru.models.Account;
 import id.roogry.passtru.models.Sosmed;
-import id.roogry.passtru.repository.AccountRepository;
-import id.roogry.passtru.viewmodel.ListSosmedViewModel;
+import id.roogry.passtru.viewmodel.FormManageAccountViewModel;
 
-public class FormManageAccountActivity extends AppCompatActivity implements MoreOptionInterface {
+public class FormManageAccountActivity extends AppCompatActivity implements SosmedFormInterface {
     public static final String EXTRA_ACCOUNT = "EXTRA_ACCOUNT";
 
     private Account account;
@@ -42,7 +37,7 @@ public class FormManageAccountActivity extends AppCompatActivity implements More
     private ActivityFormManageAccountBinding binding;
     private ArrayAdapter<Sosmed> spinnerAdapter;
     private ArrayList<Sosmed> listSosmeds;
-    private AccountRepository accountRepository;
+    private FormManageAccountViewModel viewModel;
     private int selectedSosmedId;
 
     @Override
@@ -51,7 +46,8 @@ public class FormManageAccountActivity extends AppCompatActivity implements More
         binding = ActivityFormManageAccountBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        accountRepository = new AccountRepository(this.getApplication());
+        ViewModelFactory factory = ViewModelFactory.getInstance(this.getApplication());
+        viewModel = new ViewModelProvider(this, factory).get(FormManageAccountViewModel.class);
 
         //load spinner data
         loadSosmedSpinner();
@@ -111,7 +107,7 @@ public class FormManageAccountActivity extends AppCompatActivity implements More
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.deleteAccount:
-                    accountRepository.delete(account);
+                    viewModel.delete(account);
                     onBackPressed();
                     break;
                 case R.id.createSosmed:
@@ -162,10 +158,7 @@ public class FormManageAccountActivity extends AppCompatActivity implements More
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.spSosmed.setAdapter(spinnerAdapter);
 
-        ViewModelFactory factory = ViewModelFactory.getInstance(this.getApplication());
-        ListSosmedViewModel sosmedViewModel = new ViewModelProvider(this, factory).get(ListSosmedViewModel.class);
-
-        sosmedViewModel.getSosmeds().observe(this, sosmedList -> {
+        viewModel.getSosmeds().observe(this, sosmedList -> {
             listSosmeds.clear();
             listSosmeds.addAll(sosmedList);
 
@@ -183,12 +176,12 @@ public class FormManageAccountActivity extends AppCompatActivity implements More
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
         account.setCreatedAt(dateFormat.format(new Date()));
 
-        accountRepository.insert(account);
+        viewModel.insert(account);
         ToastMessage.showInsertedMessage(this, account.getUsername());
     }
 
     private void updateAccount() {
-        accountRepository.update(account);
+        viewModel.update(account);
         ToastMessage.showUpdatedMessage(this, account.getUsername());
     }
 
@@ -202,27 +195,14 @@ public class FormManageAccountActivity extends AppCompatActivity implements More
     }
 
     @Override
-    public void getDataByPos(int position) {
-
+    public void insert(String title) {
+        Sosmed sosmed = new Sosmed(title);
+        viewModel.insertSosmed(sosmed);
+        ToastMessage.showInsertedMessage(this, title);
     }
 
     @Override
-    public void copyPassword(int position) {
-
-    }
-
-    @Override
-    public void delete(int position) {
-
-    }
-
-    @Override
-    public void insertSosmed(String title) {
-
-    }
-
-    @Override
-    public void updateSosmed(int position, String sosmedTitle) {
+    public void update(int position, String sosmedTitle) {
 
     }
 }

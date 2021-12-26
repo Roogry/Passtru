@@ -7,21 +7,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.List;
 
 import id.roogry.passtru.R;
 import id.roogry.passtru.adapter.SosmedAdapter;
 import id.roogry.passtru.databinding.ActivityListSosmedBinding;
-import id.roogry.passtru.helpers.CustomDialog;
-import id.roogry.passtru.helpers.MoreOptionInterface;
+import id.roogry.passtru.helpers.dialog.CustomDialog;
+import id.roogry.passtru.helpers.dialog.SosmedFormInterface;
 import id.roogry.passtru.helpers.ToastMessage;
 import id.roogry.passtru.helpers.ViewModelFactory;
 import id.roogry.passtru.models.Sosmed;
 import id.roogry.passtru.viewmodel.ListSosmedViewModel;
 
-public class ListSosmedActivity extends AppCompatActivity implements MoreOptionInterface {
+public class ListSosmedActivity extends AppCompatActivity implements SosmedFormInterface {
 
     private ActivityListSosmedBinding binding;
     private SosmedAdapter sosmedAdapter;
@@ -72,29 +71,14 @@ public class ListSosmedActivity extends AppCompatActivity implements MoreOptionI
     };
 
     @Override
-    public void insertSosmed(String title) {
+    public void insert(String title) {
         Sosmed sosmed = new Sosmed(title);
         sosmedViewModel.insert(sosmed);
         ToastMessage.showInsertedMessage(this, title);
     }
 
     @Override
-    public void updateSosmed(int position, String sosmedTitle) {
-
-    }
-
-    @Override
-    public void getDataByPos(int position) {
-
-    }
-
-    @Override
-    public void copyPassword(int position) {
-
-    }
-
-    @Override
-    public void delete(int position) {
+    public void update(int position, String sosmedTitle) {
 
     }
 }

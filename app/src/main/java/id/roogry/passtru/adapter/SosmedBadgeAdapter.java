@@ -13,9 +13,11 @@ import java.util.List;
 
 import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ItemSosmedHomeBinding;
-import id.roogry.passtru.helpers.CustomDialog;
-import id.roogry.passtru.helpers.MoreOptionInterface;
+import id.roogry.passtru.helpers.dialog.CustomDialog;
 import id.roogry.passtru.helpers.SosmedDiffCallback;
+import id.roogry.passtru.helpers.dialog.SosmedConfirmDeleteInterface;
+import id.roogry.passtru.helpers.dialog.SosmedFormInterface;
+import id.roogry.passtru.helpers.dialog.SosmedOptionInterface;
 import id.roogry.passtru.helpers.ToastMessage;
 import id.roogry.passtru.models.Sosmed;
 import id.roogry.passtru.repository.SosmedRepository;
@@ -62,7 +64,7 @@ public class SosmedBadgeAdapter extends RecyclerView.Adapter<SosmedBadgeAdapter.
         return listSosmeds.size();
     }
 
-    class SosmedViewHolder extends RecyclerView.ViewHolder implements MoreOptionInterface {
+    class SosmedViewHolder extends RecyclerView.ViewHolder implements SosmedOptionInterface, SosmedConfirmDeleteInterface, SosmedFormInterface {
         final ItemSosmedHomeBinding binding;
 
         SosmedViewHolder(ItemSosmedHomeBinding binding) {
@@ -75,8 +77,14 @@ public class SosmedBadgeAdapter extends RecyclerView.Adapter<SosmedBadgeAdapter.
             binding.sosmedName.setText(sosmed.getTitle());
             binding.cardSosmed.setOnClickListener(view -> {
                 CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_sosmed);
-                customDialog.startAlertDialog(position, this);
+                customDialog.startSosmedOption(position, this);
             });
+        }
+
+        @Override
+        public void deleteConfirm(int position) {
+            CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_confirm_delete);
+            customDialog.startConfirmDeleteSosmed(position, this);
         }
 
         @Override
@@ -87,12 +95,13 @@ public class SosmedBadgeAdapter extends RecyclerView.Adapter<SosmedBadgeAdapter.
         }
 
         @Override
-        public void insertSosmed(String title) {
-
+        public void sosmedByPos(int position) {
+            CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_add_sosmed);
+            customDialog.startFormSosmed(position, listSosmeds.get(position).getTitle(), this);
         }
 
         @Override
-        public void updateSosmed(int position, String sosmedTitle) {
+        public void update(int position, String sosmedTitle) {
             listSosmeds.get(position).setTitle(sosmedTitle);
             sosmedRepository.update(listSosmeds.get(position));
 
@@ -101,13 +110,7 @@ public class SosmedBadgeAdapter extends RecyclerView.Adapter<SosmedBadgeAdapter.
         }
 
         @Override
-        public void getDataByPos(int position) {
-            CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_add_sosmed);
-            customDialog.startFormSosmed(position, listSosmeds.get(position).getTitle(), this);
-        }
-
-        @Override
-        public void copyPassword(int position) {
+        public void insert(String title) {
 
         }
     }

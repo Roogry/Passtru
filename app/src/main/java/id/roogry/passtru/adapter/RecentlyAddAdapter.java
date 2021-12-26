@@ -18,8 +18,8 @@ import java.util.List;
 
 import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ItemAccountHomeBinding;
-import id.roogry.passtru.helpers.CustomDialog;
-import id.roogry.passtru.helpers.MoreOptionInterface;
+import id.roogry.passtru.helpers.dialog.CustomDialog;
+import id.roogry.passtru.helpers.dialog.AccountOptionInterface;
 import id.roogry.passtru.helpers.ToastMessage;
 import id.roogry.passtru.models.AccountAndSosmed;
 import id.roogry.passtru.repository.AccountRepository;
@@ -56,10 +56,10 @@ public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.
 
     @Override
     public int getItemCount() {
-        return Math.min(listAccounts.size(), 4);
+        return listAccounts.size();
     }
 
-    class AccountViewHolder extends RecyclerView.ViewHolder implements MoreOptionInterface {
+    class AccountViewHolder extends RecyclerView.ViewHolder implements AccountOptionInterface {
         final ItemAccountHomeBinding binding;
 
         AccountViewHolder(ItemAccountHomeBinding binding) {
@@ -73,7 +73,7 @@ public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.
             binding.tvUsername.setText(accountWithSosmed.getAccount().getUsername());
             binding.cardAccount.setOnClickListener(view -> {
                 CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_account);
-                customDialog.startAlertDialogOptionAccount(position, accountWithSosmed.getAccount().getUsername(), this);
+                customDialog.startAccountOption(position, accountWithSosmed.getAccount().getUsername(), this);
             });
 
             binding.btnCopy.setOnClickListener(view -> copyPassword(accountWithSosmed));
@@ -104,16 +104,6 @@ public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.
         public void delete(int position) {
             accountRepositor.delete(listAccounts.get(position).getAccount());
             ToastMessage.showDeletedMessage(activity, listAccounts.get(position).getAccount().getUsername());
-        }
-
-        @Override
-        public void insertSosmed(String title) {
-
-        }
-
-        @Override
-        public void updateSosmed(int position, String sosmedTitle) {
-
         }
     }
 }

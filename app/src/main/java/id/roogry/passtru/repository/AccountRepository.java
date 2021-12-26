@@ -27,6 +27,10 @@ public class AccountRepository {
         return accountsDao.getAllAccounts();
     }
 
+    public LiveData<List<AccountAndSosmed>> getAccountRecents() {
+        return accountsDao.getAccountRecents();
+    }
+
     public void insert(final Account account) {
         executorService.execute(() -> accountsDao.insert(account));
     }

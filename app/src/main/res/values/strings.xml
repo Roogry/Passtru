@@ -8,6 +8,7 @@
     <string name="ex_subtitle_dialog">lorem ipsum dolor</string>
     <string name="edit">Edit</string>
     <string name="Delete">Delete</string>
+    <string name="Cancel">Cancel</string>
     <string name="copy_password">Copy Password</string>
     <string name="more_option">More Option</string>
     <string name="account">Account</string>
@@ -37,6 +38,8 @@
 
     <string name="empty_title">Data Kosong</string>
     <string name="empty_subtitle">Mulailah menambahkan data baru!</string>
+    <string name="delete_sosmed_title">Delete Social Media</string>
+    <string name="delete_sosmed_subtitle">This process will also delete account data that contain this social media</string>
 
     <string-array name="placeHolder">
         <item>Select Your Social Media</item>

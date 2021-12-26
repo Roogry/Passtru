@@ -22,7 +22,7 @@ public class HomeViewModel extends ViewModel {
     }
 
     public LiveData<List<AccountAndSosmed>> getAccounts() {
-        return accountRepository.getAllAccounts();
+        return accountRepository.getAccountRecents();
     }
 
     public LiveData<List<Sosmed>> getSosmeds() {

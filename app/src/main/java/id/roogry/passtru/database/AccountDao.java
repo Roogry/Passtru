@@ -13,6 +13,7 @@ import java.util.List;
 
 import id.roogry.passtru.models.Account;
 import id.roogry.passtru.models.AccountAndSosmed;
+import id.roogry.passtru.models.Sosmed;
 
 @Dao
 public interface AccountDao {
@@ -28,4 +29,7 @@ public interface AccountDao {
     @Transaction
     @Query("SELECT * FROM accounts ORDER BY id DESC")
     LiveData<List<AccountAndSosmed>> getAllAccounts();
+
+    @Query("SELECT * FROM accounts ORDER BY id DESC LIMIT 3")
+    LiveData<List<AccountAndSosmed>> getAccountRecents();
 }

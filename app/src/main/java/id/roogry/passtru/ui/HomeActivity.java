@@ -2,6 +2,7 @@ package id.roogry.passtru.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -72,11 +73,33 @@ public class HomeActivity extends AppCompatActivity {
         if (sosmedList != null) {
             sosmedBadgeAdapter.setListSosmeds(sosmedList);
         }
+
+        if (sosmedList.size() > 0){
+            binding.sosmedTitle.setVisibility(View.VISIBLE);
+            binding.sosmedAll.setVisibility(View.VISIBLE);
+            binding.sosmedSeeAll.setVisibility(View.VISIBLE);
+            binding.rvSosmed.setVisibility(View.VISIBLE);
+        }else{
+            binding.sosmedTitle.setVisibility(View.GONE);
+            binding.sosmedAll.setVisibility(View.GONE);
+            binding.sosmedSeeAll.setVisibility(View.GONE);
+            binding.rvSosmed.setVisibility(View.GONE);
+        }
     };
 
     private final Observer<List<AccountAndSosmed>> accountObserver = accountList -> {
         if (accountList != null) {
             recentlyAddAdapter.setListAccounts(accountList);
+        }
+
+        if (accountList.size() > 0){
+            binding.recentTitle.setVisibility(View.VISIBLE);
+            binding.recentAll.setVisibility(View.VISIBLE);
+            binding.rvRecent.setVisibility(View.VISIBLE);
+        }else{
+            binding.recentTitle.setVisibility(View.GONE);
+            binding.recentAll.setVisibility(View.GONE);
+            binding.rvRecent.setVisibility(View.GONE);
         }
     };
 

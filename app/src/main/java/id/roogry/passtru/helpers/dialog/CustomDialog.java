@@ -1,4 +1,4 @@
-package id.roogry.passtru.helpers;
+package id.roogry.passtru.helpers.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -8,24 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import id.roogry.passtru.R;
-import id.roogry.passtru.models.Sosmed;
-import id.roogry.passtru.repository.SosmedRepository;
 
 public class CustomDialog {
-    private final Activity activity;
-    private final SosmedRepository sosmedRepository;
-    private final int view;
-
     private Dialog dialog;
 
     public CustomDialog(Activity activity, int view) {
-        this.activity = activity;
-        this.view = view;
-        sosmedRepository = new SosmedRepository(activity.getApplication());
-
         dialog = new Dialog(activity);
         dialog.setContentView(view);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -38,7 +27,21 @@ public class CustomDialog {
         });
     }
 
-    public void startFormSosmed(int position, String sosmedTitle, MoreOptionInterface callback) {
+    public void startConfirmDeleteSosmed(int position, SosmedConfirmDeleteInterface callback) {
+        dialog.show();
+
+        Button btnCancel = dialog.findViewById(R.id.btnCancel);
+        Button btnDelete = dialog.findViewById(R.id.btnDelete);
+
+        btnCancel.setOnClickListener(view -> dismissDialog());
+
+        btnDelete.setOnClickListener(v -> {
+            callback.delete(position);
+            dismissDialog();
+        });
+    }
+
+    public void startFormSosmed(int position, String sosmedTitle, SosmedFormInterface callback) {
         dialog.show();
 
         Button btnSave = dialog.findViewById(R.id.btnSubmit);
@@ -50,31 +53,32 @@ public class CustomDialog {
             String title = inputSosmed.getText().toString();
 
             if (sosmedTitle == null) {
-                callback.insertSosmed(title);
+                callback.insert(title);
             } else {
-                callback.updateSosmed(position, title);
+                callback.update(position, title);
             }
 
             dismissDialog();
         });
     }
 
-    public void startAlertDialog(int position, MoreOptionInterface callback) {
+    public void startSosmedOption(int position, SosmedOptionInterface callback) {
         dialog.show();
         Button edit = dialog.findViewById(R.id.btnEdit);
         Button delete = dialog.findViewById(R.id.btnDelete);
+
         edit.setOnClickListener(v -> {
-            callback.getDataByPos(position);
+            callback.sosmedByPos(position);
             dismissDialog();
         });
 
         delete.setOnClickListener(v -> {
-            callback.delete(position);
+            callback.deleteConfirm(position);
             dismissDialog();
         });
     }
 
-    public void startAlertDialogOptionAccount(int position, String username,MoreOptionInterface callback) {
+    public void startAccountOption(int position, String username, AccountOptionInterface callback) {
         dialog.show();
 
         TextView tvUsername = dialog.findViewById(R.id.tvUsername);

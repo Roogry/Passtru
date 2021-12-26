@@ -2,7 +2,11 @@ package id.roogry.passtru.viewmodel;
 
 import android.app.Application;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
+
+import java.util.List;
+
 import id.roogry.passtru.models.Account;
 import id.roogry.passtru.models.Sosmed;
 import id.roogry.passtru.repository.AccountRepository;
@@ -17,6 +21,14 @@ public class FormManageAccountViewModel extends ViewModel {
         sosmedRepository = new SosmedRepository(application);
     }
 
+    public LiveData<List<Sosmed>> getSosmeds() {
+        return sosmedRepository.getAllSosmeds();
+    }
+
+    public void insertSosmed(Sosmed sosmed) {
+        sosmedRepository.insert(sosmed);
+    }
+
     public void insert(Account account) {
         accountRepository.insert(account);
     }
@@ -27,9 +39,5 @@ public class FormManageAccountViewModel extends ViewModel {
 
     public void delete(Account account) {
         accountRepository.delete(account);
-    }
-
-    public void insertSosmed(Sosmed sosmed) {
-        sosmedRepository.insert(sosmed);
     }
 }
