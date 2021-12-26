@@ -28,7 +28,4 @@ public interface AccountDao {
     @Transaction
     @Query("SELECT * FROM accounts ORDER BY id DESC")
     LiveData<List<AccountAndSosmed>> getAllAccounts();
-
-    @Query("SELECT * FROM accounts WHERE id = :id LIMIT 1")
-    Account getAccountById(int id);
 }

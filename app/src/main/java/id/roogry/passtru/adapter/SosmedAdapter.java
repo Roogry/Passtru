@@ -1,10 +1,8 @@
 package id.roogry.passtru.adapter;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
@@ -25,11 +23,11 @@ import id.roogry.passtru.repository.SosmedRepository;
 public class SosmedAdapter extends RecyclerView.Adapter<SosmedAdapter.SosmedViewHolder> {
     private final ArrayList<Sosmed> listSosmeds = new ArrayList<>();
     private Activity activity;
-    private SosmedRepository sosmedRepositor;
+    private SosmedRepository sosmedRepository;
 
-    public SosmedAdapter(Activity activity){
+    public SosmedAdapter(Activity activity) {
         this.activity = activity;
-        sosmedRepositor = new SosmedRepository(activity.getApplication());
+        sosmedRepository = new SosmedRepository(activity.getApplication());
     }
 
     public void setListSosmeds(List<Sosmed> listSosmeds) {
@@ -42,7 +40,7 @@ public class SosmedAdapter extends RecyclerView.Adapter<SosmedAdapter.SosmedView
         this.notifyDataSetChanged();
     }
 
-    public void updateData(){
+    public void updateData() {
         this.notifyDataSetChanged();
     }
 
@@ -74,7 +72,7 @@ public class SosmedAdapter extends RecyclerView.Adapter<SosmedAdapter.SosmedView
         public void bind(int position) {
             Sosmed sosmed = listSosmeds.get(position);
             binding.tvSosmed.setText(sosmed.getTitle());
-            binding.cardSosmed.setOnClickListener(v ->{
+            binding.cardSosmed.setOnClickListener(v -> {
                 CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_sosmed);
                 customDialog.startAlertDialog(position, this);
             });
@@ -82,22 +80,9 @@ public class SosmedAdapter extends RecyclerView.Adapter<SosmedAdapter.SosmedView
 
         @Override
         public void delete(int position) {
-            sosmedRepositor.delete(listSosmeds.get(position));
+            sosmedRepository.deleteAccountSosmed(listSosmeds.get(position));
+            sosmedRepository.delete(listSosmeds.get(position));
             ToastMessage.showDeletedMessage(activity, listSosmeds.get(position).getTitle());
-        }
-
-        @Override
-        public void insertSosmed(String title) {
-
-        }
-
-        @Override
-        public void updateSosmed(int position, String sosmedTitle) {
-            listSosmeds.get(position).setTitle(sosmedTitle);
-            sosmedRepositor.update(listSosmeds.get(position));
-
-            updateData();
-            ToastMessage.showUpdatedMessage(activity, listSosmeds.get(position).getTitle());
         }
 
         @Override
@@ -107,10 +92,22 @@ public class SosmedAdapter extends RecyclerView.Adapter<SosmedAdapter.SosmedView
         }
 
         @Override
-        public void copyPassword(int position) {
+        public void updateSosmed(int position, String sosmedTitle) {
+            listSosmeds.get(position).setTitle(sosmedTitle);
+            sosmedRepository.update(listSosmeds.get(position));
+
+            updateData();
+            ToastMessage.showUpdatedMessage(activity, listSosmeds.get(position).getTitle());
+        }
+
+        @Override
+        public void insertSosmed(String title) {
 
         }
 
+        @Override
+        public void copyPassword(int position) {
 
+        }
     }
 }

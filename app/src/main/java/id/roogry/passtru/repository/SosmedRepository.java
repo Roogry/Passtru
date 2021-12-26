@@ -38,6 +38,10 @@ public class SosmedRepository {
         executorService.execute(() -> sosmedsDao.delete(sosmed));
     }
 
+    public void deleteAccountSosmed(final Sosmed sosmed){
+        executorService.execute(() -> sosmedsDao.deleteAccountSosmedId(sosmed.id));
+    }
+
     public void update(final Sosmed sosmed){
         executorService.execute(() -> sosmedsDao.update(sosmed));
     }

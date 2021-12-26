@@ -8,6 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import id.roogry.passtru.models.Sosmed;
@@ -23,12 +24,12 @@ public interface SosmedDao {
     @Delete
     void delete(Sosmed sosmed);
 
+    @Query("DELETE FROM accounts WHERE id_sosmed = :sosmedId")
+    void deleteAccountSosmedId(int sosmedId);
+
     @Query("SELECT * FROM sosmeds ORDER BY id DESC LIMIT 5")
     LiveData<List<Sosmed>> getSosmedBadges();
 
     @Query("SELECT * FROM sosmeds ORDER BY id DESC")
     LiveData<List<Sosmed>> getAllSosmeds();
-
-    @Query("SELECT * FROM sosmeds WHERE id = :id LIMIT 1")
-    Sosmed getSosmedById(int id);
 }

@@ -52,6 +52,11 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        binding.sosmedSeeAll.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, ListSosmedActivity.class);
+            startActivity(intent);
+        });
+
         binding.recentAll.setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, ListAccountActivity.class);
             startActivity(intent);

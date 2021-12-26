@@ -26,6 +26,7 @@ public class ListSosmedViewModel extends ViewModel {
     }
 
     public void delete(Sosmed sosmed) {
+        sosmedRepository.deleteAccountSosmed(sosmed);
         sosmedRepository.delete(sosmed);
     }
 }

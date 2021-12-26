@@ -2,6 +2,7 @@ package id.roogry.passtru.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -52,6 +53,12 @@ public class ListAccountActivity extends AppCompatActivity {
     private final Observer<List<AccountAndSosmed>> accountObersver = accountList -> {
         if (accountList != null) {
             accountAdapter.setListAccounts(accountList);
+        }
+
+        if (accountList.size() > 0){
+            binding.emptyHolder.setVisibility(View.INVISIBLE);
+        }else{
+            binding.emptyHolder.setVisibility(View.VISIBLE);
         }
     };
 

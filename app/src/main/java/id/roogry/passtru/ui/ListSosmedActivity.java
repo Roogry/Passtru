@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
@@ -61,6 +62,12 @@ public class ListSosmedActivity extends AppCompatActivity implements MoreOptionI
     private final Observer<List<Sosmed>> sosmedObserver = sosmedList -> {
         if (sosmedList != null) {
             sosmedAdapter.setListSosmeds(sosmedList);
+        }
+
+        if (sosmedList.size() > 0){
+            binding.emptyHolder.setVisibility(View.INVISIBLE);
+        }else{
+            binding.emptyHolder.setVisibility(View.VISIBLE);
         }
     };
 

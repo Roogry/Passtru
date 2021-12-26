@@ -54,6 +54,17 @@
                 android:layout_marginTop="@dimen/xl"
                 android:text="@string/social_media" />
 
+            <TextView
+                android:id="@+id/sosmedSeeAll"
+                style="@style/sectionSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/sosmedTitle"
+                android:layout_alignParentEnd="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/see_all" />
+
             <HorizontalScrollView
                 android:id="@+id/nsvSosmed"
                 android:layout_width="wrap_content"
