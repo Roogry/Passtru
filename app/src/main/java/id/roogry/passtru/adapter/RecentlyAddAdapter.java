@@ -5,6 +5,7 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -19,15 +20,20 @@ import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ItemAccountHomeBinding;
 import id.roogry.passtru.helpers.CustomDialog;
 import id.roogry.passtru.helpers.MoreOptionInterface;
+import id.roogry.passtru.helpers.ToastMessage;
 import id.roogry.passtru.models.AccountAndSosmed;
+import id.roogry.passtru.repository.AccountRepository;
+import id.roogry.passtru.ui.FormManageAccountActivity;
 
 public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.AccountViewHolder> {
 
     private final ArrayList<AccountAndSosmed> listAccounts = new ArrayList<>();
     private final Activity activity;
+    private final AccountRepository accountRepositor;
 
     public RecentlyAddAdapter(Activity activity) {
         this.activity = activity;
+        accountRepositor = new AccountRepository(activity.getApplication());
     }
 
     public void setListAccounts(List<AccountAndSosmed> listAccounts) {
@@ -67,32 +73,41 @@ public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.
             binding.tvUsername.setText(accountWithSosmed.getAccount().getUsername());
             binding.cardAccount.setOnClickListener(view -> {
                 CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_account);
-                customDialog.startAlertDialog(position, this);
+                customDialog.startAlertDialogOptionAccount(position, accountWithSosmed.getAccount().getUsername(), this);
             });
 
-            binding.btnCopy.setOnClickListener(view -> {
-                ClipboardManager myClipboard = (ClipboardManager) activity.getSystemService(CLIPBOARD_SERVICE);
-                String text;
-                text = accountWithSosmed.getAccount().getPassword();
+            binding.btnCopy.setOnClickListener(view -> copyPassword(accountWithSosmed));
+        }
 
-                ClipData myClip = ClipData.newPlainText("password", text);
-                myClipboard.setPrimaryClip(myClip);
-                Toast.makeText(activity, "Password copied", Toast.LENGTH_SHORT).show();
-            });
+        private void copyPassword(AccountAndSosmed accountWithSosmed){
+            ClipboardManager myClipboard = (ClipboardManager) activity.getSystemService(CLIPBOARD_SERVICE);
+            String text = accountWithSosmed.getAccount().getPassword();
+
+            ClipData myClip = ClipData.newPlainText("password", text);
+            myClipboard.setPrimaryClip(myClip);
+            Toast.makeText(activity, "Password copied", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void getDataByPos(int position) {
-
+            Intent intent = new Intent(activity, FormManageAccountActivity.class);
+            intent.putExtra(FormManageAccountActivity.EXTRA_ACCOUNT, listAccounts.get(position).getAccount());
+            activity.startActivity(intent);
         }
 
         @Override
         public void copyPassword(int position) {
-
+            copyPassword(listAccounts.get(position));
         }
 
         @Override
         public void delete(int position) {
+            accountRepositor.delete(listAccounts.get(position).getAccount());
+            ToastMessage.showDeletedMessage(activity, listAccounts.get(position).getAccount().getUsername());
+        }
+
+        @Override
+        public void insertSosmed(String title) {
 
         }
 

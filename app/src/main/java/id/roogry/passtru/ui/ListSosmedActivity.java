@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import id.roogry.passtru.adapter.SosmedAdapter;
 import id.roogry.passtru.databinding.ActivityListSosmedBinding;
 import id.roogry.passtru.helpers.CustomDialog;
 import id.roogry.passtru.helpers.MoreOptionInterface;
+import id.roogry.passtru.helpers.ToastMessage;
 import id.roogry.passtru.helpers.ViewModelFactory;
 import id.roogry.passtru.models.Sosmed;
 import id.roogry.passtru.viewmodel.ListSosmedViewModel;
@@ -22,6 +24,7 @@ public class ListSosmedActivity extends AppCompatActivity implements MoreOptionI
 
     private ActivityListSosmedBinding binding;
     private SosmedAdapter sosmedAdapter;
+    private ListSosmedViewModel sosmedViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +34,9 @@ public class ListSosmedActivity extends AppCompatActivity implements MoreOptionI
 
         CustomDialog customDialog = new CustomDialog(ListSosmedActivity.this, R.layout.dialog_add_sosmed);
         ViewModelFactory factory = ViewModelFactory.getInstance(this.getApplication());
-        ListSosmedViewModel sosmedViewModel = new ViewModelProvider(this, factory).get(ListSosmedViewModel.class);
+        sosmedViewModel = new ViewModelProvider(this, factory).get(ListSosmedViewModel.class);
 
-        sosmedViewModel.getSosmeds().observe(this, sosmedObersver);
+        sosmedViewModel.getSosmeds().observe(this, sosmedObserver);
 
         sosmedAdapter = new SosmedAdapter(this);
         binding.rvSosmed.setLayoutManager(new LinearLayoutManager(this));
@@ -55,11 +58,23 @@ public class ListSosmedActivity extends AppCompatActivity implements MoreOptionI
         binding = null;
     }
 
-    private final Observer<List<Sosmed>> sosmedObersver = sosmedList -> {
+    private final Observer<List<Sosmed>> sosmedObserver = sosmedList -> {
         if (sosmedList != null) {
             sosmedAdapter.setListSosmeds(sosmedList);
         }
     };
+
+    @Override
+    public void insertSosmed(String title) {
+        Sosmed sosmed = new Sosmed(title);
+        sosmedViewModel.insert(sosmed);
+        ToastMessage.showInsertedMessage(this, title);
+    }
+
+    @Override
+    public void updateSosmed(int position, String sosmedTitle) {
+
+    }
 
     @Override
     public void getDataByPos(int position) {
@@ -73,11 +88,6 @@ public class ListSosmedActivity extends AppCompatActivity implements MoreOptionI
 
     @Override
     public void delete(int position) {
-
-    }
-
-    @Override
-    public void updateSosmed(int position, String sosmedTitle) {
 
     }
 }

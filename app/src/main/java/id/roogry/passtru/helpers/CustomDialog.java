@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import id.roogry.passtru.R;
@@ -49,9 +50,7 @@ public class CustomDialog {
             String title = inputSosmed.getText().toString();
 
             if (sosmedTitle == null) {
-                Sosmed newSosmed = new Sosmed(title);
-                sosmedRepository.insert(newSosmed);
-                Toast.makeText(activity, "Social Media Added! ", Toast.LENGTH_LONG).show();
+                callback.insertSosmed(title);
             } else {
                 callback.updateSosmed(position, title);
             }
@@ -75,11 +74,16 @@ public class CustomDialog {
         });
     }
 
-    public void startAlertDialogOptionAccount(int position, MoreOptionInterface callback) {
+    public void startAlertDialogOptionAccount(int position, String username,MoreOptionInterface callback) {
         dialog.show();
+
+        TextView tvUsername = dialog.findViewById(R.id.tvUsername);
         Button edit = dialog.findViewById(R.id.btnEdit);
         Button delete = dialog.findViewById(R.id.btnDelete);
         Button copy = dialog.findViewById(R.id.btnCopy);
+
+        tvUsername.setText(username);
+
         copy.setOnClickListener(v -> {
             callback.copyPassword(position);
             dismissDialog();

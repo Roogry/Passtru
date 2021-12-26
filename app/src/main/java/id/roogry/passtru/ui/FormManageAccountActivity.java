@@ -27,6 +27,7 @@ import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ActivityFormManageAccountBinding;
 import id.roogry.passtru.helpers.CustomDialog;
 import id.roogry.passtru.helpers.MoreOptionInterface;
+import id.roogry.passtru.helpers.ToastMessage;
 import id.roogry.passtru.helpers.ViewModelFactory;
 import id.roogry.passtru.models.Account;
 import id.roogry.passtru.models.Sosmed;
@@ -77,8 +78,6 @@ public class FormManageAccountActivity extends AppCompatActivity implements More
                 saveAccount();
             }
 
-            Intent intent = new Intent(FormManageAccountActivity.this, ListAccountActivity.class);
-            startActivity(intent);
             finish();
         });
 
@@ -183,12 +182,14 @@ public class FormManageAccountActivity extends AppCompatActivity implements More
     private void saveAccount() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
         account.setCreatedAt(dateFormat.format(new Date()));
-        Log.d("BLabla", account.getUsername());
+
         accountRepository.insert(account);
+        ToastMessage.showInsertedMessage(this, account.getUsername());
     }
 
     private void updateAccount() {
         accountRepository.update(account);
+        ToastMessage.showUpdatedMessage(this, account.getUsername());
     }
 
     private int getSelectionSpinner(ArrayList<Sosmed> listSosmeds) {
@@ -212,6 +213,11 @@ public class FormManageAccountActivity extends AppCompatActivity implements More
 
     @Override
     public void delete(int position) {
+
+    }
+
+    @Override
+    public void insertSosmed(String title) {
 
     }
 

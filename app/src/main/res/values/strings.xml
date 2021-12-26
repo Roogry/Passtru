@@ -30,11 +30,13 @@
     <string name="hint_add_sosmed">Input social media name</string>
     <string name="see_all_sosmed">All Social Media</string>
     <string name="copy">COPY</string>
-    <string name="deleted_sosmed">Social Media has been deleted!</string>
-    <string name="updated_sosmed">Social Media has been updated!</string>
-    <string name="deleted_account">Account has been deleted!</string>
-    <string name="updated_account">Account has been updated!</string>
 
+    <string name="deleted">has been deleted!</string>
+    <string name="updated">has been updated!</string>
+    <string name="created">has been created!</string>
+
+    <string name="empty_title">Data Kosong</string>
+    <string name="empty_subtitle">Mulailah menambahkan data baru!</string>
 
     <string-array name="placeHolder">
         <item>Select Your Social Media</item>

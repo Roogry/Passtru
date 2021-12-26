@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="15dp">
@@ -16,7 +17,8 @@
             android:layout_height="@dimen/xl"
             android:layout_alignParentEnd="true"
             android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/ic_close" />
+            android:src="@drawable/ic_close"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/tvTitle"
@@ -28,21 +30,30 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvSubtitle"
+            android:id="@+id/lblUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvTitle"
-            android:layout_marginTop="@dimen/xs"
-            android:text="@string/more_option"
+            android:layout_below="@+id/tvTitle"
+            android:layout_marginTop="@dimen/m"
+            android:text="@string/lbl_username"
             android:textColor="@color/text_secondary"
             android:textSize="14sp" />
 
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lblUsername"
+            android:text="@string/ex_username"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp" />
+
         <Button
             android:id="@+id/btnCopy"
-            style="@style/outlineButton"
+            style="@style/primaryButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvSubtitle"
+            android:layout_below="@id/tvUsername"
             android:layout_marginTop="@dimen/l"
             android:text="@string/copy_password" />
 

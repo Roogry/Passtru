@@ -20,6 +20,7 @@ import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ItemListAccountBinding;
 import id.roogry.passtru.helpers.CustomDialog;
 import id.roogry.passtru.helpers.MoreOptionInterface;
+import id.roogry.passtru.helpers.ToastMessage;
 import id.roogry.passtru.models.AccountAndSosmed;
 import id.roogry.passtru.repository.AccountRepository;
 import id.roogry.passtru.ui.FormManageAccountActivity;
@@ -69,9 +70,9 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
             AccountAndSosmed accounts = listAccounts.get(position);
             binding.tvSosmed.setText(accounts.getSosmed().getTitle());
             binding.tvUsername.setText(accounts.getAccount().getUsername());
-            binding.ivMore.setOnClickListener(v -> {
+            binding.cardAccount.setOnClickListener(v -> {
                 CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_account);
-                customDialog.startAlertDialogOptionAccount(position, this);
+                customDialog.startAlertDialogOptionAccount(position, accounts.getAccount().getUsername(), this);
             });
         }
 
@@ -85,8 +86,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         @Override
         public void copyPassword(int position) {
             ClipboardManager myClipboard = (ClipboardManager) activity.getSystemService(CLIPBOARD_SERVICE);
-            String text;
-            text = listAccounts.get(position).getAccount().getPassword();
+            String text = listAccounts.get(position).getAccount().getPassword();
 
             ClipData myClip = ClipData.newPlainText("password", text);
             myClipboard.setPrimaryClip(myClip);
@@ -97,7 +97,12 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         @Override
         public void delete(int position) {
             accountRepositor.delete(listAccounts.get(position).getAccount());
-            Toast.makeText(activity, R.string.deleted_account, Toast.LENGTH_SHORT).show();
+            ToastMessage.showDeletedMessage(activity, listAccounts.get(position).getAccount().getUsername());
+        }
+
+        @Override
+        public void insertSosmed(String title) {
+
         }
 
         @Override

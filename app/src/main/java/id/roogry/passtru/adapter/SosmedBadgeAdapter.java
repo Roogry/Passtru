@@ -21,6 +21,7 @@ import id.roogry.passtru.databinding.ItemSosmedHomeBinding;
 import id.roogry.passtru.helpers.CustomDialog;
 import id.roogry.passtru.helpers.MoreOptionInterface;
 import id.roogry.passtru.helpers.SosmedDiffCallback;
+import id.roogry.passtru.helpers.ToastMessage;
 import id.roogry.passtru.models.Sosmed;
 import id.roogry.passtru.repository.SosmedRepository;
 
@@ -42,6 +43,7 @@ public class SosmedBadgeAdapter extends RecyclerView.Adapter<SosmedBadgeAdapter.
         this.listSosmeds.clear();
         this.listSosmeds.addAll(listSosmeds);
         diffResult.dispatchUpdatesTo(this);
+        this.notifyDataSetChanged();
     }
 
     public void updateData(){
@@ -85,6 +87,12 @@ public class SosmedBadgeAdapter extends RecyclerView.Adapter<SosmedBadgeAdapter.
         @Override
         public void delete(int position) {
             sosmedRepositor.delete(listSosmeds.get(position));
+            ToastMessage.showDeletedMessage(activity, listSosmeds.get(position).getTitle());
+        }
+
+        @Override
+        public void insertSosmed(String title) {
+
         }
 
         @Override
@@ -93,7 +101,7 @@ public class SosmedBadgeAdapter extends RecyclerView.Adapter<SosmedBadgeAdapter.
             sosmedRepositor.update(listSosmeds.get(position));
 
             updateData();
-            Toast.makeText(activity, R.string.updated_sosmed, Toast.LENGTH_SHORT).show();
+            ToastMessage.showUpdatedMessage(activity, listSosmeds.get(position).getTitle());
         }
 
         @Override

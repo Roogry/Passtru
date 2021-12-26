@@ -18,6 +18,7 @@ import id.roogry.passtru.databinding.ItemSocialMediaListBinding;
 import id.roogry.passtru.helpers.CustomDialog;
 import id.roogry.passtru.helpers.MoreOptionInterface;
 import id.roogry.passtru.helpers.SosmedDiffCallback;
+import id.roogry.passtru.helpers.ToastMessage;
 import id.roogry.passtru.models.Sosmed;
 import id.roogry.passtru.repository.SosmedRepository;
 
@@ -38,6 +39,7 @@ public class SosmedAdapter extends RecyclerView.Adapter<SosmedAdapter.SosmedView
         this.listSosmeds.clear();
         this.listSosmeds.addAll(listSosmeds);
         diffResult.dispatchUpdatesTo(this);
+        this.notifyDataSetChanged();
     }
 
     public void updateData(){
@@ -72,7 +74,7 @@ public class SosmedAdapter extends RecyclerView.Adapter<SosmedAdapter.SosmedView
         public void bind(int position) {
             Sosmed sosmed = listSosmeds.get(position);
             binding.tvSosmed.setText(sosmed.getTitle());
-            binding.ivMore.setOnClickListener(v ->{
+            binding.cardSosmed.setOnClickListener(v ->{
                 CustomDialog customDialog = new CustomDialog(activity, R.layout.dialog_more_sosmed);
                 customDialog.startAlertDialog(position, this);
             });
@@ -81,7 +83,12 @@ public class SosmedAdapter extends RecyclerView.Adapter<SosmedAdapter.SosmedView
         @Override
         public void delete(int position) {
             sosmedRepositor.delete(listSosmeds.get(position));
-            Toast.makeText(activity, R.string.deleted_sosmed, Toast.LENGTH_SHORT).show();
+            ToastMessage.showDeletedMessage(activity, listSosmeds.get(position).getTitle());
+        }
+
+        @Override
+        public void insertSosmed(String title) {
+
         }
 
         @Override
@@ -90,7 +97,7 @@ public class SosmedAdapter extends RecyclerView.Adapter<SosmedAdapter.SosmedView
             sosmedRepositor.update(listSosmeds.get(position));
 
             updateData();
-            Toast.makeText(activity, R.string.updated_sosmed, Toast.LENGTH_SHORT).show();
+            ToastMessage.showUpdatedMessage(activity, listSosmeds.get(position).getTitle());
         }
 
         @Override
