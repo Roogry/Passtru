@@ -61,7 +61,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_add.xml" value="0.12702702702702703" />
         <entry key="app/src/main/res/drawable/ic_shield_lock_fill.xml" value="0.14121621621621622" />
         <entry key="app/src/main/res/layout/activity_create_new_pin.xml" value="0.12128378378378378" />
-        <entry key="app/src/main/res/layout/activity_form_manage_account.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_form_manage_account.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.13074324324324324" />
         <entry key="app/src/main/res/layout/activity_list_account.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_list_sosmed.xml" value="0.23412162162162162" />

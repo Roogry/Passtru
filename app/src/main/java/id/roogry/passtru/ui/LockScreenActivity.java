@@ -129,6 +129,8 @@ public class LockScreenActivity extends AppCompatActivity {
         super.onStart();
 
         if (pinCheck.equals("")) {
+            fingerprintHandler = new FingerprintHandler(this, binding);
+            fingerprintHandler.cancelFingerprint();
             Intent intent = new Intent(LockScreenActivity.this, SetPinActivity.class);
             startActivity(intent);
             finish();

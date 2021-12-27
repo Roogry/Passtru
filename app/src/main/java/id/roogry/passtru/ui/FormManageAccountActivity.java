@@ -88,9 +88,10 @@ public class FormManageAccountActivity extends AppCompatActivity implements Sosm
                 } else {
                     saveAccount();
                 }
+                finish();
             }
 
-            finish();
+
         });
 
         binding.ivBack.setOnClickListener(v -> onBackPressed());
@@ -169,6 +170,7 @@ public class FormManageAccountActivity extends AppCompatActivity implements Sosm
                 textView.setText(listSosmeds.get(position).title);
                 return v;
             }
+
         };
 
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -178,6 +180,10 @@ public class FormManageAccountActivity extends AppCompatActivity implements Sosm
             listSosmeds.clear();
             listSosmeds.addAll(sosmedList);
 
+            if (listSosmeds.isEmpty()){
+                binding.alertToAddSosmed.setVisibility(View.VISIBLE);
+                binding.spSosmed.setEnabled(false);
+            }
             //notifyDataSetChanged after update termsList variable here
             spinnerAdapter.notifyDataSetChanged();
 
