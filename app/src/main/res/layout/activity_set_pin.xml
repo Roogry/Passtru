@@ -89,7 +89,7 @@
             android:layout_below="@id/confirmPin"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/l"
-            android:text="@string/submit"
+            android:text="@string/submit_pin"
             tools:ignore="MissingConstraints" />
     </RelativeLayout>
 

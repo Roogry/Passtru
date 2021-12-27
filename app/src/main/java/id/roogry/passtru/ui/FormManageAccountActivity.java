@@ -265,7 +265,7 @@ public class FormManageAccountActivity extends AppCompatActivity implements Sosm
 
         if (binding.edtUsername.getText().toString().trim().length() == 0) {
             binding.tvLblUsername.setTextColor(ContextCompat.getColor(this, R.color.red));
-            binding.edtUsername.setError("This field is required");
+            binding.edtUsername.setError(getString(R.string.err_required));
             binding.edtUsername.setBackground(ContextCompat.getDrawable(
                     this,
                     R.drawable.bg_input_dark_error
@@ -282,7 +282,7 @@ public class FormManageAccountActivity extends AppCompatActivity implements Sosm
 
         if (binding.edtPassword.getText().toString().trim().length() == 0) {
             binding.tvLblPassword.setTextColor(ContextCompat.getColor(this, R.color.red));
-            binding.edtPassword.setError("This field is required");
+            binding.edtPassword.setError(getString(R.string.err_required));
             binding.edtPassword.setBackground(ContextCompat.getDrawable(
                     this,
                     R.drawable.bg_input_dark_error

@@ -119,7 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/edtPassword"
             android:layout_marginTop="@dimen/m"
-            android:text="@string/submit" />
+            android:text="@string/submit_pin" />
 
     </RelativeLayout>
 

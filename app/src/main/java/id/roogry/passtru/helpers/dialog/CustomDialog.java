@@ -9,12 +9,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import id.roogry.passtru.R;
 
 public class CustomDialog {
-    private Dialog dialog;
+    private final Dialog dialog;
+    private final Activity activity;
 
     public CustomDialog(Activity activity, int view) {
+        this.activity = activity;
         dialog = new Dialog(activity);
         dialog.setContentView(view);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -45,20 +49,29 @@ public class CustomDialog {
         dialog.show();
 
         Button btnSave = dialog.findViewById(R.id.btnSubmit);
-        EditText inputSosmed = dialog.findViewById(R.id.edtSosmed);
+        EditText edtTitle = dialog.findViewById(R.id.edtSosmed);
 
-        inputSosmed.setText(sosmedTitle);
+        edtTitle.setText(sosmedTitle);
 
         btnSave.setOnClickListener(v -> {
-            String title = inputSosmed.getText().toString();
+            String title = edtTitle.getText().toString();
 
-            if (sosmedTitle == null) {
-                callback.insert(title);
-            } else {
-                callback.update(position, title);
+            if (title.trim().length() != 0){
+                if (sosmedTitle == null) {
+                    callback.insert(title);
+                } else {
+                    callback.update(position, title);
+                }
+
+                dismissDialog();
+            }else{
+                edtTitle.setError(activity.getString(R.string.err_required));
+                edtTitle.setBackground(ContextCompat.getDrawable(
+                        activity,
+                        R.drawable.bg_input_light_error
+                ));
             }
 
-            dismissDialog();
         });
     }
 
