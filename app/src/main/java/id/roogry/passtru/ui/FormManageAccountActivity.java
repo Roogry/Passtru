@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.text.SimpleDateFormat;
@@ -79,10 +80,7 @@ public class FormManageAccountActivity extends AppCompatActivity implements Sosm
             account.setUsername(username);
             account.setPassword(encryptedPwd);
 
-            Log.d("BLabla", "id is : " + account.getId());
-
-            Boolean isAllFieldsChecked = CheckAllFields();
-            if (isAllFieldsChecked) {
+            if (CheckAllFields()) {
                 if (account.getId() != 0) {
                     updateAccount();
                 } else {
@@ -90,8 +88,6 @@ public class FormManageAccountActivity extends AppCompatActivity implements Sosm
                 }
                 finish();
             }
-
-
         });
 
         binding.ivBack.setOnClickListener(v -> onBackPressed());
@@ -103,6 +99,8 @@ public class FormManageAccountActivity extends AppCompatActivity implements Sosm
                 if (position != -1) {
                     Sosmed sosmed = (Sosmed) parent.getItemAtPosition(position);
                     selectedSosmedId = sosmed.id;
+
+                    resetErrorSpSosmed();
                 }
             }
 
@@ -183,6 +181,8 @@ public class FormManageAccountActivity extends AppCompatActivity implements Sosm
             if (listSosmeds.isEmpty()){
                 binding.alertToAddSosmed.setVisibility(View.VISIBLE);
                 binding.spSosmed.setEnabled(false);
+            }else{
+                resetErrorSpSosmed();
             }
             //notifyDataSetChanged after update termsList variable here
             spinnerAdapter.notifyDataSetChanged();
@@ -238,18 +238,66 @@ public class FormManageAccountActivity extends AppCompatActivity implements Sosm
         return encrypted;
     }
 
+    private void resetErrorSpSosmed() {
+        binding.tvLblSosmed.setTextColor(ContextCompat.getColor(this, R.color.white));
+        binding.alertToAddSosmed.setVisibility(View.GONE);
+        binding.spSosmed.setEnabled(true);
+
+        binding.spSosmed.setBackground(ContextCompat.getDrawable(
+                this,
+                R.drawable.bg_spinner_dark
+        ));
+    }
+
     private boolean CheckAllFields() {
+        boolean isValid = true;
+
+        if (binding.spSosmed.getSelectedItem() == null) {
+            binding.tvLblSosmed.setTextColor(ContextCompat.getColor(this, R.color.red));
+            binding.spSosmed.setBackground(ContextCompat.getDrawable(
+                    this,
+                    R.drawable.bg_spinner_dark_error
+            ));
+            isValid = false;
+        }else{
+            resetErrorSpSosmed();
+        }
+
         if (binding.edtUsername.getText().toString().trim().length() == 0) {
+            binding.tvLblUsername.setTextColor(ContextCompat.getColor(this, R.color.red));
             binding.edtUsername.setError("This field is required");
-            return false;
+            binding.edtUsername.setBackground(ContextCompat.getDrawable(
+                    this,
+                    R.drawable.bg_input_dark_error
+            ));
+            isValid = false;
+        }else{
+            binding.tvLblUsername.setTextColor(ContextCompat.getColor(this, R.color.white));
+            binding.edtUsername.setError(null);
+            binding.edtUsername.setBackground(ContextCompat.getDrawable(
+                    this,
+                    R.drawable.bg_input_dark
+            ));
         }
 
         if (binding.edtPassword.getText().toString().trim().length() == 0) {
+            binding.tvLblPassword.setTextColor(ContextCompat.getColor(this, R.color.red));
             binding.edtPassword.setError("This field is required");
-            return false;
+            binding.edtPassword.setBackground(ContextCompat.getDrawable(
+                    this,
+                    R.drawable.bg_input_dark_error
+            ));
+            isValid = false;
+        }else{
+            binding.tvLblPassword.setTextColor(ContextCompat.getColor(this, R.color.white));
+            binding.edtPassword.setError(null);
+            binding.edtPassword.setBackground(ContextCompat.getDrawable(
+                    this,
+                    R.drawable.bg_input_dark
+            ));
         }
 
         // after all validation return true.
-        return true;
+        return isValid;
     }
 }

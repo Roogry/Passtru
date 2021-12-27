@@ -6,7 +6,7 @@
                 <shape>
                     <corners android:radius="5dp" />
                     <padding android:bottom="@dimen/ms" android:left="@dimen/s" android:right="@dimen/ms" android:top="@dimen/ms" />
-                    <solid android:width="1dp" android:color="#4F4F58" />
+                    <solid android:width="1dp" android:color="@color/input_red_dark" />
                 </shape>
             </item>
             <item android:width="24dp" android:height="24dp" android:drawable="@drawable/ic_arrow_down_fill" android:gravity="right|center_vertical" />
