@@ -1,22 +1,24 @@
 package id.roogry.passtru.ui;
 
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.os.Bundle;
-import android.view.View;
 
 import java.util.List;
 
 import id.roogry.passtru.R;
 import id.roogry.passtru.adapter.SosmedAdapter;
 import id.roogry.passtru.databinding.ActivityListSosmedBinding;
-import id.roogry.passtru.helpers.dialog.CustomDialog;
-import id.roogry.passtru.helpers.dialog.SosmedFormInterface;
 import id.roogry.passtru.helpers.ToastMessage;
 import id.roogry.passtru.helpers.ViewModelFactory;
+import id.roogry.passtru.helpers.dialog.CustomDialog;
+import id.roogry.passtru.helpers.dialog.SosmedFormInterface;
 import id.roogry.passtru.models.Sosmed;
 import id.roogry.passtru.viewmodel.ListSosmedViewModel;
 
@@ -24,6 +26,17 @@ public class ListSosmedActivity extends AppCompatActivity implements SosmedFormI
 
     private ActivityListSosmedBinding binding;
     private SosmedAdapter sosmedAdapter;
+    private final Observer<List<Sosmed>> sosmedObserver = sosmedList -> {
+        if (sosmedList != null) {
+            sosmedAdapter.setListSosmeds(sosmedList);
+        }
+
+        if (sosmedList.size() > 0) {
+            binding.emptyHolder.setVisibility(View.INVISIBLE);
+        } else {
+            binding.emptyHolder.setVisibility(View.VISIBLE);
+        }
+    };
     private ListSosmedViewModel sosmedViewModel;
 
     @Override
@@ -47,8 +60,38 @@ public class ListSosmedActivity extends AppCompatActivity implements SosmedFormI
             onBackPressed();
         });
 
-        binding.fabAddSosmed.setOnClickListener(v ->{
+        binding.fabAddSosmed.setOnClickListener(v -> {
             customDialog.startFormSosmed(-1, null, this);
+        });
+
+        binding.edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if (s != null) {
+                    searchDatabse(binding.edtSearch.getText().toString());
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s != null) {
+                    searchDatabse(binding.edtSearch.getText().toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s != null) {
+                    searchDatabse(binding.edtSearch.getText().toString());
+                }
+            }
+        });
+    }
+
+    private void searchDatabse(String query) {
+        String searchQuery = "%" + query + "%";
+        sosmedViewModel.searchDatabase(searchQuery).observe(this, sosmeds -> {
+            sosmedAdapter.setListSosmeds(sosmeds);
         });
     }
 
@@ -57,18 +100,6 @@ public class ListSosmedActivity extends AppCompatActivity implements SosmedFormI
         super.onDestroy();
         binding = null;
     }
-
-    private final Observer<List<Sosmed>> sosmedObserver = sosmedList -> {
-        if (sosmedList != null) {
-            sosmedAdapter.setListSosmeds(sosmedList);
-        }
-
-        if (sosmedList.size() > 0){
-            binding.emptyHolder.setVisibility(View.INVISIBLE);
-        }else{
-            binding.emptyHolder.setVisibility(View.VISIBLE);
-        }
-    };
 
     @Override
     public void insert(String title) {

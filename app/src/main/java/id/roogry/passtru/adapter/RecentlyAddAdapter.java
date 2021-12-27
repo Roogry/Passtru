@@ -24,6 +24,7 @@ import id.roogry.passtru.helpers.ToastMessage;
 import id.roogry.passtru.models.AccountAndSosmed;
 import id.roogry.passtru.repository.AccountRepository;
 import id.roogry.passtru.ui.FormManageAccountActivity;
+import id.roogry.passtru.ui.HomeActivity;
 
 public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.AccountViewHolder> {
 
@@ -81,7 +82,7 @@ public class RecentlyAddAdapter extends RecyclerView.Adapter<RecentlyAddAdapter.
 
         private void copyPassword(AccountAndSosmed accountWithSosmed){
             ClipboardManager myClipboard = (ClipboardManager) activity.getSystemService(CLIPBOARD_SERVICE);
-            String text = accountWithSosmed.getAccount().getPassword();
+            String text = FormManageAccountActivity.decrypt(accountWithSosmed.getAccount().getPassword());
 
             ClipData myClip = ClipData.newPlainText("password", text);
             myClipboard.setPrimaryClip(myClip);

@@ -86,7 +86,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.AccountV
         @Override
         public void copyPassword(int position) {
             ClipboardManager myClipboard = (ClipboardManager) activity.getSystemService(CLIPBOARD_SERVICE);
-            String text = listAccounts.get(position).getAccount().getPassword();
+            String text = FormManageAccountActivity.decrypt(listAccounts.get(position).getAccount().getPassword());
 
             ClipData myClip = ClipData.newPlainText("password", text);
             myClipboard.setPrimaryClip(myClip);

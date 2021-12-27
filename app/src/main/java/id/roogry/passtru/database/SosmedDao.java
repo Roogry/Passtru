@@ -11,6 +11,7 @@ import androidx.room.Update;
 import java.util.ArrayList;
 import java.util.List;
 
+import id.roogry.passtru.models.AccountAndSosmed;
 import id.roogry.passtru.models.Sosmed;
 
 @Dao
@@ -32,4 +33,7 @@ public interface SosmedDao {
 
     @Query("SELECT * FROM sosmeds ORDER BY id DESC")
     LiveData<List<Sosmed>> getAllSosmeds();
+
+    @Query("SELECT * FROM sosmeds WHERE title Like :searchQuery")
+    LiveData<List<Sosmed>> searchDatabase(String searchQuery);
 }

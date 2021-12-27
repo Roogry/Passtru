@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 
 import id.roogry.passtru.database.PasstruRoomDatabase;
 import id.roogry.passtru.database.SosmedDao;
+import id.roogry.passtru.models.AccountAndSosmed;
 import id.roogry.passtru.models.Sosmed;
 
 public class SosmedRepository {
@@ -28,6 +29,10 @@ public class SosmedRepository {
 
     public LiveData<List<Sosmed>> getSosmedBadges() {
         return sosmedsDao.getSosmedBadges();
+    }
+
+    public LiveData<List<Sosmed>> searchDatabase(String searchQuery) {
+        return sosmedsDao.searchDatabase(searchQuery);
     }
 
     public void insert(final Sosmed sosmed) {

@@ -35,4 +35,7 @@ public interface AccountDao {
 
     @Query("SELECT * FROM accounts WHERE username = :username AND password = :password")
     LiveData<List<Account>> getAccountsByUsernamePassword(String username, String password);
+
+    @Query("SELECT accounts.*, sosmeds.title AS sosmedTitle FROM accounts INNER JOIN sosmeds ON accounts.id_sosmed=sosmeds.id WHERE  username LIKE :searchQuery OR sosmedTitle LIKE :searchQuery ")
+    LiveData<List<AccountAndSosmed>> searchDatabase(String searchQuery);
 }

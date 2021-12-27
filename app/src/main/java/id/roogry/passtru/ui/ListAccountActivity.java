@@ -2,6 +2,8 @@ package id.roogry.passtru.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +23,7 @@ public class ListAccountActivity extends AppCompatActivity {
 
     private ActivityListAccountBinding binding;
     private AccountAdapter accountAdapter;
-
+    private  ListAccountViewModel listAccountViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +32,7 @@ public class ListAccountActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         ViewModelFactory factory = ViewModelFactory.getInstance(this.getApplication());
-        ListAccountViewModel listAccountViewModel = new ViewModelProvider(this, factory).get(ListAccountViewModel.class);
+        listAccountViewModel = new ViewModelProvider(this, factory).get(ListAccountViewModel.class);
 
         listAccountViewModel.getAccounts().observe(this, accountObersver);
 
@@ -47,6 +49,29 @@ public class ListAccountActivity extends AppCompatActivity {
             Intent intent = new Intent(ListAccountActivity.this, FormManageAccountActivity.class);
             startActivity(intent);
         });
+
+        binding.edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if (s != null){
+                    searchDatabse(binding.edtSearch.getText().toString());
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s != null){
+                    searchDatabse(binding.edtSearch.getText().toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s != null){
+                    searchDatabse(binding.edtSearch.getText().toString());
+                }
+            }
+        });
     }
 
 
@@ -62,6 +87,12 @@ public class ListAccountActivity extends AppCompatActivity {
         }
     };
 
+    private void searchDatabse(String query){
+        String searchQuery = "%"+query+"%";
+        listAccountViewModel.searchDatabase(searchQuery).observe(this, accounts -> {
+            accountAdapter.setListAccounts(accounts);
+        });
+    }
 
     @Override
     protected void onDestroy() {

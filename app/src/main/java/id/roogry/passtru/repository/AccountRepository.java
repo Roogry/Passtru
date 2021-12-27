@@ -35,6 +35,10 @@ public class AccountRepository {
         return accountsDao.getAccountsByUsernamePassword(username, password);
     }
 
+    public LiveData<List<AccountAndSosmed>> searchDatabase(String searchQuery) {
+        return accountsDao.searchDatabase(searchQuery);
+    }
+
     public void insert(final Account account) {
         executorService.execute(() -> accountsDao.insert(account));
     }

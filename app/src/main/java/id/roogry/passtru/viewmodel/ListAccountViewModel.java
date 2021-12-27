@@ -22,6 +22,10 @@ public class ListAccountViewModel extends ViewModel {
         return accountRepository.getAllAccounts();
     }
 
+    public LiveData<List<AccountAndSosmed>> searchDatabase(String searchQuery) {
+        return accountRepository.searchDatabase(searchQuery);
+    }
+
     public void delete(Account account) {
         accountRepository.delete(account);
     }

@@ -21,6 +21,10 @@ public class ListSosmedViewModel extends ViewModel {
         return sosmedRepository.getAllSosmeds();
     }
 
+    public LiveData<List<Sosmed>> searchDatabase(String searchQuery) {
+        return sosmedRepository.searchDatabase(searchQuery);
+    }
+
     public void insert(Sosmed sosmed) {
         sosmedRepository.insert(sosmed);
     }
