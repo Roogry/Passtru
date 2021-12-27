@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_search"
                 android:hint="******"
-                android:inputType="numberPassword|textPassword"
+                android:inputType="numberPassword"
                 android:maxLength="6"
                 android:maxLines="1"
                 android:padding="20dp"

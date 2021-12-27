@@ -13,6 +13,7 @@ import java.util.List;
 
 import id.roogry.passtru.R;
 import id.roogry.passtru.databinding.ActivityResetPinBinding;
+import id.roogry.passtru.helpers.AESUtils;
 import id.roogry.passtru.helpers.ViewModelFactory;
 import id.roogry.passtru.models.Account;
 import id.roogry.passtru.repository.AccountRepository;
@@ -45,7 +46,7 @@ public class ResetPinActivity extends AppCompatActivity {
         String username = binding.edtUsername.getText().toString().trim();
         String password = binding.edtPassword.getText().toString().trim();
 
-        resetPinViewModel.getAccounts(username, password).observe(ResetPinActivity.this, accounts -> {
+        resetPinViewModel.getAccounts(username, encrypt(password)).observe(ResetPinActivity.this, accounts -> {
             if (accounts.size() > 0){
                 Intent intent = new Intent(ResetPinActivity.this, CreateNewPinActivity.class);
                 startActivity(intent);
@@ -56,4 +57,14 @@ public class ResetPinActivity extends AppCompatActivity {
         });
     }
 
+    private String encrypt(String password) {
+        String encrypted = "";
+        try {
+            encrypted = AESUtils.encrypt(password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return encrypted;
+    }
 }
+
