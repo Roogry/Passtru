@@ -18,12 +18,13 @@
 
         <ImageView
             android:id="@+id/ivBack"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="@dimen/xl"
+            android:layout_height="@dimen/xl"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginHorizontal="25dp"
+            android:layout_marginStart="@dimen/m"
             android:contentDescription="backButton"
+            android:padding="@dimen/xs"
             android:src="@drawable/ion_arrow_back" />
 
         <TextView
@@ -31,9 +32,9 @@
             style="@style/toolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@id/ivBack"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="@dimen/s"
+            android:layout_toEndOf="@+id/ivBack"
             android:text="Back" />
 
     </RelativeLayout>
@@ -52,7 +53,7 @@
             android:layout_height="wrap_content"
             android:text="Create New Pin"
             android:textColor="@color/black"
-            android:textSize="30sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
@@ -61,9 +62,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/title"
             android:layout_marginTop="10dp"
-            android:lineSpacingExtra="5dp"
+            android:lineSpacingExtra="3dp"
             android:text="Enter your new access PIN. Please remember your new Access Pin"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/labelPin"
@@ -72,19 +73,20 @@
             android:layout_below="@id/subTitle"
             android:layout_marginTop="@dimen/l"
             android:text="New Pin"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp" />
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtNewPin"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_below="@+id/labelPin"
-            android:maxLength="6"
             android:layout_marginTop="@dimen/s"
             android:background="@drawable/bg_input_light"
             android:hint="Input New Pin"
             android:inputType="numberPassword"
+            android:maxLength="6"
             android:paddingHorizontal="@dimen/m"
             android:textColor="@color/text_secondary"
             android:textSize="14sp" />
@@ -97,19 +99,20 @@
             android:layout_below="@id/edtNewPin"
             android:layout_marginTop="@dimen/l"
             android:text="Confirm Pin"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp" />
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtConfimPin"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:maxLength="6"
             android:layout_below="@+id/labelConfirmPin"
             android:layout_marginTop="@dimen/s"
             android:background="@drawable/bg_input_light"
             android:hint="Input Confirmation Pin"
             android:inputType="numberPassword"
+            android:maxLength="6"
             android:paddingHorizontal="@dimen/m"
             android:textColor="@color/text_secondary"
             android:textSize="14sp" />

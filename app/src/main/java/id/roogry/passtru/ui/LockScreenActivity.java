@@ -80,14 +80,10 @@ public class LockScreenActivity extends AppCompatActivity {
         setFingerprintMethod();
         pinAuth();
 
-        binding.tvMethod.setOnClickListener(v -> {
-            if (isFingerprint) setPinMethod();
-            else setFingerprintMethod();
-        });
-
-        binding.tvForgotPIN.setOnClickListener(v -> {
-            checkAccountSize();
-        });
+        binding.tvMethodFinger.setOnClickListener(v -> setFingerprintMethod());
+        binding.tvMethodPin.setOnClickListener(v -> setPinMethod());
+        binding.tvForgotPIN.setOnClickListener(v -> checkAccountSize());
+        binding.btnSubmit.setOnClickListener(v -> submitPin());
     }
     
 
@@ -96,8 +92,6 @@ public class LockScreenActivity extends AppCompatActivity {
 
         binding.pinContainer.setVisibility(View.VISIBLE);
         binding.fingerprintContainer.setVisibility(View.GONE);
-        binding.tvStatusFingerprint.setVisibility(View.GONE);
-        binding.tvMethod.setText("Use Fingerprint");
 
         fingerprintHandler.cancelFingerprint();
     }
@@ -107,8 +101,6 @@ public class LockScreenActivity extends AppCompatActivity {
 
         binding.pinContainer.setVisibility(View.GONE);
         binding.fingerprintContainer.setVisibility(View.VISIBLE);
-        binding.tvStatusFingerprint.setVisibility(View.VISIBLE);
-        binding.tvMethod.setText("Use PIN");
 
         fingerPrintAuth();
     }
@@ -227,19 +219,35 @@ public class LockScreenActivity extends AppCompatActivity {
         binding.edtPIN.setOnKeyListener((v, keyCode, event) -> {
             String pinInput = binding.edtPIN.getText().toString();
 
-            if (pinInput.equals(pinCheck)) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                    Intent intent = new Intent(LockScreenActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                return true;
-            } else {
-                binding.tvStatusFingerprint.setTextColor(ContextCompat.getColor(LockScreenActivity.this, R.color.red));
-                binding.tvStatusFingerprint.setText("Pin Is Wrong");
-                return false;
+            if (pinInput.trim().length() > 0){
+                binding.edtPIN.setError(null);
+                binding.edtPIN.setBackground(ContextCompat.getDrawable(
+                        this,
+                        R.drawable.bg_input_light
+                ));
             }
+
+            if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                submitPin();
+            }
+            return false;
         });
+    }
+
+    private void submitPin() {
+        String pinInput = binding.edtPIN.getText().toString();
+
+        if (pinInput.equals(pinCheck)) {
+            Intent intent = new Intent(LockScreenActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            binding.edtPIN.setError("PIN not correct");
+            binding.edtPIN.setBackground(ContextCompat.getDrawable(
+                    this,
+                    R.drawable.bg_input_light_error
+            ));
+        }
     }
 
     private void checkAccountSize(){
