@@ -48,10 +48,16 @@ public class CustomDialog {
     public void startFormSosmed(int position, String sosmedTitle, SosmedFormInterface callback) {
         dialog.show();
 
+        TextView tvTitle = dialog.findViewById(R.id.tvTitle);
+        TextView tvSubtitle = dialog.findViewById(R.id.tvSubtitle);
         Button btnSave = dialog.findViewById(R.id.btnSubmit);
         EditText edtTitle = dialog.findViewById(R.id.edtSosmed);
 
         edtTitle.setText(sosmedTitle);
+        if (sosmedTitle != null) {
+            tvTitle.setText("Update Social Media");
+            tvSubtitle.setText(String.format("Input new title for %s", sosmedTitle));
+        }
 
         btnSave.setOnClickListener(v -> {
             String title = edtTitle.getText().toString();
